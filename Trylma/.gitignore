@@ -1,0 +1,32 @@
+# Maven build files
+/target/
+/pom.xml.tag
+/pom.xml.releaseBackup
+/pom.xml.versionsBackup
+/pom.xml.next
+/release.properties
+/dependency-reduced-pom.xml
+/buildNumber.properties
+
+# Maven Wrapper files
+.mvn/timing.properties
+!/.mvn/wrapper/maven-wrapper.jar # UWAGA: usuń ten wpis, jeśli chcesz ignorować Maven Wrappera
+
+# Eclipse specific files
+.project
+.classpath
+/.metadata/
+/.settings/
+
+# IntelliJ specific files
+/.idea/
+/*.iml
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+
