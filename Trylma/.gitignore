@@ -18,7 +18,7 @@
 /.metadata/
 /.settings/
 
-# IntelliJ sgitpecific files
+# IntelliJ specific files
 /.idea/
 /*.iml
 
