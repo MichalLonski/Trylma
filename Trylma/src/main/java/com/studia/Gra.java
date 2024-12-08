@@ -109,4 +109,9 @@ public class Gra {
             gracz.informacjaOdGry(wiadomosc);
         }
     }
+
+    //Dodany co by był jakiś dostęp do ID_Gry
+    public int dajID(){
+        return ID_GRY;
+    }
 }
