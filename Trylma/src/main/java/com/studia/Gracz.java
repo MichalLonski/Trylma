@@ -6,7 +6,7 @@ public class Gracz {
     private String identyfikatorGracza;
     private int miejscePrzyStole;
     private Gra gra;
-    Gracz() {
+    public Gracz() {
         this.identyfikatorGracza = UUID.randomUUID().toString();
     }
 
