@@ -11,6 +11,8 @@ package com.studia;
  */
 
 
+import com.studia.Zasady.TypGry;
+
 // Klasa testowa
 public class KlasaTestowa {
 

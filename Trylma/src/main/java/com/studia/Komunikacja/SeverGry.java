@@ -1,4 +1,7 @@
-package com.studia;
+package com.studia.Komunikacja;
+
+import com.studia.Gracz;
+import com.studia.Zasady.TypGry;
 
 import java.io.*;
 import java.net.ServerSocket;

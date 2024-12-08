@@ -1,4 +1,4 @@
-package com.studia;
+package com.studia.Zasady;
 
 public class FabrykaZasad {
     public static ZasadyGry stworzZasadyGry(TypGry typ, int[] parametry){

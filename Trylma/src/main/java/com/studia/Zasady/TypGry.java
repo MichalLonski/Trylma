@@ -1,4 +1,4 @@
-package com.studia;
+package com.studia.Zasady;
 
 /*
  * Pojęcia nie mam czy będziemy to implementować

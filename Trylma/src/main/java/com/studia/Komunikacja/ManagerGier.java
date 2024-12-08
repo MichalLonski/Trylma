@@ -1,4 +1,8 @@
-package com.studia;
+package com.studia.Komunikacja;
+
+import com.studia.Gra;
+import com.studia.Gracz;
+import com.studia.Zasady.TypGry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,7 @@ public class ManagerGier {
     }
 
     //Inicjuje nową gre i dodaje do niego gracza który ją stworzył
-    public synchronized void inicjujNowaGre(TypGry typGry,int[] parametry,Gracz inicjujacyGracz){
+    public synchronized void inicjujNowaGre(TypGry typGry, int[] parametry, Gracz inicjujacyGracz){
         Gra nowaGra = new Gra(typGry,parametry);
         ListaGier.add(nowaGra);
         nowaGra.dodajGracza(inicjujacyGracz);

@@ -1,4 +1,6 @@
-package com.studia;
+package com.studia.Zasady;
+
+import com.studia.Plansza.Plansza;
 
 public class StandardoweZasadyGry implements ZasadyGry {
     private int liczbaGraczy;

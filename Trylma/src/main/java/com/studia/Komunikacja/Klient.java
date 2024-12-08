@@ -1,4 +1,4 @@
-package com.studia;
+package com.studia.Komunikacja;
 import java.io.*;
 import java.net.*;
 

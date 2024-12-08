@@ -1,5 +1,10 @@
 package com.studia;
 
+import com.studia.Plansza.Plansza;
+import com.studia.Zasady.FabrykaZasad;
+import com.studia.Zasady.TypGry;
+import com.studia.Zasady.ZasadyGry;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +19,7 @@ public class Gra {
     private KolejkaGraczy kolejka;
     private Plansza planszaGry;
 
-    Gra(TypGry typ, int[] parametry) {
+    public Gra(TypGry typ, int[] parametry) {
         this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, parametry);
         this.listaGraczy = new ArrayList<>();
         ID_GRY = ID;

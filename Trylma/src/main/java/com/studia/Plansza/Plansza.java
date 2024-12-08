@@ -1,4 +1,4 @@
-package com.studia;
+package com.studia.Plansza;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Plansza {
     private Pole planszaDoGry[][];
     private int liczbaGraczy;
 
-    Plansza(int liczbaGraczy) {
+    public Plansza(int liczbaGraczy) {
         if (liczbaGraczy == 2 || liczbaGraczy == 3 || liczbaGraczy == 4 || liczbaGraczy == 6) {
             this.liczbaGraczy = liczbaGraczy;
         } else {

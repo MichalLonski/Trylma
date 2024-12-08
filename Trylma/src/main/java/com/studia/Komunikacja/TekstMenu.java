@@ -1,4 +1,4 @@
-package com.studia;
+package com.studia.Komunikacja;
 /*
 dekoduje wiadomość serwera, po to tak zrobione żeby obejść jakoś
 to że serwer wysyła tylko jedną linijkę do klienta i czeka

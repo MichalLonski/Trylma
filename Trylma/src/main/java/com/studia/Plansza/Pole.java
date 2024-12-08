@@ -1,4 +1,4 @@
-package com.studia;
+package com.studia.Plansza;
 
 public class Pole {
     private int wiersz;
