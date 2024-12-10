@@ -18,6 +18,8 @@ public class Gra {
     private ZasadyGry zasadyGry;
     private KolejkaGraczy kolejka;
     private Plansza planszaGry;
+    private boolean graWTrakcie = false;
+    private String ruchWPoprzedniejTurze = "";
 
     public Gra(TypGry typ, int[] parametry) {
         this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, parametry);
@@ -37,6 +39,7 @@ public class Gra {
         planszaGry = new Plansza(zasadyGry.ileGraczy());
         planszaGry.utworzPlansze();
         informujGraczy("Gra się zaczyna");
+        graWTrakcie = true;
         return kolejka.obecnyGracz();
     }
 
@@ -87,6 +90,9 @@ public class Gra {
             System.err.println("Poczekaj na swoją kolej");
         } else {
             boolean udanyRuch = planszaGry.wykonajRuch(pozycjaPoczatkowa, pozycjaKoncowa, kolejka.obecnyGracz());
+            //Moja modyfikacja
+            ruchWPoprzedniejTurze = "Gracz nr: " + miejsceGracza + " wykonał ruch z " + pozycjaPoczatkowa + " na " + pozycjaKoncowa +"&";
+            System.out.println(ruchWPoprzedniejTurze);
             if (udanyRuch) {
                 kolejka.wykonanoRuch();
             }
@@ -100,6 +106,8 @@ public class Gra {
             return;
         }
         this.listaGraczy.add(gracz);
+        //Moja modyfikacja
+        gracz.przypiszGre(this);
     }
 
     // TODO: co jak wyjdzie podczas gry
@@ -115,8 +123,37 @@ public class Gra {
         }
     }
 
+    ///////////////////////////////////////////////
+    //////////////Gettery i Settery////////////////
+    ///////////////////////////////////////////////
+
     //Dodany co by był jakiś dostęp do ID_Gry
-    public int dajID(){
+    public int dajID() {
         return ID_GRY;
+    }
+
+    //Zwraca fakt czy gra się zaczełą czy nie
+    public boolean czyGraSieZaczela() {
+        return graWTrakcie;
+    }
+
+    //Zwraca liste graczy
+    public List<Gracz> dajListeGraczy() {
+        return listaGraczy;
+    }
+
+    //Zwraca zasady
+    public ZasadyGry dajZasadyGry() {
+        return zasadyGry;
+    }
+
+    //Zwraca ruch z poprzedniej tury
+    public String dajRuchZPoprzedniejTury(){
+        return ruchWPoprzedniejTurze;
+    }
+
+    //Zwraca miejsce przy stole gracza którego tura trwa
+    public int dajObecnegoGracza(){
+        return kolejka.obecnyGracz();
     }
 }

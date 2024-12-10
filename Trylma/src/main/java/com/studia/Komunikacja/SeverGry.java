@@ -6,6 +6,7 @@ import com.studia.Zasady.TypGry;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 
 /*
@@ -14,11 +15,32 @@ Klasa servera i wątku,klasa wątku przechowuje gracza za którego odpowiada
 generalnie wątek działa tak że switchuje się po enumie Stan
  */
 public class SeverGry {
-
+    static boolean SerwerWlaczony = true;
     public static void main(String[] args) throws Exception {
+
+        //Prosta obsługa konsoli serwera, nie wiem co tam jeszcze dodać ale jest
+        Thread watekKonsolaSerwera = new Thread(() -> {
+            String wiadomosc;
+            Scanner scanner = new Scanner(System.in);
+            while(true){
+
+                wiadomosc = scanner.nextLine();
+
+
+                if ("exit".equalsIgnoreCase(wiadomosc)) {
+                    System.out.println("Serwer wyłączony");
+                    SerwerWlaczony = false;
+                    break;
+                } else {
+                    System.out.println("Wpisano: " + wiadomosc);
+                }
+            }
+        });
+        watekKonsolaSerwera.start();
+
         try (ServerSocket serverSocket = new ServerSocket(12345)) {
             System.out.println("Serwer nasłuchuje...");
-            while (true) {
+            while (SerwerWlaczony) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Nowy klient połączony: " + clientSocket.getInetAddress().getHostAddress());
                 new WatekGracz(clientSocket).start();
@@ -27,6 +49,7 @@ public class SeverGry {
     }
 
 }
+
 class WatekGracz extends Thread {
     private StanKlienta stan = StanKlienta.MENUGLOWNE;
     private final Socket clientSocket;
@@ -41,8 +64,9 @@ class WatekGracz extends Thread {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
         ) {
+            ManagerGier.dajInstancje().zarejestrujGracza(gracz,out);
             String wiadamoscKlienta;
-            out.println("a");// Drukuje menu główne
+            out.println(TekstMenu.drukujTekst("a",gracz));// Drukuje menu główne
             while ((wiadamoscKlienta = in.readLine()) != null) {
                 String[] slowa = wiadamoscKlienta.split(" ");
 
@@ -53,28 +77,32 @@ class WatekGracz extends Thread {
                         switch(slowa[0]){
                             case "1":
                                 stan = StanKlienta.TWORZYGRE;
-                                out.println("b");
+                                out.println(TekstMenu.drukujTekst("b",gracz));
                                 break;
                             case "2":
-                                if(ManagerGier.dajInstancje().dolaczDoGry(gracz,slowa[1]) == -1){
-                                    out.println("a 1");
+                                if(ManagerGier.dajInstancje().znajdzGrePoID(Integer.parseInt(slowa[1])) == null){
+                                    out.println("Taka gra nie isnieje &" + TekstMenu.drukujTekst("a1",gracz));
+                                }else if(ManagerGier.dajInstancje().znajdzGrePoID(Integer.parseInt(slowa[1])).czyGraSieZaczela()){
+                                    out.println("Ta gra jest pełna &" + TekstMenu.drukujTekst("a1",gracz));
                                 }else {
                                     stan = StanKlienta.WGRZE;
-                                    out.println("b");
+                                    ManagerGier.dajInstancje().dolaczDoGry(gracz,slowa[1]);
+                                    out.println(TekstMenu.drukujTekst("d",gracz));
+                                    ManagerGier.dajInstancje().jesliGraPelnaRozpocznij(gracz.dajGre());
                                 }
-                                out.flush();
                                 break;
                             case "3":
-                                OpcjaDrukujGry();
-                                out.println("a");
+                                out.println(TekstMenu.drukujTekst("c",gracz));
                                 break;
                             default:
-                                out.println("a");
+                                out.println(TekstMenu.drukujTekst("a",gracz));
                                 break;
                         }
                         break;
 
                     case StanKlienta.TWORZYGRE:
+
+                        //TODO: Sprawdzenie czy input jest poprawny ale już późno
 
                         TypGry typgry = switch (slowa[1]) {
                             case "1" -> TypGry.STANDARDOWA;
@@ -83,17 +111,42 @@ class WatekGracz extends Thread {
                             default -> null;
                         };
 
-                        int[] parametry = new int[slowa.length-1];
-                        for(int i = 1;i < slowa.length;i++){
-                            parametry[i-1] = Integer.parseInt(slowa[i]);
+                        int[] parametry = new int[slowa.length-2];
+                        for(int i = 2;i < slowa.length;i++){
+                            parametry[i-2] = Integer.parseInt(slowa[i]);
                         }
 
                         ManagerGier.dajInstancje().inicjujNowaGre(typgry,parametry,gracz);
                         stan = StanKlienta.WGRZE;
+                        out.println(TekstMenu.drukujTekst("d",gracz));
 
                         break;
 
                     case StanKlienta.WGRZE:
+
+                        if(gracz.dajGre().czyGraSieZaczela()) {
+
+                            if(slowa[0].isEmpty()){
+                                out.println(TekstMenu.drukujTekst("e",gracz));
+                            }
+
+                            //Warunek sprawdza czy podane koordynaty mieszczą się w istniejących zakresach
+                            if(slowa[0].equals("ruch") && String.valueOf(slowa[1].charAt(0)).matches("[A-M]")
+                                    && String.valueOf(slowa[1].charAt(1)).matches("(1[0-2]|[1-9])")
+                                    && String.valueOf(slowa[2].charAt(0)).matches("[A-M]")
+                                    && String.valueOf(slowa[2].charAt(1)).matches("(1[0-2]|[1-9])")
+                                    && (gracz.ktoreMiejsce() == gracz.dajGre().dajObecnegoGracza())){
+
+                                ManagerGier.dajInstancje().wykonajRuch(gracz,slowa[1],slowa[2]);
+
+                            }
+//                            else {
+//                                out.println(TekstMenu.drukujTekst("e",gracz));
+//                            }
+                        }else {
+                            out.println(TekstMenu.drukujTekst("d",gracz));
+
+                        }
 
                         break;
                 }
@@ -106,7 +159,4 @@ class WatekGracz extends Thread {
 
     }
 
-    private void OpcjaDrukujGry(){
-        //TODO: Print gier z managera
-    }
 }

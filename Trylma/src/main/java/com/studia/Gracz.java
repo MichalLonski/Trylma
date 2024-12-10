@@ -11,7 +11,8 @@ public class Gracz {
     }
 
     public void zajmijMiejsce(Gra gra, int miejsce) {
-        this.gra = gra;
+        //To usunąłem stad i do osobnej funkcji włożyłem
+        //this.gra = gra;
         miejscePrzyStole = miejsce;
     }
 
@@ -34,4 +35,17 @@ public class Gracz {
     public void informacjaOdGry(String wiadomosc){
         System.out.println("Gracz: " + identyfikatorGracza + " otrzymał wiadomość: " + wiadomosc);
     }
+
+    //Dodane aby był dostęp do gry w której bierze udział gracz
+    public Gra dajGre(){
+        return gra;
+    }
+
+    //Ustawia zmienną gre gracza, pozwoliłem se to zmienić
+    //bo potrzebuje tego do struktury przypisywania do nowej
+    //Wywoływane w Gra.dodajGracza
+    public void przypiszGre(Gra gra){
+        this.gra = gra;
+    }
+
 }

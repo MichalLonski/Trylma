@@ -4,8 +4,11 @@ import com.studia.Gra;
 import com.studia.Gracz;
 import com.studia.Zasady.TypGry;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 Klasa do zarządzania grami, aby na serwerze mogła się odbywać wiecej niż jedna gra
@@ -13,7 +16,8 @@ plus jest singletonem wiec kolejny ten wzorzec z poprzeniej listy i guess
  */
 public class ManagerGier {
 
-    List<Gra> ListaGier = new ArrayList<>();
+    final private List<Gra> ListaGier = new ArrayList<>();
+    final private Map<Gracz, PrintWriter> konsolaGraczy = new HashMap<>();
     //To raczej potrzebne nie będzie
     //List<Gracz> ListaGracz = new ArrayList<>();
 
@@ -42,17 +46,55 @@ public class ManagerGier {
 
         if(znajdzGrePoID(iD) == null){
             return -1;
-        }else {
-            znajdzGrePoID(iD).dodajGracza(gracz);
+        } else if(znajdzGrePoID(iD).dajZasadyGry().ileGraczy() == znajdzGrePoID(iD).dajListeGraczy().size()) {
+            return -1;
+        } else {
+            Gra gra = znajdzGrePoID(iD);
+            gra.dodajGracza(gracz);
+            komunikatDlaGraczyGry(gra,"Gracz dołączył do gry &");
             return 1;
         }
     }
 
+    public synchronized void jesliGraPelnaRozpocznij(Gra gra){
+        if(gra.dajZasadyGry().ileGraczy() == gra.dajListeGraczy().size()){
+            rozpocznijGre(gra);
+        }
+    }
+
+    private synchronized void rozpocznijGre(Gra gra){
+        gra.ZacznijGre();
+        komunikatDlaGraczyGry(gra,"Ostatni gracz dołączył &Gra rozpoczyna się &Wciśnij ENTER by odświeżyć");
+    }
+
+    public synchronized void wykonajRuch(Gracz gracz,String pozycjaStartowa,String pozycjaKoncowa){
+        gracz.wykonajRuch(pozycjaStartowa,pozycjaKoncowa);
+        komunikatDlaGraczyGry(gracz.dajGre(),"Gracz " + gracz.ktoreMiejsce() + " wykonał ruch &wciśnij Enter by odświeżyć");
+    }
+
     //Zwraca gre po ID
-    private Gra znajdzGrePoID(int id){
+    public Gra znajdzGrePoID(int id){
         for(Gra g : ListaGier){
             if(g.dajID() == id){return g;}
         }
         return null;
+    }
+
+    //Wysyła wiadomośc każdemu graczowi w grze
+    private void komunikatDlaGraczyGry(Gra gra,String komunikat){
+        for(Gracz g : gra.dajListeGraczy()){
+            PrintWriter out = konsolaGracza(g);
+            out.println(komunikat);
+        }
+    }
+
+    //Dodaje gracza do mapy
+    public void zarejestrujGracza(Gracz gracz, PrintWriter printWriter){
+        konsolaGraczy.put(gracz,printWriter);
+    }
+
+    //Zwraca output graza
+    public PrintWriter konsolaGracza(Gracz gracz){
+        return konsolaGraczy.get(gracz);
     }
 }
