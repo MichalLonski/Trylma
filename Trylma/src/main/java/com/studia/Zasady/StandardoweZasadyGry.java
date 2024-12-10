@@ -14,6 +14,7 @@ public class StandardoweZasadyGry implements ZasadyGry {
         return liczbaGraczy;
     }
 
+    // TODO: implementacja ruchów
     @Override
     public boolean ruchJestPoprawny(Plansza plansza, String pozycjaPoczatkowa, String pozycjaKoncowa) {
         return true;

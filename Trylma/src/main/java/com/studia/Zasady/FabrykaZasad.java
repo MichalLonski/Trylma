@@ -1,7 +1,7 @@
 package com.studia.Zasady;
 
 public class FabrykaZasad {
-    public static ZasadyGry stworzZasadyGry(TypGry typ, int[] parametry){
+    public static ZasadyGry stworzZasadyGry(TypGry typ, int[] parametry) {
         switch (typ) {
             case STANDARDOWA:
                 return new StandardoweZasadyGry(parametry[0]);

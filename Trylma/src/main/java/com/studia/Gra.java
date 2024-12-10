@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-
 public class Gra {
     private static int ID = 0;
     private final int ID_GRY;
@@ -38,7 +36,7 @@ public class Gra {
         kolejka.ustawLosowo();
         planszaGry = new Plansza(zasadyGry.ileGraczy());
         planszaGry.utworzPlansze();
-        informujGraczy("Gra się zaczyna");
+        // informujGraczy("Gra się zaczyna");
         graWTrakcie = true;
         return kolejka.obecnyGracz();
     }
@@ -90,9 +88,10 @@ public class Gra {
             System.err.println("Poczekaj na swoją kolej");
         } else {
             boolean udanyRuch = planszaGry.wykonajRuch(pozycjaPoczatkowa, pozycjaKoncowa, kolejka.obecnyGracz());
-            //Moja modyfikacja
-            ruchWPoprzedniejTurze = "Gracz nr: " + miejsceGracza + " wykonał ruch z " + pozycjaPoczatkowa + " na " + pozycjaKoncowa +"&";
+            // Moja modyfikacja
             if (udanyRuch) {
+                ruchWPoprzedniejTurze = "Gracz nr: " + miejsceGracza + " wykonał ruch z " + pozycjaPoczatkowa + " na "
+                        + pozycjaKoncowa + "&";
                 kolejka.wykonanoRuch();
             }
         }
@@ -105,7 +104,7 @@ public class Gra {
             return;
         }
         this.listaGraczy.add(gracz);
-        //Moja modyfikacja
+        // Moja modyfikacja
         gracz.przypiszGre(this);
     }
 
@@ -116,43 +115,50 @@ public class Gra {
         }
     }
 
-    public void informujGraczy(String wiadomosc) {
-        for (Gracz gracz : listaGraczy) {
-            gracz.informacjaOdGry(wiadomosc);
-        }
-    }
+    /*
+     * Chyba zbędne
+     * public void informujGraczy(String wiadomosc) {
+     * for (Gracz gracz : listaGraczy) {
+     * gracz.informacjaOdGry(wiadomosc);
+     * }
+     * }
+     */
 
     ///////////////////////////////////////////////
-    //////////////Gettery i Settery////////////////
+    ////////////// Gettery i Settery////////////////
     ///////////////////////////////////////////////
 
-    //Dodany co by był jakiś dostęp do ID_Gry
+    // Dodany co by był jakiś dostęp do ID_Gry
     public int dajID() {
         return ID_GRY;
     }
 
-    //Zwraca fakt czy gra się zaczełą czy nie
+    // Zwraca fakt czy gra się zaczełą czy nie
     public boolean czyGraSieZaczela() {
         return graWTrakcie;
     }
 
-    //Zwraca liste graczy
+    // Zwraca liste graczy
     public List<Gracz> dajListeGraczy() {
         return listaGraczy;
     }
 
-    //Zwraca zasady
+    // Zwraca zasady
     public ZasadyGry dajZasadyGry() {
         return zasadyGry;
     }
 
-    //Zwraca ruch z poprzedniej tury
-    public String dajRuchZPoprzedniejTury(){
+    // Zwraca ruch z poprzedniej tury
+    public String dajRuchZPoprzedniejTury() {
         return ruchWPoprzedniejTurze;
     }
 
-    //Zwraca miejsce przy stole gracza którego tura trwa
-    public int dajObecnegoGracza(){
+    // Zwraca miejsce przy stole gracza którego tura trwa
+    public int dajObecnegoGracza() {
         return kolejka.obecnyGracz();
+    }
+
+    public String opis() {
+        return "ID gry: " + ID_GRY + " | Zapełnienie: " + listaGraczy.size() + "/" + zasadyGry.ileGraczy();
     }
 }
