@@ -92,7 +92,6 @@ public class Gra {
             boolean udanyRuch = planszaGry.wykonajRuch(pozycjaPoczatkowa, pozycjaKoncowa, kolejka.obecnyGracz());
             //Moja modyfikacja
             ruchWPoprzedniejTurze = "Gracz nr: " + miejsceGracza + " wykonał ruch z " + pozycjaPoczatkowa + " na " + pozycjaKoncowa +"&";
-            System.out.println(ruchWPoprzedniejTurze);
             if (udanyRuch) {
                 kolejka.wykonanoRuch();
             }

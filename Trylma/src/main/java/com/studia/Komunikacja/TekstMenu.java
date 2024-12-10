@@ -4,15 +4,20 @@ import com.studia.Gra;
 import com.studia.Gracz;
 
 /*
-dekoduje wiadomość serwera, po to tak zrobione żeby obejść jakoś
-to że serwer wysyła tylko jedną linijkę do klienta i czeka
-można potem te kody jakoś czytelniej napisać bo a,b itd nie znaczą za dużo ale na razeie imo jest okej
+Klasa istnieje po to aby ten sporo switch w wątkuServera wyglądał trochę czytalniej,
+można potem te kody jakoś czytelniej napisać, czy jakies lepsze rowiązanie zastosować
+bo a,b itd nie znaczą za dużo ale na razeie imo jest okej
+
 a-menu główne
 b-menu tworzenia gry
 c-print listy gier
 d-oczekiwanie na gre
 e-gra trwa
 
+Aby serwer mógł jednorazowy output przesłać w jednej linijce zamiast znaków \n wysyła &
+które klient sam zamienia na \n. Głównie istaniało to zanim tu zrobiłem po prostu osobny
+wątek do odczytywania tego i trochę dużo tego do poprawy się zrobiło,
+jak to sie jakkolwiek problemem okaże to to poprawie
  */
 public class TekstMenu {
 

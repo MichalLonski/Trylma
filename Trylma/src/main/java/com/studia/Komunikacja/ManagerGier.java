@@ -12,7 +12,7 @@ import java.util.Map;
 
 /*
 Klasa do zarządzania grami, aby na serwerze mogła się odbywać wiecej niż jedna gra
-plus jest singletonem wiec kolejny ten wzorzec z poprzeniej listy i guess
+plus jest singletonem wiec kolejny ten wzorzec z poprzedniej listy i guess
  */
 public class ManagerGier {
 
@@ -39,7 +39,7 @@ public class ManagerGier {
         nowaGra.dodajGracza(inicjujacyGracz);
     }
 
-    //Dodaje gracza do istniejącej gry, zwraca 1 dla sukcesu i -1 dla porażki
+    //Dodaje gracza do istniejącej gry, zwraca 1 dla sukcesu i -1 gdy gra jest pełna lub nie isnieje
     public synchronized int dolaczDoGry(Gracz gracz,String id){
 
         int iD = Integer.parseInt(id);
@@ -56,23 +56,26 @@ public class ManagerGier {
         }
     }
 
+    //Wywołuje rozpocznijGre jeśli gra jest pełna
     public synchronized void jesliGraPelnaRozpocznij(Gra gra){
         if(gra.dajZasadyGry().ileGraczy() == gra.dajListeGraczy().size()){
             rozpocznijGre(gra);
         }
     }
 
+    //Wywołuje rozpoczęcie gry oraz wysyła komunikat do wszystkich o rozpoczeciu
     private synchronized void rozpocznijGre(Gra gra){
         gra.ZacznijGre();
         komunikatDlaGraczyGry(gra,"Ostatni gracz dołączył &Gra rozpoczyna się &Wciśnij ENTER by odświeżyć");
     }
 
+    //Wywołuje wykonanie ruchu na graczu oraz wysyła komunikat do wszystkich o wykonaniu ruchu
     public synchronized void wykonajRuch(Gracz gracz,String pozycjaStartowa,String pozycjaKoncowa){
         gracz.wykonajRuch(pozycjaStartowa,pozycjaKoncowa);
         komunikatDlaGraczyGry(gracz.dajGre(),"Gracz " + gracz.ktoreMiejsce() + " wykonał ruch &wciśnij Enter by odświeżyć");
     }
 
-    //Zwraca gre po ID
+    //Zwraca gre po podanym ID
     public Gra znajdzGrePoID(int id){
         for(Gra g : ListaGier){
             if(g.dajID() == id){return g;}
@@ -93,7 +96,7 @@ public class ManagerGier {
         konsolaGraczy.put(gracz,printWriter);
     }
 
-    //Zwraca output graza
+    //Zwraca PrintWriter gracza
     public PrintWriter konsolaGracza(Gracz gracz){
         return konsolaGraczy.get(gracz);
     }

@@ -13,12 +13,16 @@ import java.util.Scanner;
 Klasa servera i wątku,klasa wątku przechowuje gracza za którego odpowiada
 (Do zmiany jak klient będzie brał udział w wiecej niż jednej grze)
 generalnie wątek działa tak że switchuje się po enumie Stan
+Aby serwer mógł jednorazowy output przesłać w jednej linijce zamiast znaków \n wysyła &
+które klient sam zamienia na \n. Głównie istaniało to zanim tu zrobiłem po prostu osobny
+wątek do odczytywania tego i trochę dużo tego do poprawy się zrobiło,
+jak to sie jakkolwiek problemem okaże to to poprawie
  */
 public class SeverGry {
     static boolean SerwerWlaczony = true;
     public static void main(String[] args) throws Exception {
 
-        //Prosta obsługa konsoli serwera, nie wiem co tam jeszcze dodać ale jest
+        //Prosta obsługa konsoli serwera, nie wiem co tam jeszcze dodać ale jak coś to jest
         Thread watekKonsolaSerwera = new Thread(() -> {
             String wiadomosc;
             Scanner scanner = new Scanner(System.in);
@@ -102,7 +106,7 @@ class WatekGracz extends Thread {
 
                     case StanKlienta.TWORZYGRE:
 
-                        //TODO: Sprawdzenie czy input jest poprawny ale już późno
+                        //TODO: Sprawdzenie czy input jest poprawny ale to tam kiedyś
 
                         TypGry typgry = switch (slowa[1]) {
                             case "1" -> TypGry.STANDARDOWA;
@@ -124,8 +128,13 @@ class WatekGracz extends Thread {
 
                     case StanKlienta.WGRZE:
 
+                        //Jesli gra się nie zaczeła wyświetlaj ekran o oczekiwaniu na gracza
+                        //Gdy się zaczeła jeśli nie twoja tura dostajesz ekran z informacją jaki gracz mature
+                        //Jeśli jest twoja dostajesz ekran z instrukcją wykonania ruchu
                         if(gracz.dajGre().czyGraSieZaczela()) {
 
+                            //Aby tekst drukował się tylko gdy klikasz enter na pustej linii
+                            //a nie na przykład jak wpisujesz twój ruch
                             if(slowa[0].isEmpty()){
                                 out.println(TekstMenu.drukujTekst("e",gracz));
                             }
@@ -140,9 +149,7 @@ class WatekGracz extends Thread {
                                 ManagerGier.dajInstancje().wykonajRuch(gracz,slowa[1],slowa[2]);
 
                             }
-//                            else {
-//                                out.println(TekstMenu.drukujTekst("e",gracz));
-//                            }
+//
                         }else {
                             out.println(TekstMenu.drukujTekst("d",gracz));
 
