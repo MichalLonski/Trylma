@@ -25,7 +25,7 @@ public class Gracz {
     }
 
     public int ktoreMiejsce(){
-        return miejscePrzyStole+1;
+        return miejscePrzyStole;
     }
 
     public String przedstawSie(){
