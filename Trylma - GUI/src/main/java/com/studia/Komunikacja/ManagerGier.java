@@ -91,10 +91,11 @@ public class ManagerGier {
 
     // Wysyła wiadomośc każdemu graczowi w grze
     private void komunikatDlaGraczyGry(Gra gra, String komunikat) {
-        for (Gracz g : gra.dajListeGraczy()) {
-            PrintWriter out = konsolaGracza(g);
-            out.println(komunikat);
-        }
+//        for (Gracz g : gra.dajListeGraczy()) {
+//            PrintWriter out = konsolaGracza(g);
+//            out.println(komunikat);
+//        }
+        //TODO do zmainy by wypisywało się gdzieś na jakimś czacie czy czymś takim
     }
 
     // Dodaje gracza do mapy
@@ -110,7 +111,7 @@ public class ManagerGier {
     public String wypiszGry(){
         String wynik = "";
         for (Gra gra : ListaGier) {
-            wynik += gra.opis() + "&&";
+            wynik += gra.opis() + "&";
         }
         return wynik;
     }
