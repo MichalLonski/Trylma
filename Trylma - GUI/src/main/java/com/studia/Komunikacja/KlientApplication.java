@@ -45,14 +45,9 @@ public class KlientApplication extends Application{
         menuGUIController.setInOut(in,out);
         graGUIController.setInOut(in,out);
     }
-
-    /**
-     * Główna metoda uruchamiająca aplikację.
-     */
-    public static void main(String[] args) {
-        launch();
+    public void start(String[] args){
+        launch(args);
     }
-
     private void poloczZSerwerem() {
         System.out.println("Zyje!");
         try {

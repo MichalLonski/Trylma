@@ -3,7 +3,6 @@ package com.studia.Komunikacja.GUI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;

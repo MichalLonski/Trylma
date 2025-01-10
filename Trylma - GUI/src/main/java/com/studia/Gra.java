@@ -32,7 +32,7 @@ public class Gra {
             System.err.println("Gra nie jest pełna");
             return -1;
         }
-        kolejka = new KolejkaGraczy(this, listaGraczy);
+        kolejka = new KolejkaGraczy(listaGraczy);
         kolejka.ustawLosowo();
         planszaGry = new Plansza(zasadyGry.ileGraczy());
         planszaGry.utworzPlansze();
@@ -44,18 +44,17 @@ public class Gra {
     private class KolejkaGraczy {
         private List<Gracz> zakolejkowaniGracze;
         private int tura;
-        private Gra gra;
 
-        KolejkaGraczy(Gra gra, List<Gracz> lista) {
-            this.gra = gra;
+        KolejkaGraczy(List<Gracz> lista) {
             this.zakolejkowaniGracze = lista;
         }
 
+        // gracze w kolejce są 0-(n-1), ale ich numery to 1-n, bo 0 ma oznaczać puste pole
         public Gracz ustawLosowo() {
             Collections.shuffle(zakolejkowaniGracze);
             tura = 0;
-            for (int miejsce = 0; miejsce < zakolejkowaniGracze.size(); miejsce++) {
-                zakolejkowaniGracze.get(miejsce).zajmijMiejsce(gra, miejsce);
+            for (int miejsce = 1; miejsce <= zakolejkowaniGracze.size(); miejsce++) {
+                zakolejkowaniGracze.get(miejsce-1).zajmijMiejsce(miejsce);
             }
             return zakolejkowaniGracze.get(tura);
         }
@@ -74,7 +73,7 @@ public class Gra {
         }
 
         public int obecnyGracz() {
-            return tura;
+            return tura+1;
         }
     }
 
@@ -83,18 +82,18 @@ public class Gra {
      * Kolumna: 1-13
      * Pozycja wiersz + kolumna (konkatenacja, bez spacji, np A1, M12)
      */
-    public void wykonajRuch(int miejsceGracza, String pozycjaPoczatkowa, String pozycjaKoncowa) {
-        if (miejsceGracza != kolejka.obecnyGracz()) {
-            System.err.println("Poczekaj na swoją kolej");
-        } else {
-            boolean udanyRuch = planszaGry.wykonajRuch(pozycjaPoczatkowa, pozycjaKoncowa, kolejka.obecnyGracz());
-            // Moja modyfikacja
-            if (udanyRuch) {
-                ruchWPoprzedniejTurze = "Gracz nr: " + miejsceGracza + " wykonał ruch z " + pozycjaPoczatkowa + " na "
-                        + pozycjaKoncowa + "&";
-                kolejka.wykonanoRuch();
-            }
+    public void wykonajRuch(int miejsceGracza, String[] sekwencjaRuchow) {
+        if (trwaTuraGracza(miejsceGracza, sekwencjaRuchow)){
+            planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length-1], miejsceGracza);
+            kolejka.wykonanoRuch();
         }
+    }
+
+    public boolean trwaTuraGracza(int miejsceGracza, String[] sekwencjaRuchow){
+        if (miejsceGracza != kolejka.obecnyGracz()){
+            return false;
+        }
+        return zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, miejsceGracza);
     }
 
     // TODO: synchroniczna - sprawdzić

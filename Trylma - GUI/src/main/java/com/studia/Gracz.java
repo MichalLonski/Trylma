@@ -6,18 +6,19 @@ public class Gracz {
     private String identyfikatorGracza;
     private int miejscePrzyStole;
     private Gra gra;
+    
     public Gracz() {
         this.identyfikatorGracza = UUID.randomUUID().toString();
     }
 
-    public void zajmijMiejsce(Gra gra, int miejsce) {
+    public void zajmijMiejsce(int miejsce) {
         //To usunąłem stad i do osobnej funkcji włożyłem
         //this.gra = gra;
         miejscePrzyStole = miejsce;
     }
 
-    public void wykonajRuch(String pozycjaPoczatkowa, String pozycjaKoncowa) {
-        gra.wykonajRuch(miejscePrzyStole, pozycjaPoczatkowa, pozycjaKoncowa);
+    public void wykonajRuch(String[] sekwencjaRuchow) {
+        gra.wykonajRuch(miejscePrzyStole, sekwencjaRuchow);
     }
 
     public void opuscGre(){

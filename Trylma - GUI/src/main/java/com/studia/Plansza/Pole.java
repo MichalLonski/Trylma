@@ -22,4 +22,7 @@ public class Pole {
     public String koordynaty() {
         return "Wiersz: " + wiersz + " Kolumna: " + kolumna + " Gracz: " + nrGracza;
     }
+    public void setGracz(int gracz){
+        nrGracza = gracz;
+    }
 }

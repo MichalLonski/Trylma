@@ -73,8 +73,8 @@ public class ManagerGier {
 
     // Wywołuje wykonanie ruchu na graczu oraz wysyła komunikat do wszystkich o
     // wykonaniu ruchu
-    public synchronized void wykonajRuch(Gracz gracz, String pozycjaStartowa, String pozycjaKoncowa) {
-        gracz.wykonajRuch(pozycjaStartowa, pozycjaKoncowa);
+    public synchronized void wykonajRuch(Gracz gracz, String[] sekwencjaRuchow) {
+        gracz.wykonajRuch(sekwencjaRuchow);
         komunikatDlaGraczyGry(gracz.dajGre(),
                 "Gracz " + gracz.ktoreMiejsce() + " wykonał ruch &wciśnij Enter by odświeżyć");
     }

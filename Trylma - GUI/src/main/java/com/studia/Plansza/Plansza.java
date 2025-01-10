@@ -50,43 +50,27 @@ public class Plansza {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        /*
-         * Wypisywanie planszy
-         * for (Pole[] wiersz : planszaDoGry) {
-         * String s = "";
-         * for (Pole pole : wiersz) {
-         * if (pole.getGracz() > 6) {
-         * s += "█ ";
-         * } else {
-         * s += String.valueOf(pole.getGracz());
-         * s += " ";
-         * }
-         * }
-         * System.out.println(s);
-         * }
-         * System.out.println("============================================");
-         */
     }
 
-    public String sprawdzPole(int wiersz, int kolumna) {
-        return (planszaDoGry[wiersz][kolumna].koordynaty());
+    public Pole sprawdzPole(int wiersz, int kolumna) {
+        return planszaDoGry[wiersz][kolumna];
     }
 
-    @SuppressWarnings("unused")
-    public boolean wykonajRuch(String pozycjaPoczatkowa, String pozycjaKoncowa, int gracz) {
+    public void wykonajRuch(String pozycjaPoczatkowa, String pozycjaKoncowa, int gracz) {
         int wierszP = (int) (pozycjaPoczatkowa.toUpperCase().charAt(0)) - 65;
         int kolumnaP = Integer.parseInt(pozycjaPoczatkowa.substring(1)) - 1;
         int wierszK = (int) (pozycjaKoncowa.toUpperCase().charAt(0)) - 65;
         int kolumnaK = Integer.parseInt(pozycjaKoncowa.substring(1)) - 1;
-        /*
-         * System.out.println("Gracz: " + (gracz + 1) + " wykonuje ruch: " +
-         * pozycjaPoczatkowa + " -> " + pozycjaKoncowa);
-         * System.out.println("Pod pozycją " + pozycjaPoczatkowa + " znajduje się " +
-         * sprawdzPole(wierszP, kolumnaP));
-         * System.out.println("Pod pozycją " + pozycjaKoncowa + " znajduje się " +
-         * sprawdzPole(wierszK, kolumnaK));
-         */
-        return true;
+        sprawdzPole(wierszK, kolumnaK).setGracz(gracz);
+        sprawdzPole(wierszP, kolumnaP).setGracz(0);
+
     }
+
+    public boolean jestMiedzyPolami(int wiersz1, int kolumna1, int wiersz2, int kolumna2) {
+        if (wiersz1 % 2 != wiersz2 % 2 || kolumna1 % 2 != kolumna2 % 2) {
+            return false; // nie ma pola pomiędzy
+        }
+        return sprawdzPole((wiersz1 + wiersz2) / 2, (kolumna1 + kolumna2) / 2).zajete();
+    }
+
 }
