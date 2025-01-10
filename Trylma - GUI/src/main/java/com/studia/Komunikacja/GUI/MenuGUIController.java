@@ -17,7 +17,7 @@ Klasa kontrolera dla Menu głównego i ekranu tworzenia gry
 Nazwy raczej same tłumaczą co robią poszczególne funkcje i obiekty
 Także nie ma co tu pisać
  */
-public class MenuGUIController {
+public class MenuGUIController extends GUIController {
 
     private BufferedReader in;
     private PrintWriter out;
@@ -42,25 +42,6 @@ public class MenuGUIController {
 
     @FXML
     private TextArea opisWariantuTextArea;
-
-    public void setInOut(BufferedReader IN, PrintWriter OUT){
-        in = IN;
-        out = OUT;
-    }
-
-
-
-    private String sendCommand(String komenda) {
-        try {
-            out.println(komenda);
-            String odp = in.readLine();
-            return odp;
-        } catch (IOException e) {
-            System.out.println("Błąd w komunikacji z serwerem\n");
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public void stworzGreButtonKlik(){
         menuGlownePane.setVisible(false);
@@ -115,17 +96,8 @@ public class MenuGUIController {
         }
     }
 
-    private static boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch(Exception e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private void quit() throws IOException {
+    @Override
+    public void quit() throws IOException {
         try{
             in.close();
             out.close();

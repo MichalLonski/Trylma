@@ -4,27 +4,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+
 /*
 Klasa kontrolera dla Okienka oczekiwania na gre i gry
  */
-public class GraGUIController {
+public class GraGUIController extends GUIController {
 
-    private BufferedReader in;
-    private PrintWriter out;
+    @FXML
+    GridPane planszaGridPane;
 
-    public void setInOut(BufferedReader IN, PrintWriter OUT){
-        in = IN;
-        out = OUT;
-    }
+    @FXML
+    Pane oczekiwaniePane;
 
-    private void quit() throws IOException {
-        try{
-            in.close();
-            out.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    @FXML
+    Pane wGrzePane;
 
+    public void GenerateBoard() {
+       String odp = sendCommand("#players");
+       int iloscGraczy = Integer.parseInt(odp);
+       //TODO: zczytuje z pliku schemat tablicy i wsadza go do GridPane
     }
 
 }

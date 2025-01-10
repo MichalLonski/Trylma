@@ -71,6 +71,10 @@ public class WatekGracza extends Thread {
                     case "refresh":
                         out.println(ManagerGier.dajInstancje().wypiszGry());
                         break;
+
+                    case "#players":
+                        out.println(gracz.dajGre().dajZasadyGry().ileGraczy());
+                        break;
                 }
 
             }
