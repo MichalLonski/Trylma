@@ -49,14 +49,19 @@ public class MenuGUIController extends GUIController {
     }
 
     public void doloczdoGryButtonKlik(){
-        if(isInteger(IDGryDoDoloczeniaTextField.getText())){
-            String odpowiedz = sendCommand("join"+" "+IDGryDoDoloczeniaTextField.getText());
-            if("success".equals(odpowiedz)){
-                KlientApplication.MenuDoGry();
+        try{
+            if(isInteger(IDGryDoDoloczeniaTextField.getText())){
+                String odpowiedz = sendCommand("join"+" "+IDGryDoDoloczeniaTextField.getText());
+                if("success".equals(odpowiedz)){
+                    KlientApplication.MenuDoGry();
+                }
+            }else{
+                listaGierTextArea.setText("Podaj poprawne ID\n");
             }
-        }else{
-            listaGierTextArea.setText("Podaj poprawne ID\n");
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     public void odswiezButtonKlik(){
@@ -73,8 +78,12 @@ public class MenuGUIController extends GUIController {
     }
 
     public void stworzGreFinalButtonKlik(){
-        String odpowiedz = sendCommand("create" + " " + wariantGryComboBox.getValue() + " " + iloscGraczyComboBox.getValue());
-        KlientApplication.MenuDoGry();
+        try{
+            String odpowiedz = sendCommand("create" + " " + wariantGryComboBox.getValue() + " " + iloscGraczyComboBox.getValue());
+            KlientApplication.MenuDoGry();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void cofnijButtonKlik(){

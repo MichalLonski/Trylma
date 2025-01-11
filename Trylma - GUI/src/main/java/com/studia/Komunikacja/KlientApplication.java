@@ -27,13 +27,9 @@ public class KlientApplication extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoaderMain = new FXMLLoader(getClass().getResource("/MenuGUI.fxml"));
+        FXMLLoader fxmlLoaderMain = new FXMLLoader(KlientApplication.class.getResource("/MenuGUI.fxml"));
         menuScene = new Scene(fxmlLoaderMain.load());
         menuGUIController = fxmlLoaderMain.getController();
-
-        FXMLLoader fxmlLoaderSec = new FXMLLoader(getClass().getResource("/WGrzeGUI.fxml"));
-        wGrzeScene = new Scene(fxmlLoaderSec.load());
-        graGUIController = fxmlLoaderSec.getController();
 
         stage.setResizable(false);
         stage.setTitle("Menu");
@@ -43,11 +39,13 @@ public class KlientApplication extends Application{
 
         poloczZSerwerem();
         menuGUIController.setInOut(in,out);
-        graGUIController.setInOut(in,out);
+
     }
+
     public void start(String[] args){
         launch(args);
     }
+
     private void poloczZSerwerem() {
         System.out.println("Zyje!");
         try {
@@ -61,8 +59,15 @@ public class KlientApplication extends Application{
         }
     }
 
-    public static void MenuDoGry(){
+    public static void MenuDoGry() throws IOException{
+        FXMLLoader fxmlLoaderSec = new FXMLLoader(KlientApplication.class.getResource("/WGrzeGUI.fxml"));
+        wGrzeScene = new Scene(fxmlLoaderSec.load());
+        graGUIController = fxmlLoaderSec.getController();
+        graGUIController.setInOut(in,out);
+        graGUIController.setStage(glownaScena);
+
         glownaScena.setScene(wGrzeScene);
+        graGUIController.GenerateBoard();
     }
 
     public static void GraDoMenu(){
