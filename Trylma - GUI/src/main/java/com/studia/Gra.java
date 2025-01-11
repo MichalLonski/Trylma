@@ -160,4 +160,8 @@ public class Gra {
     public String opis() {
         return "ID gry: " + ID_GRY + " | Zapełnienie: " + listaGraczy.size() + "/" + zasadyGry.ileGraczy();
     }
+
+    public void printPlansza(){
+        planszaGry.wypiszPlansze();
+    }
 }

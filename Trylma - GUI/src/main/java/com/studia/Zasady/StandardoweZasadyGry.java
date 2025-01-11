@@ -1,6 +1,7 @@
 package com.studia.Zasady;
 
 import com.studia.Plansza.Plansza;
+import com.studia.Plansza.Pole;
 
 public class StandardoweZasadyGry implements ZasadyGry {
     private int liczbaGraczy;
@@ -14,17 +15,26 @@ public class StandardoweZasadyGry implements ZasadyGry {
         return liczbaGraczy;
     }
 
-    // TODO: implementacja ruchów
+    /*
+     * Jakie mamy ograniczenia:
+     * - trzeba zacząć od pola ze swoim pionem
+     * - trzeba skończyć na polu pustym
+     * - można ruszyć się na sąsiednie pole
+     * - można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion
+     * - nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu
+     */
     @Override
     public boolean ruchJestPoprawny(Plansza plansza, String[] sekwencjaRuchow, int gracz) {
 
-        if (gracz != plansza.sprawdzPole((int) (sekwencjaRuchow[0].toUpperCase().charAt(0)) - 65,
-                Integer.parseInt(sekwencjaRuchow[0].substring(1)) - 1).getGracz()) {
+        Pole obecne = plansza.sprawdzPole((int) (sekwencjaRuchow[0].toUpperCase().charAt(0)) - 65,
+                Integer.parseInt(sekwencjaRuchow[0].substring(1)) - 1);
+        if (gracz != obecne.getGracz()) {
             return false;
             // czy zaczynamy od swojego piona
         }
 
         boolean rezultat = true;
+        boolean czyNaKoncu = (obecne.getGraczZwycieski() == gracz); // czy jesteśmy w domku
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
             int wierszP = (int) (sekwencjaRuchow[i].toUpperCase().charAt(0)) - 65;
@@ -55,7 +65,15 @@ public class StandardoweZasadyGry implements ZasadyGry {
                 break;
             }
         }
-
+        if (rezultat) {
+            Pole ostatnie = plansza.sprawdzPole(
+                    (int) (sekwencjaRuchow[sekwencjaRuchow.length - 1].toUpperCase().charAt(0)) - 65,
+                    Integer.parseInt(sekwencjaRuchow[0].substring(1)) - 1);
+            if (czyNaKoncu) {
+                rezultat = (ostatnie.getGraczZwycieski() == gracz);
+                // jeśli zaczynamy w domku to musi tam już kończyć
+            }
+        }
         return rezultat;
     }
 

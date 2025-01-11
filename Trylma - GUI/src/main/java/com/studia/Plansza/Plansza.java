@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Plansza {
 
-    public final static int LICZBA_WIERSZY = 13;
+    public final static int LICZBA_WIERSZY = 25;
     public final static int LICZBA_KOLUMN = 17;
 
     private Pole planszaDoGry[][];
@@ -22,7 +22,7 @@ public class Plansza {
         }
     }
 
-    private static Pole[] odczytajPole(int nrWiersza, ArrayList<Integer> list) {
+    private Pole[] odczytajPole(int nrWiersza, ArrayList<Integer> list) {
         Pole[] wiersz = new Pole[list.size()];
         for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
             wiersz[nrKolumny] = new Pole(nrWiersza + 1, nrKolumny + 1, list.get(nrKolumny));
@@ -47,6 +47,16 @@ public class Plansza {
                 wiersz = odczytajPole(nrWiersza, mapa.get(nrWiersza));
                 planszaDoGry[nrWiersza] = wiersz;
             }
+
+            for (int nrWiersza = 0; nrWiersza < LICZBA_WIERSZY; nrWiersza++) {
+                int odbityWiersz = LICZBA_WIERSZY - nrWiersza - 1;
+                for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
+                    int odbitaKolumna = LICZBA_KOLUMN - nrKolumny - 1;
+                    if (sprawdzPole(nrWiersza, nrKolumny).zajete()) {
+                        sprawdzPole(odbityWiersz, odbitaKolumna).setGraczZwycieski(sprawdzPole(nrWiersza, nrKolumny).getGracz());
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,7 +73,6 @@ public class Plansza {
         int kolumnaK = Integer.parseInt(pozycjaKoncowa.substring(1)) - 1;
         sprawdzPole(wierszK, kolumnaK).setGracz(gracz);
         sprawdzPole(wierszP, kolumnaP).setGracz(0);
-
     }
 
     public boolean jestMiedzyPolami(int wiersz1, int kolumna1, int wiersz2, int kolumna2) {
@@ -71,6 +80,15 @@ public class Plansza {
             return false; // nie ma pola pomiędzy
         }
         return sprawdzPole((wiersz1 + wiersz2) / 2, (kolumna1 + kolumna2) / 2).zajete();
+    }
+
+    public void wypiszPlansze() {
+        for (Pole[] poles : planszaDoGry) {
+            for (Pole pole : poles) {
+                System.out.println(pole.koordynaty());
+            }
+            System.err.println("=================");
+        }
     }
 
 }
