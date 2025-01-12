@@ -37,7 +37,7 @@ public class GraGUIController extends GUIController {
     public final static int ROZMIAR_POLA = 20;
     public int SZEROKOSC_MENU;// 240
     public int WYSOKOSC_MENU;// 280
-    private ArrayList<String> sekwencjaRuchow = new ArrayList<>();
+    private ArrayList<int[]> sekwencjaRuchow = new ArrayList<>();
     private ArrayList<PoleWGUI> Pola = new ArrayList<>();
     private HashMap<Integer, Color> kolorGracza = new HashMap<>() {
         {
@@ -161,34 +161,44 @@ public class GraGUIController extends GUIController {
             rect.setFill(Color.WHITE);
             Circle cric = new Circle();
             pane.getChildren().add(cric);
+
             cric.setRadius((double) ROZMIAR_POLA * 0.45);
             cric.setCenterX((double) ROZMIAR_POLA / 2);
             cric.setCenterY((double) ROZMIAR_POLA / 2);
+
             cric.setStroke(Color.WHITE);
             cric.setFill(Color.WHITE);
             cric.setMouseTransparent(true);
-            Pola.add(new PoleWGUI(Y + "" + X, rect, cric, typ));
+
+            int[] pole = {X,Y};
+
+            Pola.add(new PoleWGUI(pole, rect, cric, typ));
             rect.setOnMouseClicked((MouseEvent event) -> {
-                poleKlikniete(Y + " " + X, cric, typ);
+                poleKlikniete(pole, cric, typ);
             });
         } else {
             rect.setFill(kolorGracza.get(typ));
             Circle cric = new Circle();
             pane.getChildren().add(cric);
+
             cric.setRadius((double) ROZMIAR_POLA * 0.45);
             cric.setCenterX((double) ROZMIAR_POLA / 2);
             cric.setCenterY((double) ROZMIAR_POLA / 2);
+
             cric.setStroke(Color.BLACK);
             cric.setFill(kolorGracza.get(typ));
             cric.setMouseTransparent(true);
-            Pola.add(new PoleWGUI(Y + "" + X, rect, cric, typ));
+
+            int[] pole = {X,Y};
+
+            Pola.add(new PoleWGUI(pole, rect, cric, typ));
             rect.setOnMouseClicked((MouseEvent event) -> {
-                poleKlikniete(Y + "" + X, cric, typ);
+                poleKlikniete(pole, cric, typ);
             });
         }
     }
 
-    private void poleKlikniete(String pole, Circle circ, int typ) {
+    private void poleKlikniete(int[] pole, Circle circ, int typ) {
         if (turaGracza == miejsceGracza && !graRozpoczeta) {
             sekwencjaRuchow.add(pole);
             circ.setStroke(kolorGracza.get(typ).invert());
@@ -248,8 +258,8 @@ public class GraGUIController extends GUIController {
 
     public void wykonajRuchButtonKlik() {
         String doWyslania = "";
-        for (String str : sekwencjaRuchow) {
-            doWyslania = doWyslania + " " + str;
+        for (int[] pole : sekwencjaRuchow) {
+            doWyslania = doWyslania + " " + pole[0] + "!" + pole[1];
         }
         sendCommand("doMove " + doWyslania);
         // TODO: na jutroooooo
@@ -262,8 +272,8 @@ public class GraGUIController extends GUIController {
     private void czyMoznaWykonacRuch() {
 
         String doWyslania = "";
-        for (String str : sekwencjaRuchow) {
-            doWyslania = doWyslania + " " + str;
+        for (int[] pole : sekwencjaRuchow) {
+            doWyslania = doWyslania + " " + pole[0] +"!"+ pole[1];
         }
         if (sendCommand("checkMove " + doWyslania).equals("true")) {
             wykonajRuchButton.setDisable(true);

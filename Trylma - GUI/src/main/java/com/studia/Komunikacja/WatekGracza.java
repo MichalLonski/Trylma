@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.Array;
+import java.util.ArrayList;
 
 import com.studia.Gracz;
 import com.studia.Zasady.TypGry;
@@ -91,12 +93,13 @@ public class WatekGracza extends Thread {
                         out.println(gracz.dajGre().dajListeGraczy().size());
                         break;
                     case "checkMove":
-                        String[] sekwencja = new String[slowa.length - 1];
-                        for (int j = 1; j < slowa.length; j++) {
-                            sekwencja[j - 1] = slowa[j];
+                        int[][] sekwencjaRuchow = new int[slowa.length-1][2];
+                        for (int j = 0; j < slowa.length-1; j++) {
+                            sekwencjaRuchow[j] = new int[]{
+                                    Integer.parseInt(slowa[j+1].split("!")[0]),
+                                    Integer.parseInt(slowa[j+1].split("!")[0])};
                         }
-                        // TODO - to nie powinno tak wyglądać
-                        // out.println(gracz.dajGre().ruchJestPoprawny(sekwencja,gracz.ktoreMiejsce()));
+                        out.println(gracz.dajGre().ruchJestPoprawny(sekwencjaRuchow,gracz.ktoreMiejsce()));
                         break;
                 }
 
