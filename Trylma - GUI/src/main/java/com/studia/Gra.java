@@ -157,6 +157,10 @@ public class Gra {
         return kolejka.obecnyGracz();
     }
 
+    public boolean ruchJestPoprawny( String[] sekwencjaRuchow, int gracz){
+        return zasadyGry.ruchJestPoprawny(planszaGry,sekwencjaRuchow,gracz);
+    }
+
     public String opis() {
         return "ID gry: " + ID_GRY + " | Zapełnienie: " + listaGraczy.size() + "/" + zasadyGry.ileGraczy();
     }

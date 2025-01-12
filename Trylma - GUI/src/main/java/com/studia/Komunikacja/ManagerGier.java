@@ -54,6 +54,7 @@ public class ManagerGier {
             Gra gra = znajdzGrePoID(iD);
             gra.dodajGracza(gracz);
             komunikatDlaGraczyGry(gra, "Gracz dołączył do gry &");
+            jesliGraPelnaRozpocznij(gracz.dajGre());
             return 1;
         }
     }

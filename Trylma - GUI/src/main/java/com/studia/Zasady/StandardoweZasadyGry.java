@@ -77,4 +77,13 @@ public class StandardoweZasadyGry implements ZasadyGry {
         return rezultat;
     }
 
+    @Override
+    public String opisZasad(){
+        return "1. Trzeba zacząć od pola ze swoim pionem &" +
+                "2. Trzeba skończyć na polu pustym &" +
+                "3. Można ruszyć się na sąsiednie pole &" +
+                "4. Można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion &" +
+                "5. Nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu &";
+    }
+
 }

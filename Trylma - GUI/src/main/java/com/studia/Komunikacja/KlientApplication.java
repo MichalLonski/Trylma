@@ -64,7 +64,7 @@ public class KlientApplication extends Application{
         wGrzeScene = new Scene(fxmlLoaderSec.load());
         graGUIController = fxmlLoaderSec.getController();
         graGUIController.setInOut(in,out);
-        graGUIController.setStage(glownaScena);
+        graGUIController.setInfo(glownaScena);
 
         glownaScena.setScene(wGrzeScene);
         graGUIController.GenerateBoard();

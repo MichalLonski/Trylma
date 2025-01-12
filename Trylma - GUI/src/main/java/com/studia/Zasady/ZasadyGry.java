@@ -7,4 +7,6 @@ public interface ZasadyGry {
     public int ileGraczy();
 
     public boolean ruchJestPoprawny(Plansza plansza, String[] sekwencjaRuchow, int gracz);
+
+    public String opisZasad();
 }

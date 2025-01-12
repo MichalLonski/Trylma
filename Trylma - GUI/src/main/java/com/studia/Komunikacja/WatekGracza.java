@@ -71,9 +71,31 @@ public class WatekGracza extends Thread {
                     case "refresh":
                         out.println(ManagerGier.dajInstancje().wypiszGry());
                         break;
-
                     case "#players":
                         out.println(gracz.dajGre().dajZasadyGry().ileGraczy());
+                        break;
+                    case "currentPlayer":
+                        out.println(gracz.dajGre().dajObecnegoGracza());
+                        break;
+                    case "playerSeat":
+                        out.println(gracz.ktoreMiejsce());
+                        break;
+                    case "gameRules":
+                        out.println(gracz.dajGre().dajZasadyGry().opisZasad());
+                        break;
+                    case "hasStarted":
+                        System.out.println(gracz.dajGre().czyGraSieZaczela());
+                        out.println(gracz.dajGre().czyGraSieZaczela());
+                        break;
+                    case "#playersGame":
+                        out.println(gracz.dajGre().dajListeGraczy().size());
+                        break;
+                    case "checkMove":
+                        String[] sekwencja = new String[slowa.length-1];
+                        for (int j = 1;j < slowa.length ;j++){
+                            sekwencja[j-1] = slowa[j];
+                        }
+                        out.println(gracz.dajGre().ruchJestPoprawny(sekwencja,gracz.ktoreMiejsce()));
                         break;
                 }
 
