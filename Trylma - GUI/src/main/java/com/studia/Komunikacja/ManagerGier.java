@@ -74,7 +74,7 @@ public class ManagerGier {
 
     // Wywołuje wykonanie ruchu na graczu oraz wysyła komunikat do wszystkich o
     // wykonaniu ruchu
-    public synchronized void wykonajRuch(Gracz gracz, String[] sekwencjaRuchow) {
+    public synchronized void wykonajRuch(Gracz gracz, int[][] sekwencjaRuchow) {
         gracz.wykonajRuch(sekwencjaRuchow);
         komunikatDlaGraczyGry(gracz.dajGre(),
                 "Gracz " + gracz.ktoreMiejsce() + " wykonał ruch &wciśnij Enter by odświeżyć");
@@ -92,11 +92,11 @@ public class ManagerGier {
 
     // Wysyła wiadomośc każdemu graczowi w grze
     private void komunikatDlaGraczyGry(Gra gra, String komunikat) {
-//        for (Gracz g : gra.dajListeGraczy()) {
-//            PrintWriter out = konsolaGracza(g);
-//            out.println(komunikat);
-//        }
-        //TODO do zmainy by wypisywało się gdzieś na jakimś czacie czy czymś takim
+        // for (Gracz g : gra.dajListeGraczy()) {
+        // PrintWriter out = konsolaGracza(g);
+        // out.println(komunikat);
+        // }
+        // TODO do zmainy by wypisywało się gdzieś na jakimś czacie czy czymś takim
     }
 
     // Dodaje gracza do mapy
@@ -109,7 +109,7 @@ public class ManagerGier {
         return konsolaGraczy.get(gracz);
     }
 
-    public String wypiszGry(){
+    public String wypiszGry() {
         String wynik = "";
         for (Gra gra : ListaGier) {
             wynik += gra.opis() + "&";

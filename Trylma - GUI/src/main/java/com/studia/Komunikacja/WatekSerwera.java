@@ -7,6 +7,7 @@ public class WatekSerwera extends Thread {
     private SerwerGry serwerGry;
     private String wiadomosc;
     private Scanner scanner;
+
     WatekSerwera(SerwerGry serwer) {
         serwerGry = serwer;
         scanner = new Scanner(System.in);
@@ -16,10 +17,9 @@ public class WatekSerwera extends Thread {
     public void run() {
         while (true) {
             wiadomosc = scanner.nextLine().stripLeading().stripTrailing().toLowerCase();
-            if ("".equals(wiadomosc)){
+            if ("".equals(wiadomosc)) {
                 continue;
-            }else
-            if ("exit".equals(wiadomosc)) {
+            } else if ("exit".equals(wiadomosc)) {
                 quit();
                 break;
             } else if (wiadomosc.startsWith("create game")) {
@@ -30,7 +30,7 @@ public class WatekSerwera extends Thread {
         }
     }
 
-    public void quit(){
+    public void quit() {
         scanner.close();
         serwerGry.koniec();
     }

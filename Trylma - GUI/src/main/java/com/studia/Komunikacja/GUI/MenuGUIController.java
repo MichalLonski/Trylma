@@ -43,56 +43,57 @@ public class MenuGUIController extends GUIController {
     @FXML
     private TextArea opisWariantuTextArea;
 
-    public void stworzGreButtonKlik(){
+    public void stworzGreButtonKlik() {
         menuGlownePane.setVisible(false);
         stworzGrePane.setVisible(true);
     }
 
-    public void doloczdoGryButtonKlik(){
-        try{
-            if(isInteger(IDGryDoDoloczeniaTextField.getText())){
-                String odpowiedz = sendCommand("join"+" "+IDGryDoDoloczeniaTextField.getText());
-                if("success".equals(odpowiedz)){
+    public void doloczdoGryButtonKlik() {
+        try {
+            if (isInteger(IDGryDoDoloczeniaTextField.getText())) {
+                String odpowiedz = sendCommand("join" + " " + IDGryDoDoloczeniaTextField.getText());
+                if ("success".equals(odpowiedz)) {
                     KlientApplication.MenuDoGry();
                 }
-            }else{
+            } else {
                 listaGierTextArea.setText("Podaj poprawne ID\n");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public void odswiezButtonKlik(){
+    public void odswiezButtonKlik() {
         String odpowiedz = sendCommand("refresh");
-        listaGierTextArea.setText(odpowiedz.replaceAll("&","\n"));
+        listaGierTextArea.setText(odpowiedz.replaceAll("&", "\n"));
     }
 
-    public void wyjdzButtonKlik(){
+    public void wyjdzButtonKlik() {
         try {
             quit();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void stworzGreFinalButtonKlik(){
-        try{
-            String odpowiedz = sendCommand("create" + " " + wariantGryComboBox.getValue() + " " + iloscGraczyComboBox.getValue());
+    public void stworzGreFinalButtonKlik() {
+        try {
+            String odpowiedz = sendCommand(
+                    "create" + " " + wariantGryComboBox.getValue() + " " + iloscGraczyComboBox.getValue());
             KlientApplication.MenuDoGry();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void cofnijButtonKlik(){
+    public void cofnijButtonKlik() {
         menuGlownePane.setVisible(true);
         stworzGrePane.setVisible(false);
     }
 
-    public void wyswietlOpisZasad(){
-        switch (wariantGryComboBox.getValue()){
+    public void wyswietlOpisZasad() {
+        switch (wariantGryComboBox.getValue()) {
             case "Standardowy":
                 opisWariantuTextArea.setText("Opis Standardowego wariantu gry");
                 break;
@@ -107,10 +108,10 @@ public class MenuGUIController extends GUIController {
 
     @Override
     public void quit() throws IOException {
-        try{
+        try {
             in.close();
             out.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -53,7 +53,8 @@ public class Plansza {
                 for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
                     int odbitaKolumna = LICZBA_KOLUMN - nrKolumny - 1;
                     if (sprawdzPole(nrWiersza, nrKolumny).zajete()) {
-                        sprawdzPole(odbityWiersz, odbitaKolumna).setGraczZwycieski(sprawdzPole(nrWiersza, nrKolumny).getGracz());
+                        sprawdzPole(odbityWiersz, odbitaKolumna)
+                                .setGraczZwycieski(sprawdzPole(nrWiersza, nrKolumny).getGracz());
                     }
                 }
             }
@@ -66,11 +67,11 @@ public class Plansza {
         return planszaDoGry[wiersz][kolumna];
     }
 
-    public void wykonajRuch(String pozycjaPoczatkowa, String pozycjaKoncowa, int gracz) {
-        int wierszP = (int) (pozycjaPoczatkowa.toUpperCase().charAt(0)) - 65;
-        int kolumnaP = Integer.parseInt(pozycjaPoczatkowa.substring(1)) - 1;
-        int wierszK = (int) (pozycjaKoncowa.toUpperCase().charAt(0)) - 65;
-        int kolumnaK = Integer.parseInt(pozycjaKoncowa.substring(1)) - 1;
+    public void wykonajRuch(int[] pozycjaPoczatkowa, int[] pozycjaKoncowa, int gracz) {
+        int wierszP = pozycjaPoczatkowa[0];
+        int kolumnaP = pozycjaPoczatkowa[1];
+        int wierszK = pozycjaKoncowa[0];
+        int kolumnaK = pozycjaKoncowa[1];
         sprawdzPole(wierszK, kolumnaK).setGracz(gracz);
         sprawdzPole(wierszP, kolumnaP).setGracz(0);
     }

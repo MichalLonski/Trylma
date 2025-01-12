@@ -9,7 +9,7 @@ public abstract class GUIController {
     public BufferedReader in;
     public PrintWriter out;
 
-    public void setInOut(BufferedReader IN, PrintWriter OUT){
+    public void setInOut(BufferedReader IN, PrintWriter OUT) {
         in = IN;
         out = OUT;
     }
@@ -29,7 +29,7 @@ public abstract class GUIController {
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
 
@@ -37,10 +37,10 @@ public abstract class GUIController {
     }
 
     public void quit() throws IOException {
-        try{
+        try {
             in.close();
             out.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -21,13 +21,13 @@ public class StandardoweZasadyGry implements ZasadyGry {
      * - trzeba skończyć na polu pustym
      * - można ruszyć się na sąsiednie pole
      * - można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion
-     * - nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu
+     * - nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym
+     * samym ruchu
      */
     @Override
-    public boolean ruchJestPoprawny(Plansza plansza, String[] sekwencjaRuchow, int gracz) {
+    public boolean ruchJestPoprawny(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
 
-        Pole obecne = plansza.sprawdzPole((int) (sekwencjaRuchow[0].toUpperCase().charAt(0)) - 65,
-                Integer.parseInt(sekwencjaRuchow[0].substring(1)) - 1);
+        Pole obecne = plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]);
         if (gracz != obecne.getGracz()) {
             return false;
             // czy zaczynamy od swojego piona
@@ -37,10 +37,10 @@ public class StandardoweZasadyGry implements ZasadyGry {
         boolean czyNaKoncu = (obecne.getGraczZwycieski() == gracz); // czy jesteśmy w domku
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
-            int wierszP = (int) (sekwencjaRuchow[i].toUpperCase().charAt(0)) - 65;
-            int kolumnaP = Integer.parseInt(sekwencjaRuchow[i].substring(1)) - 1;
-            int wierszK = (int) (sekwencjaRuchow[i + 1].toUpperCase().charAt(0)) - 65;
-            int kolumnaK = Integer.parseInt(sekwencjaRuchow[i + 1].substring(1)) - 1;
+            int wierszP = sekwencjaRuchow[i][0];
+            int kolumnaP = sekwencjaRuchow[i][1];
+            int wierszK = sekwencjaRuchow[i + 1][0];
+            int kolumnaK = sekwencjaRuchow[i + 1][1];
 
             if (plansza.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
@@ -66,10 +66,10 @@ public class StandardoweZasadyGry implements ZasadyGry {
             }
         }
         if (rezultat) {
-            Pole ostatnie = plansza.sprawdzPole(
-                    (int) (sekwencjaRuchow[sekwencjaRuchow.length - 1].toUpperCase().charAt(0)) - 65,
-                    Integer.parseInt(sekwencjaRuchow[0].substring(1)) - 1);
             if (czyNaKoncu) {
+
+                Pole ostatnie = plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
+                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
                 rezultat = (ostatnie.getGraczZwycieski() == gracz);
                 // jeśli zaczynamy w domku to musi tam już kończyć
             }
@@ -78,7 +78,7 @@ public class StandardoweZasadyGry implements ZasadyGry {
     }
 
     @Override
-    public String opisZasad(){
+    public String opisZasad() {
         return "1. Trzeba zacząć od pola ze swoim pionem &" +
                 "2. Trzeba skończyć na polu pustym &" +
                 "3. Można ruszyć się na sąsiednie pole &" +

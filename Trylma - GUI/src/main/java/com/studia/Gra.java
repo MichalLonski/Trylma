@@ -49,12 +49,13 @@ public class Gra {
             this.zakolejkowaniGracze = lista;
         }
 
-        // gracze w kolejce są 0-(n-1), ale ich numery to 1-n, bo 0 ma oznaczać puste pole
+        // gracze w kolejce są 0-(n-1), ale ich numery to 1-n, bo 0 ma oznaczać puste
+        // pole
         public Gracz ustawLosowo() {
             Collections.shuffle(zakolejkowaniGracze);
             tura = 0;
             for (int miejsce = 1; miejsce <= zakolejkowaniGracze.size(); miejsce++) {
-                zakolejkowaniGracze.get(miejsce-1).zajmijMiejsce(miejsce);
+                zakolejkowaniGracze.get(miejsce - 1).zajmijMiejsce(miejsce);
             }
             return zakolejkowaniGracze.get(tura);
         }
@@ -73,7 +74,7 @@ public class Gra {
         }
 
         public int obecnyGracz() {
-            return tura+1;
+            return tura + 1;
         }
     }
 
@@ -82,15 +83,16 @@ public class Gra {
      * Kolumna: 1-13
      * Pozycja wiersz + kolumna (konkatenacja, bez spacji, np A1, M12)
      */
-    public void wykonajRuch(int miejsceGracza, String[] sekwencjaRuchow) {
-        if (trwaTuraGracza(miejsceGracza, sekwencjaRuchow)){
-            planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length-1], miejsceGracza);
+    public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
+        if (trwaTuraGracza(miejsceGracza, sekwencjaRuchow)) {
+            planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], miejsceGracza);
+            kolejka.zakolejkowaniGracze.get(miejsceGracza).getScore();
             kolejka.wykonanoRuch();
         }
     }
 
-    public boolean trwaTuraGracza(int miejsceGracza, String[] sekwencjaRuchow){
-        if (miejsceGracza != kolejka.obecnyGracz()){
+    public boolean trwaTuraGracza(int miejsceGracza, int[][] sekwencjaRuchow) {
+        if (miejsceGracza != kolejka.obecnyGracz()) {
             return false;
         }
         return zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, miejsceGracza);
@@ -157,15 +159,15 @@ public class Gra {
         return kolejka.obecnyGracz();
     }
 
-    public boolean ruchJestPoprawny( String[] sekwencjaRuchow, int gracz){
-        return zasadyGry.ruchJestPoprawny(planszaGry,sekwencjaRuchow,gracz);
+    public boolean ruchJestPoprawny(int[][] sekwencjaRuchow, int gracz) {
+        return zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, gracz);
     }
 
     public String opis() {
         return "ID gry: " + ID_GRY + " | Zapełnienie: " + listaGraczy.size() + "/" + zasadyGry.ileGraczy();
     }
 
-    public void printPlansza(){
+    public void printPlansza() {
         planszaGry.wypiszPlansze();
     }
 }

@@ -6,7 +6,7 @@ import com.studia.Plansza.Plansza;
 public interface ZasadyGry {
     public int ileGraczy();
 
-    public boolean ruchJestPoprawny(Plansza plansza, String[] sekwencjaRuchow, int gracz);
+    public boolean ruchJestPoprawny(Plansza plansza, int[][] sekwencjaRuchow, int gracz);
 
     public String opisZasad();
 }

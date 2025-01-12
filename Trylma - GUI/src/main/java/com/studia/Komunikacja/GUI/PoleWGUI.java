@@ -10,7 +10,7 @@ public class PoleWGUI {
     Circle circ;
     int typ;
 
-    public PoleWGUI(String koor, Rectangle rectangle, Circle circle, int Typ){
+    public PoleWGUI(String koor, Rectangle rectangle, Circle circle, int Typ) {
         koordynaty = koor;
         rect = rectangle;
         circ = circle;

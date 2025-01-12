@@ -38,17 +38,17 @@ public class WatekGracza extends Thread {
                 String[] slowa = wiadomoscOdKlienta.split(" ");
                 switch (slowa[0]) {
 
-                        //Przycisk dołącz do gry
+                    // Przycisk dołącz do gry
                     case "join":
-                        int i = ManagerGier.dajInstancje().dolaczDoGry(gracz,slowa[1]);
-                        if(i == 1){
+                        int i = ManagerGier.dajInstancje().dolaczDoGry(gracz, slowa[1]);
+                        if (i == 1) {
                             out.println("success");
-                        }else{
+                        } else {
                             out.println("fail");
                         }
                         break;
 
-                        //Przycisk dołącz do gry
+                    // Przycisk dołącz do gry
                     case "create":
 
                         TypGry typgry = switch (slowa[1]) {
@@ -67,7 +67,7 @@ public class WatekGracza extends Thread {
 
                         break;
 
-                        //Przycisk odśwież
+                    // Przycisk odśwież
                     case "refresh":
                         out.println(ManagerGier.dajInstancje().wypiszGry());
                         break;
@@ -91,11 +91,12 @@ public class WatekGracza extends Thread {
                         out.println(gracz.dajGre().dajListeGraczy().size());
                         break;
                     case "checkMove":
-                        String[] sekwencja = new String[slowa.length-1];
-                        for (int j = 1;j < slowa.length ;j++){
-                            sekwencja[j-1] = slowa[j];
+                        String[] sekwencja = new String[slowa.length - 1];
+                        for (int j = 1; j < slowa.length; j++) {
+                            sekwencja[j - 1] = slowa[j];
                         }
-                        out.println(gracz.dajGre().ruchJestPoprawny(sekwencja,gracz.ktoreMiejsce()));
+                        // TODO - to nie powinno tak wyglądać
+                        // out.println(gracz.dajGre().ruchJestPoprawny(sekwencja,gracz.ktoreMiejsce()));
                         break;
                 }
 

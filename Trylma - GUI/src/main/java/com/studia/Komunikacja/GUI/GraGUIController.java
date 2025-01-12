@@ -35,22 +35,22 @@ public class GraGUIController extends GUIController {
     private final static int LICZBA_KOLUMN = 17;
     private Stage taScena;
     public final static int ROZMIAR_POLA = 20;
-    public int SZEROKOSC_MENU;//240
-    public int WYSOKOSC_MENU;//280
+    public int SZEROKOSC_MENU;// 240
+    public int WYSOKOSC_MENU;// 280
     private ArrayList<String> sekwencjaRuchow = new ArrayList<>();
     private ArrayList<PoleWGUI> Pola = new ArrayList<>();
-    private HashMap<Integer, Color> kolorGracza = new HashMap<>(){{
-        put(9, Color.LIGHTGRAY);
-        put(0, Color.WHITE);
-        put(1, Color.BLUE);
-        put(2, Color.GOLD);
-        put(3, Color.GREEN);
-        put(4, Color.YELLOW);
-        put(5, Color.VIOLET);
-        put(6, Color.RED);
-    }};
-
-
+    private HashMap<Integer, Color> kolorGracza = new HashMap<>() {
+        {
+            put(9, Color.LIGHTGRAY);
+            put(0, Color.WHITE);
+            put(1, Color.BLUE);
+            put(2, Color.GOLD);
+            put(3, Color.GREEN);
+            put(4, Color.YELLOW);
+            put(5, Color.VIOLET);
+            put(6, Color.RED);
+        }
+    };
 
     @FXML
     Label oczekiwanieLabel;
@@ -89,8 +89,8 @@ public class GraGUIController extends GUIController {
     Button wykonajRuchButton;
 
     public void GenerateBoard() {
-        SZEROKOSC_MENU = (int) menuPane.getPrefWidth();//240
-        WYSOKOSC_MENU = (int) menuPane.getPrefHeight();//280
+        SZEROKOSC_MENU = (int) menuPane.getPrefWidth();// 240
+        WYSOKOSC_MENU = (int) menuPane.getPrefHeight();// 280
         planszaGridPane = new GridPane();
         planszaGridPane.setGridLinesVisible(true);
         planszaPane.getChildren().add(planszaGridPane);
@@ -109,7 +109,7 @@ public class GraGUIController extends GUIController {
             for (int y = 0; y < Y; y++) {
                 for (int x = 0; x < X; x++) {
                     typ = mapa.get(x).get(y);
-                    Pane pane = stworzPole(x,y,typ);
+                    Pane pane = stworzPole(x, y, typ);
                     planszaGridPane.add(pane, x, y);
                 }
             }
@@ -118,17 +118,16 @@ public class GraGUIController extends GUIController {
             e.printStackTrace();
         }
 
-
-        int Width = 15+SZEROKOSC_MENU+X*ROZMIAR_POLA;
-        int Height = 10+Y*ROZMIAR_POLA;
+        int Width = 15 + SZEROKOSC_MENU + X * ROZMIAR_POLA;
+        int Height = 10 + Y * ROZMIAR_POLA;
 
         anchorPane.setPrefWidth(Width);
         anchorPane.setPrefHeight(Height);
 
         taScena.sizeToScene();
 
-
-        //TODO: Tu będzie framet kodu który będzie kolorować pola, czy tam kolorować pionki na nim, to się zobaczy
+        // TODO: Tu będzie framet kodu który będzie kolorować pola, czy tam kolorować
+        // pionki na nim, to się zobaczy
 
     }
 
@@ -141,76 +140,74 @@ public class GraGUIController extends GUIController {
 
         rect.setWidth(ROZMIAR_POLA);
         rect.setHeight(ROZMIAR_POLA);
-        switch (typ){
-            case 9 -> stworzPionek(9,rect,pane,X,Y);
-            case 0 -> stworzPionek(0,rect,pane,X,Y);
-            case 1 -> stworzPionek(1,rect,pane,X,Y);
-            case 2 -> stworzPionek(2,rect,pane,X,Y);
-            case 3 -> stworzPionek(3,rect,pane,X,Y);
-            case 4 -> stworzPionek(4,rect,pane,X,Y);
-            case 5 -> stworzPionek(5,rect,pane,X,Y);
-            case 6 -> stworzPionek(6,rect,pane,X,Y);
+        switch (typ) {
+            case 9 -> stworzPionek(9, rect, pane, X, Y);
+            case 0 -> stworzPionek(0, rect, pane, X, Y);
+            case 1 -> stworzPionek(1, rect, pane, X, Y);
+            case 2 -> stworzPionek(2, rect, pane, X, Y);
+            case 3 -> stworzPionek(3, rect, pane, X, Y);
+            case 4 -> stworzPionek(4, rect, pane, X, Y);
+            case 5 -> stworzPionek(5, rect, pane, X, Y);
+            case 6 -> stworzPionek(6, rect, pane, X, Y);
         }
 
         return pane;
     }
 
-    private void stworzPionek(int typ,Rectangle rect,Pane pane,int X,int Y) {
-        if(typ == 9){
+    private void stworzPionek(int typ, Rectangle rect, Pane pane, int X, int Y) {
+        if (typ == 9) {
             rect.setFill(Color.LIGHTGRAY);
-        }else if(typ == 0){
+        } else if (typ == 0) {
             rect.setFill(Color.WHITE);
             Circle cric = new Circle();
             pane.getChildren().add(cric);
             cric.setRadius((double) ROZMIAR_POLA * 0.45);
-            cric.setCenterX((double) ROZMIAR_POLA /2);
-            cric.setCenterY((double) ROZMIAR_POLA /2);
+            cric.setCenterX((double) ROZMIAR_POLA / 2);
+            cric.setCenterY((double) ROZMIAR_POLA / 2);
             cric.setStroke(Color.WHITE);
             cric.setFill(Color.WHITE);
             cric.setMouseTransparent(true);
-            Pola.add(new PoleWGUI(Y+ "" + X,rect,cric,typ));
+            Pola.add(new PoleWGUI(Y + "" + X, rect, cric, typ));
             rect.setOnMouseClicked((MouseEvent event) -> {
-                poleKlikniete(Y+ " " + X, cric,typ);
+                poleKlikniete(Y + " " + X, cric, typ);
             });
-        }else {
+        } else {
             rect.setFill(kolorGracza.get(typ));
             Circle cric = new Circle();
             pane.getChildren().add(cric);
             cric.setRadius((double) ROZMIAR_POLA * 0.45);
-            cric.setCenterX((double) ROZMIAR_POLA /2);
-            cric.setCenterY((double) ROZMIAR_POLA /2);
+            cric.setCenterX((double) ROZMIAR_POLA / 2);
+            cric.setCenterY((double) ROZMIAR_POLA / 2);
             cric.setStroke(Color.BLACK);
             cric.setFill(kolorGracza.get(typ));
             cric.setMouseTransparent(true);
-            Pola.add(new PoleWGUI(Y+ "" + X,rect,cric,typ));
+            Pola.add(new PoleWGUI(Y + "" + X, rect, cric, typ));
             rect.setOnMouseClicked((MouseEvent event) -> {
-                poleKlikniete(Y+ "" + X, cric, typ);
+                poleKlikniete(Y + "" + X, cric, typ);
             });
         }
     }
 
-    private void poleKlikniete(String pole,Circle circ,int typ){
-        if(turaGracza == miejsceGracza && !graRozpoczeta ){
+    private void poleKlikniete(String pole, Circle circ, int typ) {
+        if (turaGracza == miejsceGracza && !graRozpoczeta) {
             sekwencjaRuchow.add(pole);
             circ.setStroke(kolorGracza.get(typ).invert());
         }
     }
 
-
     Thread komunikacja = new Thread(() -> {
 
         try {
             while (wTymMenu) {
-                if(graRozpoczeta){
+                if (graRozpoczeta) {
                     Thread.sleep(10);
-                    if(turaGracza == miejsceGracza){
+                    if (turaGracza == miejsceGracza) {
                         resetButton.setDisable(true);
                     }
 
                     czyMoznaWykonacRuch();
 
-
-                }else {
+                } else {
                     Thread.sleep(10);
                     String odp = sendCommand("hasStarted");
                     if (odp.equals("true")) {
@@ -220,7 +217,7 @@ public class GraGUIController extends GUIController {
                             czyjaTuraLabel.setVisible(true);
                             czyjaTuraLabel.setText("Kolej Gracza " + sendCommand("currentPlayer"));
                             graRozpoczeta = true;
-                            if(turaGracza == miejsceGracza){
+                            if (turaGracza == miejsceGracza) {
                                 resetButton.setDisable(false);
                                 wykonajRuchButton.setDisable(false);
                             }
@@ -230,7 +227,8 @@ public class GraGUIController extends GUIController {
                     }
 
                     Platform.runLater(() -> {
-                        iloscGraczyLabel.setText("Gracze: " + sendCommand("#playersGame") + "/" + sendCommand("#players"));
+                        iloscGraczyLabel
+                                .setText("Gracze: " + sendCommand("#playersGame") + "/" + sendCommand("#players"));
                     });
                 }
 
@@ -240,34 +238,34 @@ public class GraGUIController extends GUIController {
         }
     });
 
-    public void setInfo(Stage stage){
+    public void setInfo(Stage stage) {
         taScena = stage;
         miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
-        zasadyTextArea.setText(sendCommand("gameRules").replaceAll("&","\n"));
+        zasadyTextArea.setText(sendCommand("gameRules").replaceAll("&", "\n"));
         komunikacja.setDaemon(true);
         komunikacja.start();
     }
 
-    public void wykonajRuchButtonKlik(){
+    public void wykonajRuchButtonKlik() {
         String doWyslania = "";
-        for(String str : sekwencjaRuchow){
-            doWyslania = doWyslania +" "+ str;
+        for (String str : sekwencjaRuchow) {
+            doWyslania = doWyslania + " " + str;
         }
         sendCommand("doMove " + doWyslania);
-        //TODO: na jutroooooo
+        // TODO: na jutroooooo
     }
 
-    public void resetButtonKlik(){
+    public void resetButtonKlik() {
         sekwencjaRuchow = new ArrayList<>();
     }
 
     private void czyMoznaWykonacRuch() {
 
         String doWyslania = "";
-        for(String str : sekwencjaRuchow){
-            doWyslania = doWyslania +" "+ str;
+        for (String str : sekwencjaRuchow) {
+            doWyslania = doWyslania + " " + str;
         }
-        if(sendCommand("checkMove " + doWyslania).equals("true")){
+        if (sendCommand("checkMove " + doWyslania).equals("true")) {
             wykonajRuchButton.setDisable(true);
         }
     }

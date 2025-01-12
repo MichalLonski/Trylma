@@ -8,5 +8,5 @@ public class Klient {
         KlientApplication klient = new KlientApplication();
         klient.start(args);
     }
-    
+
 }

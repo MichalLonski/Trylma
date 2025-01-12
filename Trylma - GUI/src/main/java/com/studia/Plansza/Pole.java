@@ -22,17 +22,19 @@ public class Pole {
     }
 
     public String koordynaty() {
-        return "Wiersz: " + wiersz + " Kolumna: " + kolumna + " Gracz: " + nrGracza + " Zwycięstwo: " + nrGraczZwycieski;
+        return "Wiersz: " + wiersz + " Kolumna: " + kolumna + " Gracz: " + nrGracza + " Zwycięstwo: "
+                + nrGraczZwycieski;
     }
-    public void setGracz(int gracz){
+
+    public void setGracz(int gracz) {
         nrGracza = gracz;
     }
 
-    public void setGraczZwycieski(int gracz){
+    public void setGraczZwycieski(int gracz) {
         nrGraczZwycieski = gracz;
     }
 
-    public int getGraczZwycieski(){
+    public int getGraczZwycieski() {
         return nrGraczZwycieski;
     }
 }
