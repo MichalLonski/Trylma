@@ -28,8 +28,8 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="42.0" prefWidth="240.0" spacing="10.0">
                            <children>
-                              <Button fx:id="wykonajRuchButtonKlik" disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Potwierdź Ruch" />
-                              <Button disable="true" mnemonicParsing="false" onAction="#resetButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Resetuj Ruch" />
+                              <Button fx:id="wykonajRuchButton" disable="true" mnemonicParsing="false" onAction="#wykonajRuchButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Potwierdź Ruch" />
+                              <Button fx:id="resetButton" disable="true" mnemonicParsing="false" onAction="#resetButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Resetuj Ruch" />
                            </children>
                         </HBox>
                      </children>
