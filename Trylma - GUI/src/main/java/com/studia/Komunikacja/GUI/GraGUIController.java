@@ -27,19 +27,23 @@ Klasa kontrolera dla Okienka oczekiwania na gre i gry
  */
 public class GraGUIController extends GUIController {
 
+    private Stage taScena;
     private volatile boolean wTymMenu = true;
     private volatile boolean graRozpoczeta = false;
     private int miejsceGracza;
     private int turaGracza;
-    private final static int LICZBA_WIERSZY = 25;
-    private final static int LICZBA_KOLUMN = 17;
-    private Stage taScena;
+    private int[][] ostatniRuch =  new int[][]{
+            new int[]{0,0},
+            new int[]{0,0},
+    };
+    private final static int LICZBA_WIERSZY = 17;
+    private final static int LICZBA_KOLUMN = 25;
     public final static int ROZMIAR_POLA = 20;
     public int SZEROKOSC_MENU;// 240
     public int WYSOKOSC_MENU;// 280
     private ArrayList<int[]> sekwencjaRuchow = new ArrayList<>();
-    private ArrayList<PoleWGUI> Pola = new ArrayList<>();
-    private HashMap<Integer, Color> kolorGracza = new HashMap<>() {
+    private final ArrayList<PoleWGUI> pola = new ArrayList<>();
+    private final HashMap<Integer, Color> kolorGracza = new HashMap<>() {
         {
             put(9, Color.LIGHTGRAY);
             put(0, Color.WHITE);
@@ -96,8 +100,8 @@ public class GraGUIController extends GUIController {
         planszaPane.getChildren().add(planszaGridPane);
         int liczbaGraczy = Integer.parseInt(sendCommand("#players"));
 
-        int X = LICZBA_WIERSZY;
-        int Y = LICZBA_KOLUMN;
+        int X = LICZBA_KOLUMN;
+        int Y = LICZBA_WIERSZY;
         int typ;///
 
         ObjectMapper mapper = new ObjectMapper();
@@ -159,90 +163,125 @@ public class GraGUIController extends GUIController {
             rect.setFill(Color.LIGHTGRAY);
         } else if (typ == 0) {
             rect.setFill(Color.WHITE);
-            Circle cric = new Circle();
-            pane.getChildren().add(cric);
+            rect.toFront();
+            Circle circle = new Circle();
+            Circle obwodkaCircle = new Circle();
+            pane.getChildren().add(circle);
+            pane.getChildren().add(obwodkaCircle);
 
-            cric.setRadius((double) ROZMIAR_POLA * 0.45);
-            cric.setCenterX((double) ROZMIAR_POLA / 2);
-            cric.setCenterY((double) ROZMIAR_POLA / 2);
+            /////Reprezentacja pionka
+            circle.setRadius((double) ROZMIAR_POLA * 0.45);
+            circle.setCenterX((double) ROZMIAR_POLA / 2);
+            circle.setCenterY((double) ROZMIAR_POLA / 2);
 
-            cric.setStroke(Color.WHITE);
-            cric.setFill(Color.WHITE);
-            cric.setMouseTransparent(true);
+            circle.setStroke(Color.WHITE);
+            circle.setFill(Color.WHITE);
+            circle.setMouseTransparent(true);
+
+            /////Obwódka zaznaczenia
+            obwodkaCircle.setRadius((double) ROZMIAR_POLA * 0.48);
+            obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
+            obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
+
+            obwodkaCircle.setStroke(Color.CYAN);
+            obwodkaCircle.setFill(Color.TRANSPARENT);
+            obwodkaCircle.setMouseTransparent(true);
+            obwodkaCircle.setVisible(false);
+            obwodkaCircle.toFront();
 
             int[] pole = {X,Y};
 
-            Pola.add(new PoleWGUI(pole, rect, cric, typ));
-            rect.setOnMouseClicked((MouseEvent event) -> {
-                poleKlikniete(pole, cric, typ);
-            });
+            pola.add(new PoleWGUI(pole, rect, circle,obwodkaCircle, typ));
+            rect.setOnMouseClicked((MouseEvent event) -> poleKlikniete(pole, obwodkaCircle, typ));
         } else {
             rect.setFill(kolorGracza.get(typ));
-            Circle cric = new Circle();
-            pane.getChildren().add(cric);
+            rect.toFront();
+            Circle circle = new Circle();
+            Circle obwodkaCircle = new Circle();
+            pane.getChildren().add(circle);
+            pane.getChildren().add(obwodkaCircle);
 
-            cric.setRadius((double) ROZMIAR_POLA * 0.45);
-            cric.setCenterX((double) ROZMIAR_POLA / 2);
-            cric.setCenterY((double) ROZMIAR_POLA / 2);
+            /////Reprezentacja pionka
+            circle.setRadius((double) ROZMIAR_POLA * 0.45);
+            circle.setCenterX((double) ROZMIAR_POLA / 2);
+            circle.setCenterY((double) ROZMIAR_POLA / 2);
 
-            cric.setStroke(Color.BLACK);
-            cric.setFill(kolorGracza.get(typ));
-            cric.setMouseTransparent(true);
+            circle.setStroke(Color.BLACK);
+            circle.setFill(kolorGracza.get(typ));
+            circle.setMouseTransparent(true);
+
+            /////Obwódka zaznaczenia
+            obwodkaCircle.setRadius((double) ROZMIAR_POLA * 0.48);
+            obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
+            obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
+
+            obwodkaCircle.setStroke(Color.CYAN);
+            obwodkaCircle.setFill(Color.TRANSPARENT);
+            obwodkaCircle.setMouseTransparent(true);
+            obwodkaCircle.setVisible(false);
+            obwodkaCircle.toFront();
 
             int[] pole = {X,Y};
 
-            Pola.add(new PoleWGUI(pole, rect, cric, typ));
-            rect.setOnMouseClicked((MouseEvent event) -> {
-                poleKlikniete(pole, cric, typ);
-            });
+            pola.add(new PoleWGUI(pole, rect, circle, obwodkaCircle, typ));
+            rect.setOnMouseClicked((MouseEvent event) -> poleKlikniete(pole, obwodkaCircle, typ));
         }
     }
 
-    private void poleKlikniete(int[] pole, Circle circ, int typ) {
-        if (turaGracza == miejsceGracza && !graRozpoczeta) {
+    private void poleKlikniete(int[] pole, Circle obwodkaCircle, int typ) {
+        if (turaGracza == miejsceGracza && graRozpoczeta) {
             sekwencjaRuchow.add(pole);
-            circ.setStroke(kolorGracza.get(typ).invert());
+            obwodkaCircle.setVisible(true);
         }
     }
 
     Thread komunikacja = new Thread(() -> {
 
         try {
-            while (wTymMenu) {
-                if (graRozpoczeta) {
-                    Thread.sleep(10);
-                    if (turaGracza == miejsceGracza) {
-                        resetButton.setDisable(true);
-                    }
+                while (wTymMenu) {
+                    sleep(10);
+                    if (graRozpoczeta) {
+                        turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
+                        Platform.runLater(this::aktualizujPlansze);
 
-                    czyMoznaWykonacRuch();
-
-                } else {
-                    Thread.sleep(10);
-                    String odp = sendCommand("hasStarted");
-                    if (odp.equals("true")) {
-
-                        Platform.runLater(() -> {
-                            oczekiwanieLabel.setVisible(false);
-                            czyjaTuraLabel.setVisible(true);
-                            czyjaTuraLabel.setText("Kolej Gracza " + sendCommand("currentPlayer"));
-                            graRozpoczeta = true;
-                            if (turaGracza == miejsceGracza) {
+                        if (turaGracza == miejsceGracza) {
+                            Platform.runLater(() -> {
                                 resetButton.setDisable(false);
-                                wykonajRuchButton.setDisable(false);
-                            }
-                        });
-                        System.out.println("dziaaałaam");
+                                czyMoznaWykonacRuch();
+                            });
 
+                        }else {
+                            Platform.runLater(() -> {
+                                resetButton.setDisable(true);
+                                wykonajRuchButton.setDisable(true);
+                            });
+                        }
+
+
+                    } else {
+
+                        String odp = sendCommand("hasStarted");
+
+                        Platform.runLater(() -> iloscGraczyLabel
+                                .setText("Gracze: " + sendCommand("#playersGame") + "/" + sendCommand("#players")));
+
+                        if (odp.equals("true")) {
+
+                            Platform.runLater(() -> {
+                                oczekiwanieLabel.setVisible(false);
+                                czyjaTuraLabel.setVisible(true);
+                                miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
+                                turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
+                                czyjaTuraLabel.setText("Kolej Gracza " + turaGracza);
+                                graRozpoczeta = true;
+
+                            });
+
+                        }
                     }
 
-                    Platform.runLater(() -> {
-                        iloscGraczyLabel
-                                .setText("Gracze: " + sendCommand("#playersGame") + "/" + sendCommand("#players"));
-                    });
                 }
 
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -250,7 +289,6 @@ public class GraGUIController extends GUIController {
 
     public void setInfo(Stage stage) {
         taScena = stage;
-        miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
         zasadyTextArea.setText(sendCommand("gameRules").replaceAll("&", "\n"));
         komunikacja.setDaemon(true);
         komunikacja.start();
@@ -261,22 +299,79 @@ public class GraGUIController extends GUIController {
         for (int[] pole : sekwencjaRuchow) {
             doWyslania = doWyslania + " " + pole[0] + "!" + pole[1];
         }
-        sendCommand("doMove " + doWyslania);
-        // TODO: na jutroooooo
+        sendCommand("doMove" + doWyslania);
+        resetButtonKlik();
+
     }
 
     public void resetButtonKlik() {
         sekwencjaRuchow = new ArrayList<>();
+        for(PoleWGUI pole : pola){
+            Circle circ = pole.getObwodkaCirc();
+            circ.setVisible(false);
+        }
     }
 
     private void czyMoznaWykonacRuch() {
 
-        String doWyslania = "";
-        for (int[] pole : sekwencjaRuchow) {
-            doWyslania = doWyslania + " " + pole[0] +"!"+ pole[1];
-        }
-        if (sendCommand("checkMove " + doWyslania).equals("true")) {
+        if(sekwencjaRuchow.size() > 1){
+            String doWyslania = "";
+            for (int[] pole : sekwencjaRuchow) {
+                doWyslania = doWyslania + " " + pole[0] +"!"+ pole[1];
+            }
+
+            if (sendCommand("checkMove" + doWyslania).equals("true")) {
+                wykonajRuchButton.setDisable(false);
+            }else{
+                wykonajRuchButton.setDisable(true);
+            }
+
+        }else {
             wykonajRuchButton.setDisable(true);
+        }
+    }
+
+    private void aktualizujPlansze(){
+
+        String odp = sendCommand("lastMove");
+        String[] koords1 = odp.split(" ");
+        String[] koords2 = new String[]{
+                koords1[0].split("!")[0],
+                koords1[0].split("!")[1],
+                koords1[1].split("!")[0],
+                koords1[1].split("!")[1]
+        };
+        int[][] nowyOstatniRuch = {
+                new int[]{Integer.parseInt(koords2[0]),Integer.parseInt(koords2[1])},
+                new int[]{Integer.parseInt(koords2[2]),Integer.parseInt(koords2[3])}
+        };
+
+        if(!(nowyOstatniRuch[0][0] == ostatniRuch[0][0]
+                && nowyOstatniRuch[0][1] == ostatniRuch[0][1]
+                && nowyOstatniRuch[1][0] == ostatniRuch[1][0]
+                && nowyOstatniRuch[1][1] == ostatniRuch[1][1])){
+
+            PoleWGUI poleStart = null,poleKoniec = null;
+
+            ostatniRuch[0][0] = nowyOstatniRuch[0][0];
+            ostatniRuch[0][1] = nowyOstatniRuch[0][1];
+            ostatniRuch[1][0] = nowyOstatniRuch[1][0];
+            ostatniRuch[1][1] = nowyOstatniRuch[1][1];
+
+            for(PoleWGUI pole : pola){
+
+                if(pole.getKoordynaty()[0] == nowyOstatniRuch[0][0] && pole.getKoordynaty()[1] == nowyOstatniRuch[0][1]){
+                    poleStart = pole;
+                }
+                if(pole.getKoordynaty()[0] == nowyOstatniRuch[1][0] && pole.getKoordynaty()[1] == nowyOstatniRuch[1][1]){
+                    poleKoniec = pole;
+                }
+            }
+            poleKoniec.getCirc().setStroke(Color.BLACK);
+            poleKoniec.getCirc().setFill(poleStart.getCirc().getFill());
+
+            poleStart.getCirc().setStroke(kolorGracza.get(poleStart.getTyp()));
+            poleStart.getCirc().setFill(kolorGracza.get(poleStart.getTyp()));
         }
     }
 

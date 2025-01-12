@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.Array;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 import com.studia.Gracz;
@@ -86,7 +87,6 @@ public class WatekGracza extends Thread {
                         out.println(gracz.dajGre().dajZasadyGry().opisZasad());
                         break;
                     case "hasStarted":
-                        System.out.println(gracz.dajGre().czyGraSieZaczela());
                         out.println(gracz.dajGre().czyGraSieZaczela());
                         break;
                     case "#playersGame":
@@ -94,13 +94,37 @@ public class WatekGracza extends Thread {
                         break;
                     case "checkMove":
                         int[][] sekwencjaRuchow = new int[slowa.length-1][2];
+
                         for (int j = 0; j < slowa.length-1; j++) {
                             sekwencjaRuchow[j] = new int[]{
                                     Integer.parseInt(slowa[j+1].split("!")[0]),
-                                    Integer.parseInt(slowa[j+1].split("!")[0])};
+                                    Integer.parseInt(slowa[j+1].split("!")[1])};
+
                         }
+
                         out.println(gracz.dajGre().ruchJestPoprawny(sekwencjaRuchow,gracz.ktoreMiejsce()));
                         break;
+                    case "lastMove":
+                        int[][] ostatniRuchInt = gracz.dajGre().dajRuchZPoprzedniejTury();
+                        String ostatniRuch =
+                                        ostatniRuchInt[0][0]+"!"+ostatniRuchInt[0][1] +" "+
+                                        ostatniRuchInt[1][0]+"!"+ostatniRuchInt[1][1];
+                        out.println(ostatniRuch);
+                        break;
+                    case "doMove":
+                        int[][] sekwencjaRuchow1 = new int[slowa.length-1][2];
+
+                        for (int j = 0; j < slowa.length-1; j++) {
+                            sekwencjaRuchow1[j] = new int[]{
+                                    Integer.parseInt(slowa[j+1].split("!")[0]),
+                                    Integer.parseInt(slowa[j+1].split("!")[1])};
+
+                        }
+
+                        gracz.dajGre().wykonajRuch(gracz.ktoreMiejsce(),sekwencjaRuchow1);
+                        out.println("success");
+                        break;
+
                 }
 
             }

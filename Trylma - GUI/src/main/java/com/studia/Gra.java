@@ -17,7 +17,10 @@ public class Gra {
     private KolejkaGraczy kolejka;
     private Plansza planszaGry;
     private boolean graWTrakcie = false;
-    private String ruchWPoprzedniejTurze = "";
+    private int[][] ruchWPoprzedniejTurze = new int[][]{
+            new int[]{0,0},
+            new int[]{0,0},
+    };
 
     public Gra(TypGry typ, int[] parametry) {
         this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, parametry);
@@ -86,8 +89,13 @@ public class Gra {
     public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (trwaTuraGracza(miejsceGracza, sekwencjaRuchow)) {
             planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], miejsceGracza);
-            kolejka.zakolejkowaniGracze.get(miejsceGracza).getScore();
+            kolejka.zakolejkowaniGracze.get(miejsceGracza-1).getScore();
             kolejka.wykonanoRuch();
+
+            ruchWPoprzedniejTurze = new int[][]{
+                    sekwencjaRuchow[0],
+                    sekwencjaRuchow[sekwencjaRuchow.length-1]
+            };
         }
     }
 
@@ -150,7 +158,7 @@ public class Gra {
     }
 
     // Zwraca ruch z poprzedniej tury
-    public String dajRuchZPoprzedniejTury() {
+    public int[][] dajRuchZPoprzedniejTury() {
         return ruchWPoprzedniejTurze;
     }
 

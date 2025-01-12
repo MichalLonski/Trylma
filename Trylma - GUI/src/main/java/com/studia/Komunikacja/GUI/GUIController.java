@@ -14,10 +14,13 @@ public abstract class GUIController {
         out = OUT;
     }
 
-    public String sendCommand(String komenda) {
+    public synchronized String sendCommand(String komenda) {
         try {
-            out.println(komenda);
-            String odp = in.readLine();
+            String odp;
+            synchronized (this){
+                out.println(komenda);
+                odp = in.readLine();
+            }
             return odp;
         } catch (IOException e) {
             System.out.println("Błąd w komunikacji z serwerem\n");
