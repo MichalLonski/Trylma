@@ -92,6 +92,12 @@ public class GraGUIController extends GUIController {
     @FXML
     Button wykonajRuchButton;
 
+    @FXML
+    Rectangle twojKolorRectangle;
+
+    @FXML
+    Rectangle turaKolorRectangle;
+
     public void GenerateBoard() {
         SZEROKOSC_MENU = (int) menuPane.getPrefWidth(); // 240
         WYSOKOSC_MENU = (int) menuPane.getPrefHeight(); // 280
@@ -241,6 +247,7 @@ public class GraGUIController extends GUIController {
                 sleep(10);
                 if (graRozpoczeta) {
                     turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
+                    turaKolorRectangle.setFill(kolorGracza.get(turaGracza));
                     Platform.runLater(this::aktualizujPlansze);
 
                     if (turaGracza == miejsceGracza) {
@@ -267,10 +274,10 @@ public class GraGUIController extends GUIController {
 
                         Platform.runLater(() -> {
                             oczekiwanieLabel.setVisible(false);
-                            czyjaTuraLabel.setVisible(true);
                             miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
                             turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
-                            czyjaTuraLabel.setText("Kolej Gracza " + turaGracza);
+                            turaKolorRectangle.setFill(kolorGracza.get(turaGracza));
+                            twojKolorRectangle.setFill(kolorGracza.get(miejsceGracza));
                             graRozpoczeta = true;
 
                         });
