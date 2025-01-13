@@ -32,15 +32,15 @@ public class GraGUIController extends GUIController {
     private volatile boolean graRozpoczeta = false;
     private int miejsceGracza;
     private int turaGracza;
-    private int[][] ostatniRuch =  new int[][]{
-            new int[]{0,0},
-            new int[]{0,0},
+    private int[][] ostatniRuch = new int[][] {
+            new int[] { 0, 0 },
+            new int[] { 0, 0 },
     };
-    private final static int LICZBA_WIERSZY = 17;
-    private final static int LICZBA_KOLUMN = 25;
-    public final static int ROZMIAR_POLA = 20;
-    public int SZEROKOSC_MENU;// 240
-    public int WYSOKOSC_MENU;// 280
+    private final static int LICZBA_WIERSZY = 25;
+    private final static int LICZBA_KOLUMN = 17;
+    public final static int ROZMIAR_POLA = 30;
+    public int SZEROKOSC_MENU; // 240
+    public int WYSOKOSC_MENU; // 280
     private ArrayList<int[]> sekwencjaRuchow = new ArrayList<>();
     private final ArrayList<PoleWGUI> pola = new ArrayList<>();
     private final HashMap<Integer, Color> kolorGracza = new HashMap<>() {
@@ -93,16 +93,14 @@ public class GraGUIController extends GUIController {
     Button wykonajRuchButton;
 
     public void GenerateBoard() {
-        SZEROKOSC_MENU = (int) menuPane.getPrefWidth();// 240
-        WYSOKOSC_MENU = (int) menuPane.getPrefHeight();// 280
+        SZEROKOSC_MENU = (int) menuPane.getPrefWidth(); // 240
+        WYSOKOSC_MENU = (int) menuPane.getPrefHeight(); // 280
         planszaGridPane = new GridPane();
         planszaGridPane.setGridLinesVisible(true);
         planszaPane.getChildren().add(planszaGridPane);
         int liczbaGraczy = Integer.parseInt(sendCommand("#players"));
 
-        int X = LICZBA_KOLUMN;
-        int Y = LICZBA_WIERSZY;
-        int typ;///
+        int typ;
 
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -110,11 +108,11 @@ public class GraGUIController extends GUIController {
             Map<String, ArrayList<ArrayList<Integer>>> map = mapper.readValue(file, Map.class);
             ArrayList<ArrayList<Integer>> mapa = map.get(String.valueOf(liczbaGraczy));
 
-            for (int y = 0; y < Y; y++) {
-                for (int x = 0; x < X; x++) {
-                    typ = mapa.get(x).get(y);
-                    Pane pane = stworzPole(x, y, typ);
-                    planszaGridPane.add(pane, x, y);
+            for (int wiersz = 0; wiersz < LICZBA_WIERSZY; wiersz++) {
+                for (int kolumna = 0; kolumna < LICZBA_KOLUMN; kolumna++) {
+                    typ = mapa.get(wiersz).get(kolumna);
+                    Pane pane = stworzPole(wiersz, kolumna, typ);
+                    planszaGridPane.add(pane, wiersz, LICZBA_KOLUMN - kolumna - 1);
                 }
             }
 
@@ -122,8 +120,8 @@ public class GraGUIController extends GUIController {
             e.printStackTrace();
         }
 
-        int Width = 15 + SZEROKOSC_MENU + X * ROZMIAR_POLA;
-        int Height = 10 + Y * ROZMIAR_POLA;
+        int Width = 15 + SZEROKOSC_MENU + LICZBA_KOLUMN * ROZMIAR_POLA;
+        int Height = 10 + LICZBA_KOLUMN * ROZMIAR_POLA;
 
         anchorPane.setPrefWidth(Width);
         anchorPane.setPrefHeight(Height);
@@ -169,7 +167,7 @@ public class GraGUIController extends GUIController {
             pane.getChildren().add(circle);
             pane.getChildren().add(obwodkaCircle);
 
-            /////Reprezentacja pionka
+            ///// Reprezentacja pionka
             circle.setRadius((double) ROZMIAR_POLA * 0.45);
             circle.setCenterX((double) ROZMIAR_POLA / 2);
             circle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -178,7 +176,7 @@ public class GraGUIController extends GUIController {
             circle.setFill(Color.WHITE);
             circle.setMouseTransparent(true);
 
-            /////Obwódka zaznaczenia
+            ///// Obwódka zaznaczenia
             obwodkaCircle.setRadius((double) ROZMIAR_POLA * 0.48);
             obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
             obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -189,11 +187,12 @@ public class GraGUIController extends GUIController {
             obwodkaCircle.setVisible(false);
             obwodkaCircle.toFront();
 
-            int[] pole = {X,Y};
+            int[] pole = { X, Y };
 
-            pola.add(new PoleWGUI(pole, rect, circle,obwodkaCircle, typ));
+            pola.add(new PoleWGUI(pole, rect, circle, obwodkaCircle, typ));
             rect.setOnMouseClicked((MouseEvent event) -> poleKlikniete(pole, obwodkaCircle, typ));
         } else {
+            // TODO: czy nie lepiej zrobić liczbaGraczy - typ?
             rect.setFill(kolorGracza.get(typ));
             rect.toFront();
             Circle circle = new Circle();
@@ -201,7 +200,7 @@ public class GraGUIController extends GUIController {
             pane.getChildren().add(circle);
             pane.getChildren().add(obwodkaCircle);
 
-            /////Reprezentacja pionka
+            ///// Reprezentacja pionka
             circle.setRadius((double) ROZMIAR_POLA * 0.45);
             circle.setCenterX((double) ROZMIAR_POLA / 2);
             circle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -210,7 +209,7 @@ public class GraGUIController extends GUIController {
             circle.setFill(kolorGracza.get(typ));
             circle.setMouseTransparent(true);
 
-            /////Obwódka zaznaczenia
+            ///// Obwódka zaznaczenia
             obwodkaCircle.setRadius((double) ROZMIAR_POLA * 0.48);
             obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
             obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -221,7 +220,7 @@ public class GraGUIController extends GUIController {
             obwodkaCircle.setVisible(false);
             obwodkaCircle.toFront();
 
-            int[] pole = {X,Y};
+            int[] pole = { X, Y };
 
             pola.add(new PoleWGUI(pole, rect, circle, obwodkaCircle, typ));
             rect.setOnMouseClicked((MouseEvent event) -> poleKlikniete(pole, obwodkaCircle, typ));
@@ -238,49 +237,48 @@ public class GraGUIController extends GUIController {
     Thread komunikacja = new Thread(() -> {
 
         try {
-                while (wTymMenu) {
-                    sleep(10);
-                    if (graRozpoczeta) {
-                        turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
-                        Platform.runLater(this::aktualizujPlansze);
+            while (wTymMenu) {
+                sleep(10);
+                if (graRozpoczeta) {
+                    turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
+                    Platform.runLater(this::aktualizujPlansze);
 
-                        if (turaGracza == miejsceGracza) {
-                            Platform.runLater(() -> {
-                                resetButton.setDisable(false);
-                                czyMoznaWykonacRuch();
-                            });
-
-                        }else {
-                            Platform.runLater(() -> {
-                                resetButton.setDisable(true);
-                                wykonajRuchButton.setDisable(true);
-                            });
-                        }
-
+                    if (turaGracza == miejsceGracza) {
+                        Platform.runLater(() -> {
+                            resetButton.setDisable(false);
+                            czyMoznaWykonacRuch();
+                        });
 
                     } else {
-
-                        String odp = sendCommand("hasStarted");
-
-                        Platform.runLater(() -> iloscGraczyLabel
-                                .setText("Gracze: " + sendCommand("#playersGame") + "/" + sendCommand("#players")));
-
-                        if (odp.equals("true")) {
-
-                            Platform.runLater(() -> {
-                                oczekiwanieLabel.setVisible(false);
-                                czyjaTuraLabel.setVisible(true);
-                                miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
-                                turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
-                                czyjaTuraLabel.setText("Kolej Gracza " + turaGracza);
-                                graRozpoczeta = true;
-
-                            });
-
-                        }
+                        Platform.runLater(() -> {
+                            resetButton.setDisable(true);
+                            wykonajRuchButton.setDisable(true);
+                        });
                     }
 
+                } else {
+
+                    String odp = sendCommand("hasStarted");
+
+                    Platform.runLater(() -> iloscGraczyLabel
+                            .setText("Gracze: " + sendCommand("#playersGame") + "/" + sendCommand("#players")));
+
+                    if (odp.equals("true")) {
+
+                        Platform.runLater(() -> {
+                            oczekiwanieLabel.setVisible(false);
+                            czyjaTuraLabel.setVisible(true);
+                            miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
+                            turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
+                            czyjaTuraLabel.setText("Kolej Gracza " + turaGracza);
+                            graRozpoczeta = true;
+
+                        });
+
+                    }
                 }
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -306,7 +304,7 @@ public class GraGUIController extends GUIController {
 
     public void resetButtonKlik() {
         sekwencjaRuchow = new ArrayList<>();
-        for(PoleWGUI pole : pola){
+        for (PoleWGUI pole : pola) {
             Circle circ = pole.getObwodkaCirc();
             circ.setVisible(false);
         }
@@ -314,56 +312,58 @@ public class GraGUIController extends GUIController {
 
     private void czyMoznaWykonacRuch() {
 
-        if(sekwencjaRuchow.size() > 1){
+        if (sekwencjaRuchow.size() > 1) {
             String doWyslania = "";
             for (int[] pole : sekwencjaRuchow) {
-                doWyslania = doWyslania + " " + pole[0] +"!"+ pole[1];
+                doWyslania = doWyslania + " " + pole[0] + "!" + pole[1];
             }
 
             if (sendCommand("checkMove" + doWyslania).equals("true")) {
                 wykonajRuchButton.setDisable(false);
-            }else{
+            } else {
                 wykonajRuchButton.setDisable(true);
             }
 
-        }else {
+        } else {
             wykonajRuchButton.setDisable(true);
         }
     }
 
-    private void aktualizujPlansze(){
+    private void aktualizujPlansze() {
 
         String odp = sendCommand("lastMove");
         String[] koords1 = odp.split(" ");
-        String[] koords2 = new String[]{
+        String[] koords2 = new String[] {
                 koords1[0].split("!")[0],
                 koords1[0].split("!")[1],
                 koords1[1].split("!")[0],
                 koords1[1].split("!")[1]
         };
         int[][] nowyOstatniRuch = {
-                new int[]{Integer.parseInt(koords2[0]),Integer.parseInt(koords2[1])},
-                new int[]{Integer.parseInt(koords2[2]),Integer.parseInt(koords2[3])}
+                new int[] { Integer.parseInt(koords2[0]), Integer.parseInt(koords2[1]) },
+                new int[] { Integer.parseInt(koords2[2]), Integer.parseInt(koords2[3]) }
         };
 
-        if(!(nowyOstatniRuch[0][0] == ostatniRuch[0][0]
+        if (!(nowyOstatniRuch[0][0] == ostatniRuch[0][0]
                 && nowyOstatniRuch[0][1] == ostatniRuch[0][1]
                 && nowyOstatniRuch[1][0] == ostatniRuch[1][0]
-                && nowyOstatniRuch[1][1] == ostatniRuch[1][1])){
+                && nowyOstatniRuch[1][1] == ostatniRuch[1][1])) {
 
-            PoleWGUI poleStart = null,poleKoniec = null;
+            PoleWGUI poleStart = null, poleKoniec = null;
 
             ostatniRuch[0][0] = nowyOstatniRuch[0][0];
             ostatniRuch[0][1] = nowyOstatniRuch[0][1];
             ostatniRuch[1][0] = nowyOstatniRuch[1][0];
             ostatniRuch[1][1] = nowyOstatniRuch[1][1];
 
-            for(PoleWGUI pole : pola){
+            for (PoleWGUI pole : pola) {
 
-                if(pole.getKoordynaty()[0] == nowyOstatniRuch[0][0] && pole.getKoordynaty()[1] == nowyOstatniRuch[0][1]){
+                if (pole.getKoordynaty()[0] == nowyOstatniRuch[0][0]
+                        && pole.getKoordynaty()[1] == nowyOstatniRuch[0][1]) {
                     poleStart = pole;
                 }
-                if(pole.getKoordynaty()[0] == nowyOstatniRuch[1][0] && pole.getKoordynaty()[1] == nowyOstatniRuch[1][1]){
+                if (pole.getKoordynaty()[0] == nowyOstatniRuch[1][0]
+                        && pole.getKoordynaty()[1] == nowyOstatniRuch[1][1]) {
                     poleKoniec = pole;
                 }
             }

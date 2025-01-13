@@ -35,6 +35,8 @@ public class StandardoweZasadyGry implements ZasadyGry {
 
         boolean rezultat = true;
         boolean czyNaKoncu = (obecne.getGraczZwycieski() == gracz); // czy jesteśmy w domku
+        boolean robiRuch = false;
+        boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
             int wierszP = sekwencjaRuchow[i][0];
@@ -47,19 +49,28 @@ public class StandardoweZasadyGry implements ZasadyGry {
                 // czy chcemy przejść na puste pole
             } else if (kolumnaP == kolumnaK) {
                 if (Math.abs(wierszK - wierszP) == 2) {
-                    // ruch w naszym pionie
-                } else if (Math.abs(wierszK - wierszP) == 4) {
+                    // ruch w naszym poziomie, musi być ostatni
+                    rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
+                    robiRuch = true;
+                } else if (Math.abs(kolumnaK - kolumnaP) == 4) {
                     rezultat = plansza.jestMiedzyPolami(wierszP, kolumnaP, wierszK, kolumnaK);
-                    // skok w pionie
+                    // skok w poziomie
+                    robiSkok = true;
                 }
             } else if (Math.abs(wierszK - wierszP) == 1 && Math.abs(kolumnaK - kolumnaP) == 1) {
                 // ruch po naszych ukosach
+                rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
+                robiRuch = true;
             } else if (Math.abs(wierszK - wierszP) == 2 && Math.abs(kolumnaK - kolumnaP) == 2) {
                 rezultat = plansza.jestMiedzyPolami(wierszP, kolumnaP, wierszK, kolumnaK);
                 // skok po skosie
+                robiSkok = true;
             } else {
                 rezultat = false;
             }
+
+            // można robić tylko jedno
+            rezultat = rezultat && (robiRuch ^ robiSkok);
 
             if (!rezultat) {
                 break;

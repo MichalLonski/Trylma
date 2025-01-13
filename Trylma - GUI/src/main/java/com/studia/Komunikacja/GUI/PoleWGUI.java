@@ -13,7 +13,7 @@ public class PoleWGUI {
     private Circle obwodkaCirc;
     private int typ;
 
-    public PoleWGUI(int[] koor, Rectangle rectangle, Circle circle,Circle obw, int Typ) {
+    public PoleWGUI(int[] koor, Rectangle rectangle, Circle circle, Circle obw, int Typ) {
         koordynaty = koor;
         rect = rectangle;
         circ = circle;

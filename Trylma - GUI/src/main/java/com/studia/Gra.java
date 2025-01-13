@@ -17,9 +17,9 @@ public class Gra {
     private KolejkaGraczy kolejka;
     private Plansza planszaGry;
     private boolean graWTrakcie = false;
-    private int[][] ruchWPoprzedniejTurze = new int[][]{
-            new int[]{0,0},
-            new int[]{0,0},
+    private int[][] ruchWPoprzedniejTurze = new int[][] {
+            new int[] { 0, 0 },
+            new int[] { 0, 0 },
     };
 
     public Gra(TypGry typ, int[] parametry) {
@@ -89,12 +89,12 @@ public class Gra {
     public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (trwaTuraGracza(miejsceGracza, sekwencjaRuchow)) {
             planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], miejsceGracza);
-            kolejka.zakolejkowaniGracze.get(miejsceGracza-1).getScore();
+            kolejka.zakolejkowaniGracze.get(miejsceGracza - 1).getScore();
             kolejka.wykonanoRuch();
 
-            ruchWPoprzedniejTurze = new int[][]{
+            ruchWPoprzedniejTurze = new int[][] {
                     sekwencjaRuchow[0],
-                    sekwencjaRuchow[sekwencjaRuchow.length-1]
+                    sekwencjaRuchow[sekwencjaRuchow.length - 1]
             };
         }
     }
@@ -168,6 +168,9 @@ public class Gra {
     }
 
     public boolean ruchJestPoprawny(int[][] sekwencjaRuchow, int gracz) {
+        for (int[] is : sekwencjaRuchow) {
+            System.out.println("wiersz: " + is[0] + " kolumna: " + is[1]);
+        }
         return zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, gracz);
     }
 

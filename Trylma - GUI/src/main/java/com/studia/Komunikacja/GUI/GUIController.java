@@ -17,7 +17,7 @@ public abstract class GUIController {
     public synchronized String sendCommand(String komenda) {
         try {
             String odp;
-            synchronized (this){
+            synchronized (this) {
                 out.println(komenda);
                 odp = in.readLine();
             }
