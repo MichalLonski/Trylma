@@ -9,5 +9,5 @@ package com.studia.Zasady;
 public enum TypGry {
     STANDARDOWA,
     FAST_PACED,
-    ROZSZERZONA
+    CAPTURE
 }

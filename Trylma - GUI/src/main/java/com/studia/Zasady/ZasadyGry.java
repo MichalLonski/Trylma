@@ -1,15 +1,20 @@
 package com.studia.Zasady;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.studia.Plansza.Plansza;
 
-// Mogą pojawić się dodatkowe zasady, lepiej mieć to z tyłu głowy
 public abstract class ZasadyGry {
     protected int liczbaGraczy;
     protected int[] warunkiZwyciestwa;
 
     public ZasadyGry(int liczbaGraczy) {
         this.liczbaGraczy = liczbaGraczy;
-        warunkiZwyciestwa = new int[liczbaGraczy+1];
+        warunkiZwyciestwa = new int[liczbaGraczy + 1];
         for (int i = 0; i < warunkiZwyciestwa.length; i++) {
             warunkiZwyciestwa[i] = 0;
         }
@@ -31,7 +36,25 @@ public abstract class ZasadyGry {
         return warunkiZwyciestwa[gracz] > 0;
     }
 
-    protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK){
+    protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
         return true;
+    }
+
+    public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+        plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
+    }
+
+    public JSONArray infoJSON() {
+        JSONArray mapa = new JSONArray();
+        try {
+
+            String content = new String(Files.readAllBytes(Paths.get("src/main/resources/config.json")));
+            JSONObject jsonObject = new JSONObject(content);
+            JSONObject standard = jsonObject.getJSONObject("standard");
+            mapa = standard.getJSONArray(String.valueOf(liczbaGraczy));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mapa;
     }
 }

@@ -23,10 +23,14 @@ public class Gra {
     };
 
     public Gra(TypGry typ, int liczbaGraczy) {
-        this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, liczbaGraczy);
-        this.listaGraczy = new ArrayList<>();
-        ID_GRY = ID;
-        ID++;
+        if (liczbaGraczy == 2 || liczbaGraczy == 3 || liczbaGraczy == 4 || liczbaGraczy == 6) {
+            this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, liczbaGraczy);
+            this.listaGraczy = new ArrayList<>();
+            ID_GRY = ID;
+            ID++;
+        } else {
+            throw new IllegalArgumentException("Zła liczba graczy");
+        }
     }
 
     // TODO: info do graczy
@@ -37,8 +41,8 @@ public class Gra {
         }
         kolejka = new KolejkaGraczy(listaGraczy);
         kolejka.ustawLosowo();
-        planszaGry = new Plansza(zasadyGry.ileGraczy());
-        planszaGry.utworzPlansze();
+        planszaGry = new Plansza();
+        planszaGry.utworzPlansze(zasadyGry.infoJSON());
         graWTrakcie = true;
         return kolejka.obecnyGracz();
     }
@@ -84,11 +88,11 @@ public class Gra {
 
     public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (ruchJestPoprawny(sekwencjaRuchow, miejsceGracza)) {
-            planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], miejsceGracza);
+            zasadyGry.wykonajRuch(planszaGry, sekwencjaRuchow, miejsceGracza);
             if (zasadyGry.checkWin(miejsceGracza)) {
-                // TODO: gracz wygrywa - jakiś victory screen czy coś
+                graczWygrywa(miejsceGracza);
                 if (kolejka.usunGracza(miejsceGracza) == 1) {
-                    // TODO: wszyscy wygrali prócz ostatniego gracza
+                    koniecGry();
                 }
             }
             kolejka.wykonanoRuch();
@@ -98,6 +102,16 @@ public class Gra {
                     sekwencjaRuchow[sekwencjaRuchow.length - 1]
             };
         }
+    }
+
+    private void koniecGry() {
+        // TODO: gracz wygrywa - jakiś victory screen czy coś
+        throw new UnsupportedOperationException("Unimplemented method 'koniecGry'");
+    }
+
+    private void graczWygrywa(int miejsceGracza) {
+        // TODO: wszyscy wygrali prócz ostatniego gracza
+        throw new UnsupportedOperationException("Unimplemented method 'graczWygrywa'");
     }
 
     public boolean trwaTuraGracza(int miejsceGracza) {
@@ -111,7 +125,6 @@ public class Gra {
             return;
         }
         this.listaGraczy.add(gracz);
-        // Moja modyfikacja
         gracz.przypiszGre(this);
     }
 
@@ -122,45 +135,26 @@ public class Gra {
         }
     }
 
-    /*
-     * Chyba zbędne
-     * public void informujGraczy(String wiadomosc) {
-     * for (Gracz gracz : listaGraczy) {
-     * gracz.informacjaOdGry(wiadomosc);
-     * }
-     * }
-     */
-
-    ///////////////////////////////////////////////
-    ////////////// Gettery i Settery////////////////
-    ///////////////////////////////////////////////
-
-    // Dodany co by był jakiś dostęp do ID_Gry
     public int dajID() {
         return ID_GRY;
     }
 
-    // Zwraca fakt czy gra się zaczełą czy nie
     public boolean czyGraSieZaczela() {
         return graWTrakcie;
     }
 
-    // Zwraca liste graczy
     public List<Gracz> dajListeGraczy() {
         return listaGraczy;
     }
 
-    // Zwraca zasady
     public ZasadyGry dajZasadyGry() {
         return zasadyGry;
     }
 
-    // Zwraca ruch z poprzedniej tury
     public int[][] dajRuchZPoprzedniejTury() {
         return ruchWPoprzedniejTurze;
     }
 
-    // Zwraca miejsce przy stole gracza którego tura trwa
     public int dajObecnegoGracza() {
         return kolejka.obecnyGracz();
     }

@@ -22,10 +22,6 @@ public class WatekSerwera extends Thread {
             } else if ("exit".equals(wiadomosc)) {
                 quit();
                 break;
-            } else if (wiadomosc.startsWith("create game")) {
-                System.err.println("create game");
-            } else {
-                System.out.println("Wpisano: " + wiadomosc);
             }
         }
     }

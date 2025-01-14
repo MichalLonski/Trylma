@@ -1,6 +1,9 @@
 package com.studia.Komunikacja.GUI;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.studia.Zasady.FabrykaZasad;
+import com.studia.Zasady.TypGry;
+import com.studia.Zasady.ZasadyGry;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,10 +18,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
+import org.json.JSONArray;
 
 import static java.lang.Thread.sleep;
 
@@ -27,6 +30,7 @@ Klasa kontrolera dla Okienka oczekiwania na gre i gry
  */
 public class GraGUIController extends GUIController {
 
+    private ZasadyGry zasady; // do generowania planszy
     private Stage taScena;
     private volatile boolean wTymMenu = true;
     private volatile boolean graRozpoczeta = false;
@@ -104,28 +108,16 @@ public class GraGUIController extends GUIController {
         planszaGridPane = new GridPane();
         planszaGridPane.setGridLinesVisible(true);
         planszaPane.getChildren().add(planszaGridPane);
-        int liczbaGraczy = Integer.parseInt(sendCommand("#players"));
-
         int typ;
 
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            File file = new File("src/main/resources/config.json");
+        JSONArray mapa = zasady.infoJSON();
 
-            @SuppressWarnings("unchecked")
-            Map<String, ArrayList<ArrayList<Integer>>> map = mapper.readValue(file, Map.class);
-            ArrayList<ArrayList<Integer>> mapa = map.get(String.valueOf(liczbaGraczy));
-
-            for (int wiersz = 0; wiersz < LICZBA_WIERSZY; wiersz++) {
-                for (int kolumna = 0; kolumna < LICZBA_KOLUMN; kolumna++) {
-                    typ = mapa.get(wiersz).get(kolumna);
-                    Pane pane = stworzPole(wiersz, kolumna, typ);
-                    planszaGridPane.add(pane, wiersz, LICZBA_KOLUMN - kolumna - 1);
-                }
+        for (int wiersz = 0; wiersz < LICZBA_WIERSZY; wiersz++) {
+            for (int kolumna = 0; kolumna < LICZBA_KOLUMN; kolumna++) {
+                typ = mapa.getJSONArray(wiersz).getInt(kolumna);
+                Pane pane = stworzPole(wiersz, kolumna, typ);
+                planszaGridPane.add(pane, wiersz, LICZBA_KOLUMN - kolumna - 1);
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         int Width = 15 + SZEROKOSC_MENU + LICZBA_KOLUMN * ROZMIAR_POLA;
@@ -295,7 +287,21 @@ public class GraGUIController extends GUIController {
 
     public void setInfo(Stage stage) {
         taScena = stage;
-        zasadyTextArea.setText(sendCommand("gameRules").replaceAll("&", "\n"));
+        String odp = sendCommand("gameRules");
+        int lg = Integer.valueOf(sendCommand("#players"));
+        switch (odp) {
+            case "Standardowe":
+                zasady = FabrykaZasad.stworzZasadyGry(TypGry.STANDARDOWA, lg);
+                break;
+            case "FastPaced":
+                zasady = FabrykaZasad.stworzZasadyGry(TypGry.FAST_PACED, lg);
+                break;
+            case "Capture":
+                zasady = FabrykaZasad.stworzZasadyGry(TypGry.CAPTURE, lg);
+            default:
+                throw new IllegalArgumentException("Błąd w ustawianiu zasad");
+        }
+        zasadyTextArea.setText(zasady.opisZasad().replaceAll("&", "\n"));
         komunikacja.setDaemon(true);
         komunikacja.start();
     }

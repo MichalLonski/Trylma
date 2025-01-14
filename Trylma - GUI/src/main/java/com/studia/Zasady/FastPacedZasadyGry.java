@@ -8,30 +8,33 @@ public class FastPacedZasadyGry extends ZasadyGry {
     public FastPacedZasadyGry(int liczbaGraczy) {
         super(liczbaGraczy);
     }
-
+    @Override
+    public String toString() {
+        return "FastPaced";
+    }
     @Override
     protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
         if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
             return false; // Nie ma pola pomiędzy
         }
-    
+
         int wierszSrodek = (wierszP + wierszK) / 2;
         int kolumnaSrodek = (kolumnaP + kolumnaK) / 2;
-    
+
         if (!plansza.sprawdzPole(wierszSrodek, kolumnaSrodek).zajete()) {
             return false;
         }
-    
+
         int deltaWiersz = Integer.signum(wierszK - wierszP);
         int deltaKolumna = Integer.signum(kolumnaK - kolumnaP);
-    
+
         int liczbaPustychPrzed = 0;
         int liczbaPustychZa = 0;
         boolean srodekOsiagniety = false;
-    
+
         int wiersz = wierszP + deltaWiersz;
         int kolumna = kolumnaP + deltaKolumna;
-    
+
         while (wiersz != wierszK || kolumna != kolumnaK) {
             if (wiersz == wierszSrodek && kolumna == kolumnaSrodek) {
                 srodekOsiagniety = true;
@@ -46,14 +49,13 @@ public class FastPacedZasadyGry extends ZasadyGry {
                     liczbaPustychPrzed++;
                 }
             }
-    
+
             wiersz += deltaWiersz;
             kolumna += deltaKolumna;
         }
-    
+
         return liczbaPustychPrzed == liczbaPustychZa;
     }
-    
 
     @Override
     public boolean ruchJestPoprawny(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
@@ -65,7 +67,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
         }
 
         boolean rezultat = true;
-        int kogoDomStart = obecne.getGraczZwycieski(); // w czyim jesteśmy domku
+        int kogoDomStart = obecne.getDomek(); // w czyim jesteśmy domku
         boolean robiRuch = false;
         boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
@@ -102,15 +104,12 @@ public class FastPacedZasadyGry extends ZasadyGry {
             // pole gdzie lądujemy
             Pole ostatnie = plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
-            int kogoDomKoniec = ostatnie.getGraczZwycieski();
-            if (kogoDomStart == gracz) {
-                // jeśli zaczynamy w swoim domku to musi tam już kończyć
-                rezultat = (kogoDomKoniec == gracz);
-            } else {
-                // nie można kończyć na cudzym domku (za wyjątkiem swojego startu)
-                warunkiZwyciestwa[gracz] += (kogoDomKoniec == gracz ? 1 : 0);
-                rezultat = (kogoDomKoniec == gracz || kogoDomKoniec == 0);
-            }
+            int kogoDomKoniec = ostatnie.getDomek();
+
+            // nie można kończyć na cudzym domku (za wyjątkiem swojego startu)
+            rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz)
+                    || kogoDomKoniec == gracz);
+
         }
         return rezultat;
     }
@@ -128,5 +127,15 @@ public class FastPacedZasadyGry extends ZasadyGry {
     @Override
     public boolean checkWin(int gracz) {
         return warunkiZwyciestwa[gracz] == 10;
+    }
+
+    @Override
+    public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz
+                && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
+                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz) {
+            warunkiZwyciestwa[gracz]++;
+        }
+        super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
     }
 }

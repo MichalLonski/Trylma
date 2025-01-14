@@ -53,7 +53,7 @@ public class WatekGracza extends Thread {
                         TypGry typgry = switch (slowa[1]) {
                             case "Standardowy" -> TypGry.STANDARDOWA;
                             case "SuperChineseCheckers" -> TypGry.FAST_PACED;
-                            case "Capture" -> TypGry.ROZSZERZONA;
+                            case "Capture" -> TypGry.CAPTURE;
                             default -> null;
                         };
 
@@ -77,7 +77,7 @@ public class WatekGracza extends Thread {
                         out.println(gracz.ktoreMiejsce());
                         break;
                     case "gameRules":
-                        out.println(gracz.dajGre().dajZasadyGry().opisZasad());
+                        out.println(gracz.dajGre().dajZasadyGry().toString());
                         break;
                     case "hasStarted":
                         out.println(gracz.dajGre().czyGraSieZaczela());

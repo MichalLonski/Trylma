@@ -27,28 +27,28 @@ public class StandardoweZasadyGry extends ZasadyGry {
         }
 
         boolean rezultat = true;
-        int kogoDomStart = obecne.getGraczZwycieski(); // w czyim jesteśmy domku
+        int kogoDomStart = obecne.getDomek(); // w czyim jesteśmy domku
         boolean robiRuch = false;
         boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
-            int wierszP = sekwencjaRuchow[i][0];
-            int kolumnaP = sekwencjaRuchow[i][1];
+            int kolumnaP = sekwencjaRuchow[i][0];
+            int wierszP = sekwencjaRuchow[i][1];
             int wierszK = sekwencjaRuchow[i + 1][0];
             int kolumnaK = sekwencjaRuchow[i + 1][1];
 
             if (plansza.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
                 // czy chcemy przejść na puste pole
-            } else if ((kolumnaP == kolumnaK && Math.abs(wierszK - wierszP) == 2)
-                    || ((Math.abs(wierszK - wierszP) == 1 && Math.abs(kolumnaK - kolumnaP) == 1))) {
+            } else if ((wierszP == kolumnaK && Math.abs(wierszK - kolumnaP) == 2)
+                    || ((Math.abs(wierszK - kolumnaP) == 1 && Math.abs(kolumnaK - wierszP) == 1))) {
                 // ruch w naszym poziomie lub po ukosach, musi być ostatni
                 rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
                 robiRuch = true;
 
-            } else if ((Math.abs(wierszK - wierszP) == 4 && Math.abs(kolumnaK - kolumnaP) == 0)
-                    || (Math.abs(wierszK - wierszP) == 2 && Math.abs(kolumnaK - kolumnaP) == 2)) {
-                rezultat = skokJestLegalny(plansza, wierszP, kolumnaP, wierszK, kolumnaK);
+            } else if ((Math.abs(wierszK - kolumnaP) == 4 && Math.abs(kolumnaK - wierszP) == 0)
+                    || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
+                rezultat = skokJestLegalny(plansza, kolumnaP, wierszP, wierszK, kolumnaK);
                 // skok w poziomie lub skosie
                 robiSkok = true;
             }
@@ -64,19 +64,17 @@ public class StandardoweZasadyGry extends ZasadyGry {
             // pole gdzie lądujemy
             Pole ostatnie = plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
-            int kogoDomKoniec = ostatnie.getGraczZwycieski();
-            if (kogoDomStart == gracz) {
-                // jeśli zaczynamy w swoim domku to musi tam już kończyć
-                rezultat = (kogoDomKoniec == gracz);
-            } else {
-                // nie można kończyć na cudzym domku (za wyjątkiem swojego startu)
-                warunkiZwyciestwa[gracz] += (kogoDomKoniec == gracz ? 1 : 0);
-                rezultat = (kogoDomKoniec == gracz || kogoDomKoniec == 0);
-            }
+            int kogoDomKoniec = ostatnie.getDomek();
+            
+            // nie można kończyć na cudzym domku (za wyjątkiem swojego startu)
+            rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz) || kogoDomKoniec == gracz);
         }
         return rezultat;
     }
-
+    @Override
+    public String toString() {
+        return "Standardowe";
+    }
     @Override
     public String opisZasad() {
         return "1. Trzeba zacząć od pola ze swoim pionem &" +
@@ -90,6 +88,15 @@ public class StandardoweZasadyGry extends ZasadyGry {
     @Override
     public boolean checkWin(int gracz) {
         return warunkiZwyciestwa[gracz] == 10;
+    }
+
+    @Override
+    public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
+        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz ){
+            warunkiZwyciestwa[gracz]++;
+        }
+        super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
     }
 
 }

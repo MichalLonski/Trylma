@@ -7,7 +7,7 @@ public class FabrykaZasad {
                 return new StandardoweZasadyGry(liczbaGraczy);
             case FAST_PACED:
                 return new FastPacedZasadyGry(liczbaGraczy);
-            case ROZSZERZONA:
+            case CAPTURE:
                 System.out.println("Litości");
                 throw new IllegalArgumentException("Nieobsługiwane");
             default:
