@@ -66,8 +66,6 @@ public class CaptureZasadyGry extends ZasadyGry {
                     int nowyWiersz = wiersz + ruch[1];
                     if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
                             && nowyWiersz < Plansza.LICZBA_WIERSZY) {
-                        System.out.println("wiersz: " + wiersz + " kolumna: " + kolumna);
-                        System.out.println("nowy wiersz: " + nowyWiersz + " nowa kolumna: " + nowaKolumna);
                         if (plansza.sprawdzPole(nowyWiersz, nowaKolumna).zajete()) {
                             if (plansza.sprawdzPole((kolumna + nowaKolumna) / 2, (wiersz + nowyWiersz) / 2).zajete()) {
                                 return true;
@@ -185,7 +183,7 @@ public class CaptureZasadyGry extends ZasadyGry {
             warunkiZwyciestwa[gracz]++;
         }
         plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
-        return istniejaRuchy(plansza);
+        return !istniejaRuchy(plansza);
     }
 
     /**
