@@ -12,6 +12,16 @@ public class Plansza {
     public Plansza() {
     }
 
+    // Używam żeby symulować ruchy zchainowane
+    public Plansza(Plansza doKopiowania) {
+        this.planszaDoGry = new Pole[LICZBA_WIERSZY][LICZBA_KOLUMN];
+        for (int i = 0; i < LICZBA_WIERSZY; i++) {
+            for (int j = 0; j < LICZBA_KOLUMN; j++) {
+                this.planszaDoGry[i][j] = new Pole(doKopiowania.sprawdzPole(i, j));
+            }
+        }
+    }
+
     private Pole[] odczytajPole(int nrWiersza, JSONArray list) {
         Pole[] wiersz = new Pole[list.length()];
         for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
@@ -29,6 +39,11 @@ public class Plansza {
             planszaDoGry[nrWiersza] = wiersz;
         }
 
+        ustawDomki();
+
+    }
+
+    private void ustawDomki() {
         for (int nrWiersza = 0; nrWiersza < LICZBA_WIERSZY; nrWiersza++) {
             int odbityWiersz = LICZBA_WIERSZY - nrWiersza - 1;
             for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
@@ -39,7 +54,6 @@ public class Plansza {
                 }
             }
         }
-
     }
 
     public Pole sprawdzPole(int wiersz, int kolumna) {

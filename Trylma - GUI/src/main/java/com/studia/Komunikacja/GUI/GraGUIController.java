@@ -298,6 +298,7 @@ public class GraGUIController extends GUIController {
                 break;
             case "Capture":
                 zasady = FabrykaZasad.stworzZasadyGry(TypGry.CAPTURE, lg);
+                break;
             default:
                 throw new IllegalArgumentException("Błąd w ustawianiu zasad");
         }

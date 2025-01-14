@@ -9,6 +9,11 @@ public class Pole {
         this.domekGracza = 0;
     }
 
+    Pole(Pole pole) {
+        this.nrGracza = pole.nrGracza;
+        this.domekGracza = pole.domekGracza;
+    }
+
     public int getGracz() {
         return nrGracza;
     }

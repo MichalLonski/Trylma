@@ -25,7 +25,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
             return false;
             // czy zaczynamy od swojego piona
         }
-
+        Plansza kopiaPlanszy = new Plansza(plansza); // jakieś patologiczne sytuacje gdybyśmy chcieli skakać nad sobą
         boolean rezultat = true;
         int kogoDomStart = obecne.getDomek(); // w czyim jesteśmy domku
         boolean robiRuch = false;
@@ -37,7 +37,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
             int wierszK = sekwencjaRuchow[i + 1][0];
             int kolumnaK = sekwencjaRuchow[i + 1][1];
 
-            if (plansza.sprawdzPole(wierszK, kolumnaK).zajete()) {
+            if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
                 // czy chcemy przejść na puste pole
             } else if ((wierszP == kolumnaK && Math.abs(wierszK - kolumnaP) == 2)
@@ -48,7 +48,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
 
             } else if ((Math.abs(wierszK - kolumnaP) == 4 && Math.abs(kolumnaK - wierszP) == 0)
                     || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
-                rezultat = skokJestLegalny(plansza, kolumnaP, wierszP, wierszK, kolumnaK);
+                rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, wierszK, kolumnaK);
                 // skok w poziomie lub skosie
                 robiSkok = true;
             }
@@ -59,22 +59,27 @@ public class StandardoweZasadyGry extends ZasadyGry {
             if (!rezultat) {
                 break;
             }
+            wykonajRuch(kopiaPlanszy, new int[][] { sekwencjaRuchow[i], sekwencjaRuchow[i + 1] }, gracz);
+
         }
         if (rezultat) {
             // pole gdzie lądujemy
-            Pole ostatnie = plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
+            Pole ostatnie = kopiaPlanszy.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
             int kogoDomKoniec = ostatnie.getDomek();
-            
+
             // nie można kończyć na cudzym domku (za wyjątkiem swojego startu)
-            rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz) || kogoDomKoniec == gracz);
+            rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz)
+                    || kogoDomKoniec == gracz);
         }
         return rezultat;
     }
+
     @Override
     public String toString() {
         return "Standardowe";
     }
+
     @Override
     public String opisZasad() {
         return "1. Trzeba zacząć od pola ze swoim pionem &" +
@@ -92,8 +97,9 @@ public class StandardoweZasadyGry extends ZasadyGry {
 
     @Override
     public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
-        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
-        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz ){
+        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz
+                && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
+                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz) {
             warunkiZwyciestwa[gracz]++;
         }
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);

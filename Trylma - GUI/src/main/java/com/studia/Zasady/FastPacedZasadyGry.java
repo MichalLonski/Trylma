@@ -8,10 +8,12 @@ public class FastPacedZasadyGry extends ZasadyGry {
     public FastPacedZasadyGry(int liczbaGraczy) {
         super(liczbaGraczy);
     }
+
     @Override
     public String toString() {
         return "FastPaced";
     }
+
     @Override
     protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
         if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
@@ -66,6 +68,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
             // czy zaczynamy od swojego piona
         }
 
+        Plansza kopiaPlanszy = new Plansza(plansza); // jakieś patologiczne sytuacje gdybyśmy chcieli skakać nad sobą
         boolean rezultat = true;
         int kogoDomStart = obecne.getDomek(); // w czyim jesteśmy domku
         boolean robiRuch = false;
@@ -77,7 +80,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
             int wierszK = sekwencjaRuchow[i + 1][0];
             int kolumnaK = sekwencjaRuchow[i + 1][1];
 
-            if (plansza.sprawdzPole(wierszK, kolumnaK).zajete()) {
+            if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
                 // czy chcemy przejść na puste pole
             } else if ((kolumnaP == kolumnaK && Math.abs(wierszK - wierszP) == 2)
@@ -87,7 +90,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
                 robiRuch = true;
 
             } else {
-                rezultat = skokJestLegalny(plansza, wierszP, kolumnaP, wierszK, kolumnaK);
+                rezultat = skokJestLegalny(kopiaPlanszy, wierszP, kolumnaP, wierszK, kolumnaK);
                 // skok w poziomie lub skosie
                 robiSkok = true;
 
@@ -99,6 +102,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
             if (!rezultat) {
                 break;
             }
+            wykonajRuch(kopiaPlanszy, new int[][] { sekwencjaRuchow[i], sekwencjaRuchow[i + 1] }, gracz);
         }
         if (rezultat) {
             // pole gdzie lądujemy
