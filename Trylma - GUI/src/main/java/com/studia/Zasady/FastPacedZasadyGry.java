@@ -129,17 +129,13 @@ public class FastPacedZasadyGry extends ZasadyGry {
     }
 
     @Override
-    public boolean graSkonczona(int gracz) {
-        return warunkiZwyciestwa[gracz] == 10;
-    }
-
-    @Override
-    public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+    public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
         if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz
                 && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                         sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz) {
             warunkiZwyciestwa[gracz]++;
         }
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
+        return warunkiZwyciestwa[gracz] == 10;
     }
 }

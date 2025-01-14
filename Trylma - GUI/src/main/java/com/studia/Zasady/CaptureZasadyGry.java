@@ -83,7 +83,7 @@ public class CaptureZasadyGry extends ZasadyGry {
     }
 
     @Override
-    public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+    public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
 
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
@@ -97,11 +97,12 @@ public class CaptureZasadyGry extends ZasadyGry {
             warunkiZwyciestwa[gracz]++;
         }
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
+        return istniejaRuchy(plansza);
     }
 
     @Override
-    public boolean graSkonczona(int gracz) {
-        return false;
+    public boolean graSkonczona(Plansza plansza) {
+        return istniejaRuchy(plansza);
     }
 
     private boolean istniejaRuchy(Plansza plansza) {
@@ -129,5 +130,17 @@ public class CaptureZasadyGry extends ZasadyGry {
         return new int[][] {
                 { -2, 0 }, { 2, 0 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
         };
+    }
+
+    @Override
+    public int zwyciezca(int gracz) {
+        int maks = 0;
+        int idx = 0;
+        for (int i = 1; i < liczbaGraczy; i++) {
+            if (warunkiZwyciestwa[i] > maks){
+                idx = i;
+            }
+        }
+        return idx;
     }
 }

@@ -32,26 +32,26 @@ public abstract class ZasadyGry {
         return "";
     };
 
-    public boolean graSkonczona(int gracz) {
+    public boolean graSkonczona(Plansza plansza) {
         int graczeKoniec = 0;
         for (int i = 1; i <= liczbaGraczy; i++) {
-            if (warunkiZwyciestwa[i] == 10){
+            if (warunkiZwyciestwa[i] == 10) {
                 graczeKoniec++;
             }
         }
-        return (graczeKoniec == liczbaGraczy-1);
+        return (graczeKoniec == liczbaGraczy - 1);
     }
 
-    public int zwyciezca(){
-        return 1;
+    public int zwyciezca(int gracz) {
+        return (warunkiZwyciestwa[gracz] == 10 ? gracz : 0);
     }
 
     protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
         return true;
     }
 
-    public void wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
-        plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
+    public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+        return false;
     }
 
     public JSONArray infoJSON() {

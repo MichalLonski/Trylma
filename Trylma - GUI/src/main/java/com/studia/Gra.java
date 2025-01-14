@@ -50,11 +50,9 @@ public class Gra {
     private class KolejkaGraczy {
         private List<Gracz> zakolejkowaniGracze;
         private int tura;
-        private int graczyPozostalo;
 
         KolejkaGraczy(List<Gracz> lista) {
             this.zakolejkowaniGracze = lista;
-            graczyPozostalo = lista.size();
         }
 
         // gracze w kolejce są 0-(n-1), ale ich numery to 1-n, bo 0 ma oznaczać puste
@@ -75,10 +73,8 @@ public class Gra {
             }
         }
 
-        public int usunGracza(int miejsce) {
+        public void usunGracza(int miejsce) {
             zakolejkowaniGracze.set(miejsce, null);
-            graczyPozostalo--;
-            return graczyPozostalo;
         }
 
         public int obecnyGracz() {
@@ -86,19 +82,25 @@ public class Gra {
         }
     }
 
-    public void passTury(int miejsceGracza){
-        if (trwaTuraGracza(miejsceGracza)){
+    public void passTury(int miejsceGracza) {
+        if (trwaTuraGracza(miejsceGracza)) {
             kolejka.wykonanoRuch();
         }
     }
+
     public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (ruchJestPoprawny(sekwencjaRuchow, miejsceGracza)) {
-            zasadyGry.wykonajRuch(planszaGry, sekwencjaRuchow, miejsceGracza);
-            if (zasadyGry.graSkonczona(miejsceGracza)) {
-                graczWygrywa(miejsceGracza);
-                if (kolejka.usunGracza(miejsceGracza) == 1) {
+            if (zasadyGry.wykonajRuch(planszaGry, sekwencjaRuchow, miejsceGracza)) {
+                // jeśli true to albo ktoś wygrał, albo cała gra dobiegła końca
+
+                int wygrany = zasadyGry.zwyciezca(miejsceGracza);
+                graczWygrywa(wygrany);
+                if (zasadyGry.graSkonczona(planszaGry)) {
                     koniecGry();
+                } else {
+                    kolejka.usunGracza(wygrany);
                 }
+
             }
             kolejka.wykonanoRuch();
 
