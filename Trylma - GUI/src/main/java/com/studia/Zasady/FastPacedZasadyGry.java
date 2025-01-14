@@ -29,8 +29,8 @@ public class FastPacedZasadyGry extends ZasadyGry {
         int liczbaPustychZa = 0;
         boolean srodekOsiagniety = false;
     
-        int wiersz = wierszP;
-        int kolumna = kolumnaP;
+        int wiersz = wierszP + deltaWiersz;
+        int kolumna = kolumnaP + deltaKolumna;
     
         while (wiersz != wierszK || kolumna != kolumnaK) {
             if (wiersz == wierszSrodek && kolumna == kolumnaSrodek) {
