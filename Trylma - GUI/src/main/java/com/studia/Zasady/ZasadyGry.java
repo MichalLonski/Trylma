@@ -32,8 +32,18 @@ public abstract class ZasadyGry {
         return "";
     };
 
-    public boolean checkWin(int gracz) {
-        return warunkiZwyciestwa[gracz] > 0;
+    public boolean graSkonczona(int gracz) {
+        int graczeKoniec = 0;
+        for (int i = 1; i <= liczbaGraczy; i++) {
+            if (warunkiZwyciestwa[i] == 10){
+                graczeKoniec++;
+            }
+        }
+        return (graczeKoniec == liczbaGraczy-1);
+    }
+
+    public int zwyciezca(){
+        return 1;
     }
 
     protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {

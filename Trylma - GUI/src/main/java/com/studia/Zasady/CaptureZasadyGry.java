@@ -67,7 +67,7 @@ public class CaptureZasadyGry extends ZasadyGry {
                     || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
                 rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, wierszK, kolumnaK);
                 // tylko skoki są legalne
-            }else{
+            } else {
                 rezultat = false;
             }
 
@@ -98,8 +98,36 @@ public class CaptureZasadyGry extends ZasadyGry {
         }
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
     }
+
     @Override
-    public boolean checkWin(int gracz) {
+    public boolean graSkonczona(int gracz) {
         return false;
+    }
+
+    private boolean istniejaRuchy(Plansza plansza) {
+        for (int i = 0; i < Plansza.LICZBA_WIERSZY; i++) {
+            for (int j = 0; j < Plansza.LICZBA_KOLUMN; j++) {
+                for (int[] ruch : legalneKierunki()) {
+                    int nowaKolumna = j + ruch[0];
+                    int nowyWiersz = i + ruch[1];
+                    if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
+                            && nowyWiersz < Plansza.LICZBA_WIERSZY) {
+                        if (plansza.sprawdzPole(nowyWiersz, nowaKolumna).zajete()) {
+                            if (ruchJestPoprawny(plansza, new int[][] { { i, j }, { nowaKolumna, nowyWiersz } }, 1)) {
+                                return true;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private int[][] legalneKierunki() {
+        return new int[][] {
+                { -2, 0 }, { 2, 0 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
+        };
     }
 }

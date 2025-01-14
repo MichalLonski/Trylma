@@ -86,10 +86,15 @@ public class Gra {
         }
     }
 
+    public void passTury(int miejsceGracza){
+        if (trwaTuraGracza(miejsceGracza)){
+            kolejka.wykonanoRuch();
+        }
+    }
     public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (ruchJestPoprawny(sekwencjaRuchow, miejsceGracza)) {
             zasadyGry.wykonajRuch(planszaGry, sekwencjaRuchow, miejsceGracza);
-            if (zasadyGry.checkWin(miejsceGracza)) {
+            if (zasadyGry.graSkonczona(miejsceGracza)) {
                 graczWygrywa(miejsceGracza);
                 if (kolejka.usunGracza(miejsceGracza) == 1) {
                     koniecGry();

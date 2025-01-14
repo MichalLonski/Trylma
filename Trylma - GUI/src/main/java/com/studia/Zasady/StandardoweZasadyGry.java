@@ -91,7 +91,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
     }
 
     @Override
-    public boolean checkWin(int gracz) {
+    public boolean graSkonczona(int gracz) {
         return warunkiZwyciestwa[gracz] == 10;
     }
 
