@@ -111,6 +111,8 @@ public class GraGUIController extends GUIController {
         ObjectMapper mapper = new ObjectMapper();
         try {
             File file = new File("src/main/resources/config.json");
+
+            @SuppressWarnings("unchecked")
             Map<String, ArrayList<ArrayList<Integer>>> map = mapper.readValue(file, Map.class);
             ArrayList<ArrayList<Integer>> mapa = map.get(String.valueOf(liczbaGraczy));
 
@@ -241,7 +243,6 @@ public class GraGUIController extends GUIController {
     }
 
     Thread komunikacja = new Thread(() -> {
-
         try {
             while (wTymMenu) {
                 sleep(10);

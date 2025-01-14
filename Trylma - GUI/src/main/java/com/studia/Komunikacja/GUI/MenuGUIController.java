@@ -79,9 +79,11 @@ public class MenuGUIController extends GUIController {
 
     public void stworzGreFinalButtonKlik() {
         try {
-            String odpowiedz = sendCommand(
-                    "create" + " " + wariantGryComboBox.getValue() + " " + iloscGraczyComboBox.getValue());
-            KlientApplication.MenuDoGry();
+            if (wariantGryComboBox.getValue() != null && iloscGraczyComboBox.getValue() != null) {
+                sendCommand("create" + " " + wariantGryComboBox.getValue().replace(" ", "") + " "
+                        + iloscGraczyComboBox.getValue());
+                KlientApplication.MenuDoGry();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,13 +97,14 @@ public class MenuGUIController extends GUIController {
     public void wyswietlOpisZasad() {
         switch (wariantGryComboBox.getValue()) {
             case "Standardowy":
-                opisWariantuTextArea.setText("Opis Standardowego wariantu gry");
+                opisWariantuTextArea.setText("Standardowa rozgrywka");
                 break;
-            case "Wariant 2":
-                opisWariantuTextArea.setText("Opis 2 wariantu gry");
+            case "Super Chinese Checkers":
+                opisWariantuTextArea.setText("Super Chinese Checkers: można skakać jak się chcę, byle symetrycznie");
                 break;
-            case "Wariant 3":
-                opisWariantuTextArea.setText("Opis 3 wariantu gry");
+            case "Capture":
+                opisWariantuTextArea
+                        .setText("Capture: zdobywaj punkty przez zbijanie pionów poprzez skakanie nad nimi");
                 break;
         }
     }

@@ -22,8 +22,8 @@ public class Gra {
             new int[] { 0, 0 },
     };
 
-    public Gra(TypGry typ, int[] parametry) {
-        this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, parametry);
+    public Gra(TypGry typ, int liczbaGraczy) {
+        this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, liczbaGraczy);
         this.listaGraczy = new ArrayList<>();
         ID_GRY = ID;
         ID++;
@@ -39,7 +39,6 @@ public class Gra {
         kolejka.ustawLosowo();
         planszaGry = new Plansza(zasadyGry.ileGraczy());
         planszaGry.utworzPlansze();
-        // informujGraczy("Gra się zaczyna");
         graWTrakcie = true;
         return kolejka.obecnyGracz();
     }
@@ -47,9 +46,11 @@ public class Gra {
     private class KolejkaGraczy {
         private List<Gracz> zakolejkowaniGracze;
         private int tura;
+        private int graczyPozostalo;
 
         KolejkaGraczy(List<Gracz> lista) {
             this.zakolejkowaniGracze = lista;
+            graczyPozostalo = lista.size();
         }
 
         // gracze w kolejce są 0-(n-1), ale ich numery to 1-n, bo 0 ma oznaczać puste
@@ -70,10 +71,10 @@ public class Gra {
             }
         }
 
-        // TODO: po wygranej
-        @SuppressWarnings("unused")
-        public void usunGracza(int miejsce) {
+        public int usunGracza(int miejsce) {
             zakolejkowaniGracze.set(miejsce, null);
+            graczyPozostalo--;
+            return graczyPozostalo;
         }
 
         public int obecnyGracz() {
@@ -81,15 +82,15 @@ public class Gra {
         }
     }
 
-    /*
-     * Wiersz: A-M; korzystamy z rzutowania na int; 'A' = 65
-     * Kolumna: 1-13
-     * Pozycja wiersz + kolumna (konkatenacja, bez spacji, np A1, M12)
-     */
     public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
-        if (trwaTuraGracza(miejsceGracza, sekwencjaRuchow)) {
+        if (ruchJestPoprawny(sekwencjaRuchow, miejsceGracza)) {
             planszaGry.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], miejsceGracza);
-            kolejka.zakolejkowaniGracze.get(miejsceGracza - 1).getScore();
+            if (zasadyGry.checkWin(miejsceGracza)) {
+                // TODO: gracz wygrywa - jakiś victory screen czy coś
+                if (kolejka.usunGracza(miejsceGracza) == 1) {
+                    // TODO: wszyscy wygrali prócz ostatniego gracza
+                }
+            }
             kolejka.wykonanoRuch();
 
             ruchWPoprzedniejTurze = new int[][] {
@@ -99,11 +100,8 @@ public class Gra {
         }
     }
 
-    public boolean trwaTuraGracza(int miejsceGracza, int[][] sekwencjaRuchow) {
-        if (miejsceGracza != kolejka.obecnyGracz()) {
-            return false;
-        }
-        return zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, miejsceGracza);
+    public boolean trwaTuraGracza(int miejsceGracza) {
+        return (miejsceGracza == kolejka.obecnyGracz());
     }
 
     // TODO: synchroniczna - sprawdzić
@@ -168,17 +166,11 @@ public class Gra {
     }
 
     public boolean ruchJestPoprawny(int[][] sekwencjaRuchow, int gracz) {
-        for (int[] is : sekwencjaRuchow) {
-            System.out.println("wiersz: " + is[0] + " kolumna: " + is[1]);
-        }
-        return zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, gracz);
+        return trwaTuraGracza(gracz) && zasadyGry.ruchJestPoprawny(planszaGry, sekwencjaRuchow, gracz);
     }
 
     public String opis() {
         return "ID gry: " + ID_GRY + " | Zapełnienie: " + listaGraczy.size() + "/" + zasadyGry.ileGraczy();
     }
 
-    public void printPlansza() {
-        planszaGry.wypiszPlansze();
-    }
 }

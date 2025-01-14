@@ -39,7 +39,6 @@ public class SerwerGry {
                 if (SerwerWlaczony) {
                     WatekGracza watek = new WatekGracza(clientSocket);
                     watek.start();
-                    System.out.println("Nowy gracz połączony: " + watek.getGracz().przedstawSie());
                     listaWatkow.add(watek);
                 }
             }
@@ -54,9 +53,7 @@ public class SerwerGry {
         SerwerWlaczony = false;
         try {
             new Socket(host, nrPortu).close();
-        } catch (Exception e) {
-            System.out.println("zgodnie z planem");
-        }
+        } catch (Exception e) {}
         for (WatekGracza watekGracza : listaWatkow) {
             watekGracza.quit();
         }

@@ -76,20 +76,4 @@ public class Plansza {
         sprawdzPole(wierszP, kolumnaP).setGracz(0);
     }
 
-    public boolean jestMiedzyPolami(int wiersz1, int kolumna1, int wiersz2, int kolumna2) {
-        if (wiersz1 % 2 != wiersz2 % 2 || kolumna1 % 2 != kolumna2 % 2) {
-            return false; // nie ma pola pomiędzy
-        }
-        return sprawdzPole((wiersz1 + wiersz2) / 2, (kolumna1 + kolumna2) / 2).zajete();
-    }
-
-    public void wypiszPlansze() {
-        for (Pole[] poles : planszaDoGry) {
-            for (Pole pole : poles) {
-                System.out.println(pole.koordynaty());
-            }
-            System.err.println("=================");
-        }
-    }
-
 }

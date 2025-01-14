@@ -3,11 +3,11 @@ package com.studia.Zasady;
 /*
  * Pojęcia nie mam czy będziemy to implementować
  * STANDARDOWA - klasyczna gra
- * ZESPOLOWA - 2v2 lub 3v3
+ * FAST_PACED - Super Chinese Checkers
  * ROZSZERZONA - gracz może kontrolować 2 lub 3 zestawy pionków
  */
 public enum TypGry {
     STANDARDOWA,
-    ZESPOLOWA,
+    FAST_PACED,
     ROZSZERZONA
 }

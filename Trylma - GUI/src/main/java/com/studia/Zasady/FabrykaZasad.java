@@ -1,13 +1,12 @@
 package com.studia.Zasady;
 
 public class FabrykaZasad {
-    public static ZasadyGry stworzZasadyGry(TypGry typ, int[] parametry) {
+    public static ZasadyGry stworzZasadyGry(TypGry typ, int liczbaGraczy) {
         switch (typ) {
             case STANDARDOWA:
-                return new StandardoweZasadyGry(parametry[0]);
-            case ZESPOLOWA:
-                System.out.println("Proszę nie");
-                throw new IllegalArgumentException("Nieobsługiwane");
+                return new StandardoweZasadyGry(liczbaGraczy);
+            case FAST_PACED:
+                return new FastPacedZasadyGry(liczbaGraczy);
             case ROZSZERZONA:
                 System.out.println("Litości");
                 throw new IllegalArgumentException("Nieobsługiwane");

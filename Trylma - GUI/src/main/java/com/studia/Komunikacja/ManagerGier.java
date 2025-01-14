@@ -34,8 +34,8 @@ public class ManagerGier {
     }
 
     // Inicjuje nową gre i dodaje do niego gracza który ją stworzył
-    public synchronized void inicjujNowaGre(TypGry typGry, int[] parametry, Gracz inicjujacyGracz) {
-        Gra nowaGra = new Gra(typGry, parametry);
+    public synchronized void inicjujNowaGre(TypGry typGry, int liczbaGraczy, Gracz inicjujacyGracz) {
+        Gra nowaGra = new Gra(typGry, liczbaGraczy);
         ListaGier.add(nowaGra);
         nowaGra.dodajGracza(inicjujacyGracz);
     }

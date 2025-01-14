@@ -4,8 +4,6 @@ import javafx.scene.shape.Circle;
 
 import javafx.scene.shape.Rectangle;
 
-import java.util.Arrays;
-
 public class PoleWGUI {
     private int[] koordynaty;
     private Rectangle rect;

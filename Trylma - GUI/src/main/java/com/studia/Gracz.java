@@ -6,7 +6,6 @@ public class Gracz {
     private String identyfikatorGracza;
     private int miejscePrzyStole;
     private Gra gra;
-    private int wynik = 0;
 
     public Gracz() {
         this.identyfikatorGracza = UUID.randomUUID().toString();
@@ -50,11 +49,4 @@ public class Gracz {
         this.gra = gra;
     }
 
-    public void addScore() {
-        wynik++;
-    }
-
-    public int getScore() {
-        return wynik;
-    }
 }

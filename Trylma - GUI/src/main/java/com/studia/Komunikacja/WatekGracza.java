@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.Array;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 import com.studia.Gracz;
 import com.studia.Zasady.TypGry;
 
@@ -56,16 +52,13 @@ public class WatekGracza extends Thread {
 
                         TypGry typgry = switch (slowa[1]) {
                             case "Standardowy" -> TypGry.STANDARDOWA;
-                            case "Wariant 2" -> TypGry.ZESPOLOWA;
-                            case "Wariant 3" -> TypGry.ROZSZERZONA;
+                            case "SuperChineseCheckers" -> TypGry.FAST_PACED;
+                            case "Capture" -> TypGry.ROZSZERZONA;
                             default -> null;
                         };
 
-                        int[] parametry = new int[slowa.length - 2];
-                        for (int j = 2; j < slowa.length; j++) {
-                            parametry[j - 2] = Integer.parseInt(slowa[j]);
-                        }
-                        ManagerGier.dajInstancje().inicjujNowaGre(typgry, parametry, gracz);
+                        int liczbaGraczy = Integer.parseInt(slowa[2]);
+                        ManagerGier.dajInstancje().inicjujNowaGre(typgry, liczbaGraczy, gracz);
                         out.println("success");
 
                         break;

@@ -18,7 +18,7 @@
             <VBox layoutX="286.0" layoutY="28.0" prefHeight="152.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="Ilosć Graczy" />
-                  <ComboBox fx:id="iloscGraczyComboBox" prefWidth="150.0" value="2">
+                  <ComboBox fx:id="iloscGraczyComboBox" prefWidth="150.0">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="2" />
@@ -29,12 +29,12 @@
                      </items>
                   </ComboBox>
                   <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="Wariant Gry" />
-                  <ComboBox fx:id="wariantGryComboBox" onAction="#wyswietlOpisZasad" prefWidth="150.0" value="Standardowy">
+                  <ComboBox fx:id="wariantGryComboBox" onAction="#wyswietlOpisZasad" prefWidth="150.0">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Standardowy" />
-                           <String fx:value="Wariant 2" />
-                           <String fx:value="Wariant 3" />
+                           <String fx:value="Super Chinese Checkers" />
+                           <String fx:value="Capture" />
                         </FXCollections>
                      </items>
                   </ComboBox>

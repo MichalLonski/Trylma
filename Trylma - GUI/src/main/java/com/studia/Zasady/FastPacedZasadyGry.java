@@ -3,19 +3,57 @@ package com.studia.Zasady;
 import com.studia.Plansza.Plansza;
 import com.studia.Plansza.Pole;
 
-public class StandardoweZasadyGry extends ZasadyGry {
+public class FastPacedZasadyGry extends ZasadyGry {
 
-    public StandardoweZasadyGry(int liczbaGraczy) {
+    public FastPacedZasadyGry(int liczbaGraczy) {
         super(liczbaGraczy);
     }
 
     @Override
     protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
         if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
-            return false; // nie ma pola pomiędzy
+            return false; // Nie ma pola pomiędzy
         }
-        return plansza.sprawdzPole((wierszP + wierszK) / 2, (kolumnaP + kolumnaK) / 2).zajete();
+    
+        int wierszSrodek = (wierszP + wierszK) / 2;
+        int kolumnaSrodek = (kolumnaP + kolumnaK) / 2;
+    
+        if (!plansza.sprawdzPole(wierszSrodek, kolumnaSrodek).zajete()) {
+            return false;
+        }
+    
+        int deltaWiersz = Integer.signum(wierszK - wierszP);
+        int deltaKolumna = Integer.signum(kolumnaK - kolumnaP);
+    
+        int liczbaPustychPrzed = 0;
+        int liczbaPustychZa = 0;
+        boolean srodekOsiagniety = false;
+    
+        int wiersz = wierszP;
+        int kolumna = kolumnaP;
+    
+        while (wiersz != wierszK || kolumna != kolumnaK) {
+            if (wiersz == wierszSrodek && kolumna == kolumnaSrodek) {
+                srodekOsiagniety = true;
+            } else if (plansza.sprawdzPole(wiersz, kolumna).zajete()) {
+                if (srodekOsiagniety) {
+                    return false;
+                }
+            } else {
+                if (srodekOsiagniety) {
+                    liczbaPustychZa++;
+                } else {
+                    liczbaPustychPrzed++;
+                }
+            }
+    
+            wiersz += deltaWiersz;
+            kolumna += deltaKolumna;
+        }
+    
+        return liczbaPustychPrzed == liczbaPustychZa;
     }
+    
 
     @Override
     public boolean ruchJestPoprawny(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
@@ -41,16 +79,16 @@ public class StandardoweZasadyGry extends ZasadyGry {
                 rezultat = false;
                 // czy chcemy przejść na puste pole
             } else if ((kolumnaP == kolumnaK && Math.abs(wierszK - wierszP) == 2)
-                    || ((Math.abs(wierszK - wierszP) == 1 && Math.abs(kolumnaK - kolumnaP) == 1))) {
+                    || (Math.abs(wierszK - wierszP) == 1 && Math.abs(kolumnaK - kolumnaP) == 1)) {
                 // ruch w naszym poziomie lub po ukosach, musi być ostatni
                 rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
                 robiRuch = true;
 
-            } else if ((Math.abs(wierszK - wierszP) == 4 && Math.abs(kolumnaK - kolumnaP) == 0)
-                    || (Math.abs(wierszK - wierszP) == 2 && Math.abs(kolumnaK - kolumnaP) == 2)) {
+            } else {
                 rezultat = skokJestLegalny(plansza, wierszP, kolumnaP, wierszK, kolumnaK);
                 // skok w poziomie lub skosie
                 robiSkok = true;
+
             }
 
             // trzeba robić tylko jedno
@@ -82,14 +120,13 @@ public class StandardoweZasadyGry extends ZasadyGry {
         return "1. Trzeba zacząć od pola ze swoim pionem &" +
                 "2. Trzeba skończyć na polu pustym &" +
                 "3. Można ruszyć się na sąsiednie pole &" +
-                "4. Można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion &" +
+                "4. Można skoczyć nad pionem, jeśli po drugiej stronie jest tyle samo wolnych pól, co przed nim &" +
                 "5. Nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu &" +
-                "6. Nie można wejść do cudzej strzefy zwycięskiej, chyba że wyjdziemy z niej w tym samym ruchu";
+                "6. Nie można wejść do cudzej strefy zwycięskiej, chyba że wyjdziemy z niej w tym samym ruchu";
     }
 
     @Override
     public boolean checkWin(int gracz) {
         return warunkiZwyciestwa[gracz] == 10;
     }
-
 }

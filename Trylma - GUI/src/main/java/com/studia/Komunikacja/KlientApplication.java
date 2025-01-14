@@ -49,7 +49,6 @@ public class KlientApplication extends Application {
 
     @SuppressWarnings("resource")
     private void poloczZSerwerem() {
-        System.out.println("Zyje!");
         try {
             Socket socket = new Socket("localhost", 8000);
             out = new PrintWriter(socket.getOutputStream(), true);
