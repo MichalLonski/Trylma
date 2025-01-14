@@ -1,13 +1,26 @@
 package com.studia.Zasady;
 
-/*
- * Pojęcia nie mam czy będziemy to implementować
- * STANDARDOWA - klasyczna gra
- * FAST_PACED - Super Chinese Checkers
- * ROZSZERZONA - gracz może kontrolować 2 lub 3 zestawy pionków
+/**
+ * Enum reprezentujący dostępne typy gier.
+ * <ul>
+ * <li><b>STANDARDOWA</b> - Klasyczna gra</li>
+ * <li><b>FAST_PACED</b> - Super Chinese Checkers</li>
+ * <li><b>CAPTURE</b> - Tryb Capture</li>
+ * </ul>
  */
 public enum TypGry {
+    /**
+     * Klasyczna gra.
+     */
     STANDARDOWA,
+
+    /**
+     * Tryb Super Chinese Checkers.
+     */
     FAST_PACED,
+
+    /**
+     * Tryb Capture.
+     */
     CAPTURE
 }

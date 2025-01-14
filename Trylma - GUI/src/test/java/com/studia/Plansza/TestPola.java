@@ -33,7 +33,7 @@ class PoleTest {
 
     @Test
     void testSetDomek() {
-        pole.setDomek(2);
+        pole.setStrefa(2);
         assertEquals(2, pole.getDomek(), "Domek nie został prawidłowo ustawiony");
     }
 

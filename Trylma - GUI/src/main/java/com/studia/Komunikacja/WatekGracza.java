@@ -8,6 +8,12 @@ import java.net.Socket;
 import com.studia.Gracz;
 import com.studia.Zasady.TypGry;
 
+/**
+ * Wątek reprezentujący komunikację z jednym klientem gry.
+ * Obsługuje przychodzące wiadomości od klienta i wykonuje odpowiednie akcje,
+ * takie jak dołączanie do gry, tworzenie gry, sprawdzanie stanu gry,
+ * wykonywanie ruchów itp.
+ */
 public class WatekGracza extends Thread {
 
     private final Socket clientSocket;
@@ -15,11 +21,21 @@ public class WatekGracza extends Thread {
     private BufferedReader in;
     private PrintWriter out;
 
+    /**
+     * Konstruktor klasy. Inicjalizuje gniazdo klienta i przypisuje gracza.
+     * 
+     * @param socket Gniazdo klienta do komunikacji z serwerem.
+     */
     public WatekGracza(Socket socket) {
         this.clientSocket = socket;
         this.gracz = new Gracz();
     }
 
+    /**
+     * Uruchamia wątek i obsługuje komunikację z klientem.
+     * Odczytuje wiadomości od klienta, wykonuje odpowiednie akcje oraz przesyła
+     * wyniki.
+     */
     @Override
     public void run() {
         try {
@@ -37,7 +53,6 @@ public class WatekGracza extends Thread {
                 String[] slowa = wiadomoscOdKlienta.split(" ");
                 switch (slowa[0]) {
 
-                    // Przycisk dołącz do gry
                     case "join":
                         int i = ManagerGier.dajInstancje().dolaczDoGry(gracz, slowa[1]);
                         if (i == 1) {
@@ -47,9 +62,7 @@ public class WatekGracza extends Thread {
                         }
                         break;
 
-                    // Przycisk dołącz do gry
                     case "create":
-
                         TypGry typgry = switch (slowa[1]) {
                             case "Standardowy" -> TypGry.STANDARDOWA;
                             case "SuperChineseCheckers" -> TypGry.FAST_PACED;
@@ -63,7 +76,6 @@ public class WatekGracza extends Thread {
 
                         break;
 
-                    // Przycisk odśwież
                     case "refresh":
                         out.println(ManagerGier.dajInstancje().wypiszGry());
                         break;
@@ -126,12 +138,19 @@ public class WatekGracza extends Thread {
 
     }
 
+    /**
+     * Zwraca obiekt gracza, który jest powiązany z tym wątkiem.
+     * 
+     * @return Gracz powiązany z tym wątkiem.
+     */
     public Gracz getGracz() {
         return this.gracz;
     }
 
+    /**
+     * Kończy komunikację z klientem i zamyka połączenie.
+     */
     public void quit() {
         out.println("exit");
     }
-
 }

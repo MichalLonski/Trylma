@@ -6,57 +6,83 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Klasa servera i wątku,klasa wątku przechowuje gracza za którego odpowiada
- * (Do zmiany jak klient będzie brał udział w wiecej niż jednej grze)
- * generalnie wątek działa tak że switchuje się po enumie Stan
- * Aby serwer mógł jednorazowy output przesłać w jednej linijce
- * zamiast znaków \n wysyła &które klient sam zamienia na \n.
- * Głównie istaniało to zanim tu zrobiłem po prostu osobny wątek do odczytywania tego
- * i trochę dużo tego do poprawy się zrobiło, jak to się jakkolwiek problemem okaże to to poprawie
+/**
+ * Klasa reprezentująca serwer gry. Odpowiada za obsługę połączeń przychodzących
+ * od klientów,
+ * zarządzanie wątkami dla graczy i zakończenie pracy serwera.
+ * 
+ * Serwer uruchamia nasłuch na określonym porcie i czeka na połączenia od
+ * klientów.
+ * Każde połączenie obsługiwane jest przez osobny wątek, który komunikuje się z
+ * klientem,
+ * obsługując jego komendy.
  */
-
 public class SerwerGry {
+
+    /** Flaga wskazująca, czy serwer jest włączony */
     public static boolean SerwerWlaczony = false;
+
+    /** Numer portu, na którym nasłuchuje serwer */
     public static final int nrPortu = 8000;
+
+    /** Adres hosta, na którym działa serwer */
     public static final String host = "localhost";
+
+    /** Lista przechowująca wątki graczy obsługiwanych przez serwer */
     private List<WatekGracza> listaWatkow;
 
+    /**
+     * Konstruktor serwera gry. Inicjalizuje listę przechowującą wątki graczy.
+     */
     public SerwerGry() {
         listaWatkow = new ArrayList<WatekGracza>();
     }
 
+    /**
+     * Uruchamia serwer gry. Tworzy gniazdo serwera i nasłuchuje na połączenia
+     * przychodzące.
+     * Każde połączenie od klienta jest obsługiwane przez osobny wątek.
+     */
     public void start() {
-
         SerwerWlaczony = true;
+
         WatekSerwera watekKonsolaSerwera = new WatekSerwera(this);
         watekKonsolaSerwera.start();
 
         try (ServerSocket serverSocket = new ServerSocket(nrPortu)) {
             System.out.println("Serwer włączony");
+
             while (SerwerWlaczony) {
                 Socket clientSocket = serverSocket.accept();
+
                 if (SerwerWlaczony) {
                     WatekGracza watek = new WatekGracza(clientSocket);
                     watek.start();
+
                     listaWatkow.add(watek);
                 }
             }
         } catch (IOException e) {
             System.err.println("Wystąpił błąd serwera: " + e.getMessage());
             watekKonsolaSerwera.quit();
-
         }
     }
 
+    /**
+     * Zamyka serwer gry, kończy wszystkie połączenia i wątki graczy.
+     */
     public void koniec() {
         SerwerWlaczony = false;
+
         try {
             new Socket(host, nrPortu).close();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
+
         for (WatekGracza watekGracza : listaWatkow) {
             watekGracza.quit();
         }
+
         System.out.println("Serwer zamknięty");
     }
 }

@@ -3,31 +3,57 @@ package com.studia.Zasady;
 import com.studia.Plansza.Plansza;
 import com.studia.Plansza.Pole;
 
+/**
+ * Klasa implementująca standardowe zasady gry.
+ * Klasa ta rozszerza abstrakcyjną klasę ZasadyGry i implementuje konkretne
+ * zasady dotyczące ruchów, zwycięstwa oraz opisu zasad gry.
+ */
 public class StandardoweZasadyGry extends ZasadyGry {
 
+    /**
+     * Konstruktor klasy StandardoweZasadyGry.
+     * Inicjalizuje zasady gry dla określonej liczby graczy.
+     * 
+     * @param liczbaGraczy Liczba graczy w grze.
+     */
     public StandardoweZasadyGry(int liczbaGraczy) {
         super(liczbaGraczy);
     }
 
+    /**
+     * Zwraca opis zasad gry.
+     * 
+     * @return String z opisem zasad gry.
+     */
     @Override
-    protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
-        if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
-            return false; // nie ma pola pomiędzy
-        }
-        return plansza.sprawdzPole((wierszP + wierszK) / 2, (kolumnaP + kolumnaK) / 2).zajete();
+    public String opisZasad() {
+        return "1. Trzeba zacząć od pola ze swoim pionem &" +
+                "2. Trzeba skończyć na polu pustym &" +
+                "3. Można ruszyć się na sąsiednie pole &" +
+                "4. Można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion &" +
+                "5. Nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu &" +
+                "6. Nie można wejść do cudzej strzefy zwycięskiej, chyba że wyjdziemy z niej w tym samym ruchu";
     }
 
+    /**
+     * Sprawdza, czy ruch gracza jest poprawny.
+     * 
+     * @param plansza         Plansza, na której rozgrywa się gra.
+     * @param sekwencjaRuchow Tablica zawierająca sekwencję ruchów.
+     * @param gracz           Indeks gracza wykonującego ruch.
+     * @return True, jeśli ruch jest poprawny, w przeciwnym razie false.
+     */
     @Override
     public boolean ruchJestPoprawny(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
 
         Pole obecne = plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]);
         if (gracz != obecne.getGracz()) {
             return false;
-            // czy zaczynamy od swojego piona
         }
-        Plansza kopiaPlanszy = new Plansza(plansza); // jakieś patologiczne sytuacje gdybyśmy chcieli skakać nad sobą
+
+        Plansza kopiaPlanszy = new Plansza(plansza);
         boolean rezultat = true;
-        int kogoDomStart = obecne.getDomek(); // w czyim jesteśmy domku
+        int kogoDomStart = obecne.getDomek();
         boolean robiRuch = false;
         boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
@@ -39,21 +65,16 @@ public class StandardoweZasadyGry extends ZasadyGry {
 
             if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
-                // czy chcemy przejść na puste pole
             } else if ((wierszP == kolumnaK && Math.abs(wierszK - kolumnaP) == 2)
                     || ((Math.abs(wierszK - kolumnaP) == 1 && Math.abs(kolumnaK - wierszP) == 1))) {
-                // ruch w naszym poziomie lub po ukosach, musi być ostatni
                 rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
                 robiRuch = true;
-
             } else if ((Math.abs(wierszK - kolumnaP) == 4 && Math.abs(kolumnaK - wierszP) == 0)
                     || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
                 rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, wierszK, kolumnaK);
-                // skok w poziomie lub skosie
                 robiSkok = true;
             }
 
-            // trzeba robić tylko jedno
             rezultat = rezultat && (robiRuch ^ robiSkok);
 
             if (!rezultat) {
@@ -62,35 +83,58 @@ public class StandardoweZasadyGry extends ZasadyGry {
             wykonajRuch(kopiaPlanszy, new int[][] { sekwencjaRuchow[i], sekwencjaRuchow[i + 1] }, gracz);
 
         }
+
         if (rezultat) {
-            // pole gdzie lądujemy
             Pole ostatnie = kopiaPlanszy.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
             int kogoDomKoniec = ostatnie.getDomek();
-
-            // nie można kończyć na cudzym domku (za wyjątkiem swojego startu)
             rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz)
                     || kogoDomKoniec == gracz);
         }
         return rezultat;
     }
 
+    /**
+     * Sprawdza, czy skok jest legalny.
+     * Skok jest legalny, jeśli pomiędzy polami znajduje się pionek.
+     * 
+     * @param plansza  Plansza, na której rozgrywa się gra.
+     * @param wierszP  Wiersz początkowy skoku.
+     * @param kolumnaP Kolumna początkowa skoku.
+     * @param wierszK  Wiersz końcowy skoku.
+     * @param kolumnaK Kolumna końcowa skoku.
+     * @return true, jeśli skok jest legalny, w przeciwnym razie false.
+     */
+    @Override
+    protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
+        if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
+            return false;
+        }
+        return plansza.sprawdzPole((wierszP + wierszK) / 2, (kolumnaP + kolumnaK) / 2).zajete();
+    }
+
+    /**
+     * Zwraca nazwę zasad gry.
+     * 
+     * @return "Standardowe" - nazwa zasad gry.
+     */
     @Override
     public String toString() {
         return "Standardowe";
     }
 
-    @Override
-    public String opisZasad() {
-        return "1. Trzeba zacząć od pola ze swoim pionem &" +
-                "2. Trzeba skończyć na polu pustym &" +
-                "3. Można ruszyć się na sąsiednie pole &" +
-                "4. Można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion &" +
-                "5. Nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu &" +
-                "6. Nie można wejść do cudzej strzefy zwycięskiej, chyba że wyjdziemy z niej w tym samym ruchu";
-    }
-
-
+    /**
+     * Wykonuje ruch na planszy, zmieniając stan gry.
+     * Jeśli gracz skończy swój ruch na pustym polu w swojej strefie zwycięstwa,
+     * jego liczba punktów
+     * zwycięstwa zostaje zwiększona.
+     * 
+     * @param plansza         Plansza, na której rozgrywa się gra.
+     * @param sekwencjaRuchow Tablica zawierająca sekwencję ruchów.
+     * @param gracz           Indeks gracza wykonującego ruch.
+     * @return True, jeśli gracz wygrał (osiągnął 10 punktów zwycięstwa), w
+     *         przeciwnym razie false.
+     */
     @Override
     public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
         if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz
@@ -101,5 +145,4 @@ public class StandardoweZasadyGry extends ZasadyGry {
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
         return warunkiZwyciestwa[gracz] == 10;
     }
-
 }

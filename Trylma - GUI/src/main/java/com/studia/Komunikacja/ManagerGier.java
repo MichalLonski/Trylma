@@ -10,40 +10,64 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
-    Klasa do zarządzania grami, aby na serwerze mogła się odbywać wiecej niż jedna gra
-    plus jest singletonem wiec kolejny ten wzorzec z poprzedniej listy i guess
-*/
+/**
+ * Klasa odpowiedzialna za zarządzanie grami na serwerze. Umożliwia tworzenie
+ * nowych gier, dołączanie graczy do istniejących gier,
+ * wykonywanie ruchów w grach oraz komunikowanie się z graczami.
+ * 
+ * Jest to implementacja wzorca Singleton, dzięki czemu istnieje tylko jedna
+ * instancja tej klasy w systemie.
+ */
 public class ManagerGier {
 
+    /** Lista wszystkich gier dostępnych na serwerze */
     final private List<Gra> ListaGier = new ArrayList<>();
+
+    /** Mapa przechowująca skojarzenie gracza z jego PrintWriter do komunikacji */
     final private Map<Gracz, PrintWriter> konsolaGraczy = new HashMap<>();
-    // To raczej potrzebne nie będzie
-    // List<Gracz> ListaGracz = new ArrayList<>();
 
     private ManagerGier() {
     }
 
-    // Ogarnięcie Singletona
+    /**
+     * Klasa pomocnicza zapewniająca implementację Singletona.
+     */
     private static class SingletonHelper {
+        /** Jedyna instancja klasy ManagerGier */
         volatile static ManagerGier INSTANCE = new ManagerGier();
     }
 
+    /**
+     * Zwraca instancję klasy ManagerGier (singleton).
+     * 
+     * @return instancja klasy ManagerGier
+     */
     public static ManagerGier dajInstancje() {
         return SingletonHelper.INSTANCE;
     }
 
-    // Inicjuje nową gre i dodaje do niego gracza który ją stworzył
+    /**
+     * Inicjuje nową grę i dodaje do niej gracza, który ją stworzył.
+     * 
+     * @param typGry          typ gry, którą chcemy stworzyć
+     * @param liczbaGraczy    liczba graczy, którzy wezmą udział w grze
+     * @param inicjujacyGracz gracz, który tworzy grę
+     */
     public synchronized void inicjujNowaGre(TypGry typGry, int liczbaGraczy, Gracz inicjujacyGracz) {
         Gra nowaGra = new Gra(typGry, liczbaGraczy);
         ListaGier.add(nowaGra);
         nowaGra.dodajGracza(inicjujacyGracz);
     }
 
-    // Dodaje gracza do istniejącej gry, zwraca 1 dla sukcesu i -1 gdy gra jest
-    // pełna lub nie isnieje
+    /**
+     * Dodaje gracza do istniejącej gry.
+     * 
+     * @param gracz gracz, który chce dołączyć do gry
+     * @param id    ID gry, do której gracz chce dołączyć
+     * @return 1 jeśli dołączenie do gry się udało, -1 jeśli gra jest pełna lub nie
+     *         istnieje
+     */
     public synchronized int dolaczDoGry(Gracz gracz, String id) {
-
         int iD = Integer.parseInt(id);
 
         if (znajdzGrePoID(iD) == null) {
@@ -53,34 +77,48 @@ public class ManagerGier {
         } else {
             Gra gra = znajdzGrePoID(iD);
             gra.dodajGracza(gracz);
-            komunikatDlaGraczyGry(gra, "Gracz dołączył do gry &");
             jesliGraPelnaRozpocznij(gracz.dajGre());
             return 1;
         }
     }
 
-    // Wywołuje rozpocznijGre jeśli gra jest pełna
+    /**
+     * Sprawdza, czy gra jest pełna, i jeśli tak, wywołuje rozpoczęcie gry.
+     * 
+     * @param gra gra, którą należy sprawdzić
+     */
     public synchronized void jesliGraPelnaRozpocznij(Gra gra) {
         if (gra.dajZasadyGry().ileGraczy() == gra.dajListeGraczy().size()) {
             rozpocznijGre(gra);
         }
     }
 
-    // Wywołuje rozpoczęcie gry oraz wysyła komunikat do wszystkich o rozpoczeciu
+    /**
+     * Rozpoczyna grę i wysyła komunikat do wszystkich graczy o rozpoczęciu gry.
+     * 
+     * @param gra gra, która ma zostać rozpoczęta
+     */
     private synchronized void rozpocznijGre(Gra gra) {
         gra.ZacznijGre();
-        komunikatDlaGraczyGry(gra, "Ostatni gracz dołączył &Gra rozpoczyna się &Wciśnij ENTER by odświeżyć");
     }
 
-    // Wywołuje wykonanie ruchu na graczu oraz wysyła komunikat do wszystkich o
-    // wykonaniu ruchu
+    /**
+     * Wykonuje ruch w grze i wysyła komunikat do wszystkich graczy o wykonaniu
+     * ruchu.
+     * 
+     * @param gracz           gracz, który wykonał ruch
+     * @param sekwencjaRuchow sekwencja ruchów, które zostały wykonane
+     */
     public synchronized void wykonajRuch(Gracz gracz, int[][] sekwencjaRuchow) {
         gracz.wykonajRuch(sekwencjaRuchow);
-        komunikatDlaGraczyGry(gracz.dajGre(),
-                "Gracz " + gracz.ktoreMiejsce() + " wykonał ruch &wciśnij Enter by odświeżyć");
     }
 
-    // Zwraca gre po podanym ID
+    /**
+     * Zwraca grę po podanym ID.
+     * 
+     * @param id ID gry, którą chcemy znaleźć
+     * @return gra o podanym ID, lub null, jeśli gra o takim ID nie istnieje
+     */
     public Gra znajdzGrePoID(int id) {
         for (Gra g : ListaGier) {
             if (g.dajID() == id) {
@@ -90,25 +128,32 @@ public class ManagerGier {
         return null;
     }
 
-    // Wysyła wiadomośc każdemu graczowi w grze
-    private void komunikatDlaGraczyGry(Gra gra, String komunikat) {
-        // for (Gracz g : gra.dajListeGraczy()) {
-        // PrintWriter out = konsolaGracza(g);
-        // out.println(komunikat);
-        // }
-        // TODO do zmainy by wypisywało się gdzieś na jakimś czacie czy czymś takim
-    }
-
-    // Dodaje gracza do mapy
+    /**
+     * Rejestruje gracza w systemie, przypisując mu odpowiedni PrintWriter do
+     * komunikacji.
+     * 
+     * @param gracz       gracz, którego rejestrujemy
+     * @param printWriter PrintWriter, który będzie używany do komunikacji z graczem
+     */
     public void zarejestrujGracza(Gracz gracz, PrintWriter printWriter) {
         konsolaGraczy.put(gracz, printWriter);
     }
 
-    // Zwraca PrintWriter gracza
+    /**
+     * Zwraca PrintWriter skojarowany z danym graczem.
+     * 
+     * @param gracz gracz, dla którego chcemy uzyskać PrintWriter
+     * @return PrintWriter skojarzony z graczem
+     */
     public PrintWriter konsolaGracza(Gracz gracz) {
         return konsolaGraczy.get(gracz);
     }
 
+    /**
+     * Zwraca opis wszystkich gier dostępnych na serwerze.
+     * 
+     * @return lista opisów gier
+     */
     public String wypiszGry() {
         String wynik = "";
         for (Gra gra : ListaGier) {

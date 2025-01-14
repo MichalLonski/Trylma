@@ -13,21 +13,48 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-/*
-Klasa klienta, która także odpowiada za zarządanie naszymi dwoma okienkami
+/**
+ * Klasa aplikacji klienta, która odpowiada za zarządzanie interfejsem
+ * użytkownika (GUI) oraz komunikację z serwerem.
+ * Aplikacja umożliwia przełączanie się między dwoma głównymi ekranami: menu
+ * oraz ekranem gry.
+ * 
+ * Rozpoczyna połączenie z serwerem oraz umożliwia interakcję z grą poprzez
+ * wysyłanie i odbieranie danych z serwera.
  */
 public class KlientApplication extends Application {
 
+    /** Główne okno aplikacji (Stage) */
     static Stage glownaScena;
+
+    /** Bufor odczytu danych z serwera */
     private static BufferedReader in;
+
+    /** Obiekt do wysyłania danych do serwera */
     private static PrintWriter out;
+
+    /** Scena z menu głównym */
     static Scene menuScene;
+
+    /** Scena z ekranem gry */
     static Scene wGrzeScene;
+
+    /** Kontroler dla sceny menu */
     static MenuGUIController menuGUIController;
+
+    /** Kontroler dla sceny gry */
     static GraGUIController graGUIController;
 
+    /**
+     * Metoda uruchamiająca aplikację i inicjalizująca interfejs użytkownika.
+     * Ładuje i wyświetla ekran menu oraz nawiązuje połączenie z serwerem.
+     *
+     * @param stage główna scena aplikacji
+     * @throws IOException jeśli wystąpi błąd podczas ładowania plików FXML
+     */
     @Override
     public void start(Stage stage) throws IOException {
+        
         FXMLLoader fxmlLoaderMain = new FXMLLoader(KlientApplication.class.getResource("/MenuGUI.fxml"));
         menuScene = new Scene(fxmlLoaderMain.load());
         menuGUIController = fxmlLoaderMain.getController();
@@ -39,14 +66,23 @@ public class KlientApplication extends Application {
         glownaScena = stage;
 
         poloczZSerwerem();
-        menuGUIController.setInOut(in, out);
 
+        menuGUIController.setInOut(in, out);
     }
 
+    /**
+     * Metoda uruchamiająca aplikację.
+     *
+     * @param args argumenty przekazywane do aplikacji
+     */
     public void start(String[] args) {
         launch(args);
     }
 
+    /**
+     * Nawiązuje połączenie z serwerem poprzez gniazdo sieciowe.
+     * Ustawia strumienie wejścia/wyjścia do komunikacji z serwerem.
+     */
     @SuppressWarnings("resource")
     private void poloczZSerwerem() {
         try {
@@ -60,17 +96,28 @@ public class KlientApplication extends Application {
         }
     }
 
+    /**
+     * Przełącza aplikację do sceny gry, inicjalizując wszystkie niezbędne elementy.
+     *
+     * @throws IOException jeśli wystąpi błąd podczas ładowania plików FXML
+     */
     public static void MenuDoGry() throws IOException {
+        
         FXMLLoader fxmlLoaderSec = new FXMLLoader(KlientApplication.class.getResource("/WGrzeGUI.fxml"));
         wGrzeScene = new Scene(fxmlLoaderSec.load());
         graGUIController = fxmlLoaderSec.getController();
+
         graGUIController.setInOut(in, out);
         graGUIController.setInfo(glownaScena);
 
         glownaScena.setScene(wGrzeScene);
+
         graGUIController.GenerateBoard();
     }
 
+    /**
+     * Przełącza aplikację z powrotem do sceny menu.
+     */
     public static void GraDoMenu() {
         glownaScena.setScene(menuScene);
     }

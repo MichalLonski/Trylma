@@ -2,24 +2,44 @@ package com.studia.Zasady;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.studia.Plansza.Plansza;
 import com.studia.Plansza.Pole;
 
+/**
+ * Klasa reprezentująca zasady gry w wersji "Capture".
+ * Zasady te opierają się na zbijaniu pionów.
+ */
 public class CaptureZasadyGry extends ZasadyGry {
 
+    /**
+     * Konstruktor klasy CaptureZasadyGry.
+     * Inicjalizuje liczbę graczy biorących udział w grze.
+     * 
+     * @param liczbaGraczy Liczba graczy biorących udział w grze.
+     */
     public CaptureZasadyGry(int liczbaGraczy) {
         super(liczbaGraczy);
     }
 
+    /**
+     * Sprawdza, czy gra została zakończona na podstawie dostępnych ruchów.
+     * 
+     * @param plansza Plansza, na której wykonywane są ruchy.
+     * @return True, jeśli gra jest zakończona (brak dostępnych ruchów), false w
+     *         przeciwnym razie.
+     */
     @Override
-    public String toString() {
-        return "Capture";
+    public boolean graSkonczona(Plansza plansza) {
+        return !istniejaRuchy(plansza);
     }
 
+    /**
+     * Zwraca dane w formacie JSON związane z grą "Capture".
+     * 
+     * @return JSONArray zawierający dane konfiguracyjne dla trybu gry.
+     */
     public JSONArray infoJSON() {
         JSONArray mapa = new JSONArray();
         try {
@@ -32,6 +52,48 @@ public class CaptureZasadyGry extends ZasadyGry {
         return mapa;
     }
 
+    /**
+     * Sprawdza, czy istnieją możliwe ruchy na planszy.
+     * 
+     * @param plansza Plansza, na której sprawdzane są dostępne ruchy.
+     * @return True, jeśli istnieją możliwe ruchy, false w przeciwnym razie.
+     */
+    private boolean istniejaRuchy(Plansza plansza) {
+        for (int i = 0; i < Plansza.LICZBA_WIERSZY; i++) {
+            for (int j = 0; j < Plansza.LICZBA_KOLUMN; j++) {
+                for (int[] ruch : legalneKierunki()) {
+                    int nowaKolumna = j + ruch[0];
+                    int nowyWiersz = i + ruch[1];
+                    if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
+                            && nowyWiersz < Plansza.LICZBA_WIERSZY) {
+                        if (plansza.sprawdzPole(nowyWiersz, nowaKolumna).zajete()) {
+                            if (ruchJestPoprawny(plansza, new int[][] { { i, j }, { nowaKolumna, nowyWiersz } }, 1)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Możliwe kierunki, w jakich gracz może się poruszać.
+     * 
+     * @return Tablica z kierunkami ruchów.
+     */
+    private int[][] legalneKierunki() {
+        return new int[][] {
+                { -2, 0 }, { 2, 0 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
+        };
+    }
+
+    /**
+     * Zwraca opis zasad gry w wersji "Capture".
+     * 
+     * @return String z opisem zasad gry.
+     */
     @Override
     public String opisZasad() {
         return "1. Trzeba zacząć od pola ze swoim pionem &" +
@@ -39,15 +101,22 @@ public class CaptureZasadyGry extends ZasadyGry {
                 "3. Można ruszyć się na sąsiednie pole &" +
                 "4. Można skoczyć na pole w odległości 2, jeśli pomiędzy polami jest pion &" +
                 "5. Nie można opuszczać strefy zwycięskiej, chyba że wrócimy do niej w tym samym ruchu &" +
-                "6. Nie można wejść do cudzej strzefy zwycięskiej, chyba że wyjdziemy z niej w tym samym ruchu";
+                "6. Nie można wejść do cudzej strefy zwycięskiej, chyba że wyjdziemy z niej w tym samym ruchu";
     }
 
+    /**
+     * Sprawdza, czy dany ruch jest poprawny zgodnie z zasadami gry.
+     * 
+     * @param plansza         Plansza, na której wykonuje się ruch.
+     * @param sekwencjaRuchow Tablica zawierająca sekwencję ruchów.
+     * @param gracz           Indeks gracza wykonującego ruch.
+     * @return True, jeśli ruch jest poprawny, false w przeciwnym razie.
+     */
     @Override
     public boolean ruchJestPoprawny(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
 
         Pole obecne = plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]);
         if (!obecne.zajete()) {
-            // musi po prostu być pionem
             return false;
         }
 
@@ -62,11 +131,9 @@ public class CaptureZasadyGry extends ZasadyGry {
 
             if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
-                // czy chcemy przejść na puste pole
             } else if ((Math.abs(wierszK - kolumnaP) == 4 && Math.abs(kolumnaK - wierszP) == 0)
                     || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
                 rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, wierszK, kolumnaK);
-                // tylko skoki są legalne
             } else {
                 rezultat = false;
             }
@@ -82,6 +149,26 @@ public class CaptureZasadyGry extends ZasadyGry {
         return rezultat;
     }
 
+    /**
+     * Zwraca nazwę trybu gry.
+     * 
+     * @return Nazwa trybu gry "Capture".
+     */
+    @Override
+    public String toString() {
+        return "Capture";
+    }
+
+    /**
+     * Wykonuje ruch na planszy i aktualizuje stan gry.
+     * Zbija pion przeciwnika i zwiększa liczbę punktów gracza.
+     * 
+     * @param plansza         Plansza, na której wykonywany jest ruch.
+     * @param sekwencjaRuchow Tablica zawierająca sekwencję ruchów.
+     * @param gracz           Indeks gracza wykonującego ruch.
+     * @return True, jeśli gra powinna być kontynuowana (istnieją dalsze ruchy),
+     *         false w przeciwnym razie.
+     */
     @Override
     public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
 
@@ -92,7 +179,6 @@ public class CaptureZasadyGry extends ZasadyGry {
             int wierszK = sekwencjaRuchow[i + 1][0];
             int kolumnaK = sekwencjaRuchow[i + 1][1];
 
-            // każdy ruch to zbicie, więc usuwamy piona i zwiększamy punkt
             plansza.sprawdzPole((wierszK + wierszP) / 2, (kolumnaK + kolumnaP) / 2).setGracz(0);
             warunkiZwyciestwa[gracz]++;
         }
@@ -100,44 +186,18 @@ public class CaptureZasadyGry extends ZasadyGry {
         return istniejaRuchy(plansza);
     }
 
-    @Override
-    public boolean graSkonczona(Plansza plansza) {
-        return istniejaRuchy(plansza);
-    }
-
-    private boolean istniejaRuchy(Plansza plansza) {
-        for (int i = 0; i < Plansza.LICZBA_WIERSZY; i++) {
-            for (int j = 0; j < Plansza.LICZBA_KOLUMN; j++) {
-                for (int[] ruch : legalneKierunki()) {
-                    int nowaKolumna = j + ruch[0];
-                    int nowyWiersz = i + ruch[1];
-                    if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
-                            && nowyWiersz < Plansza.LICZBA_WIERSZY) {
-                        if (plansza.sprawdzPole(nowyWiersz, nowaKolumna).zajete()) {
-                            if (ruchJestPoprawny(plansza, new int[][] { { i, j }, { nowaKolumna, nowyWiersz } }, 1)) {
-                                return true;
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private int[][] legalneKierunki() {
-        return new int[][] {
-                { -2, 0 }, { 2, 0 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
-        };
-    }
-
+    /**
+     * Zwraca zwycięzcę na podstawie liczby punktów zdobytych przez graczy.
+     * 
+     * @param gracz Indeks gracza, którego wynik jest brany pod uwagę.
+     * @return Indeks zwycięzcy.
+     */
     @Override
     public int zwyciezca(int gracz) {
         int maks = 0;
         int idx = 0;
         for (int i = 1; i < liczbaGraczy; i++) {
-            if (warunkiZwyciestwa[i] > maks){
+            if (warunkiZwyciestwa[i] > maks) {
                 idx = i;
             }
         }
