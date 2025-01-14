@@ -1,0 +1,130 @@
+\hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController}{}\doxysection{com.\+studia.\+Komunikacja.\+GUI.\+GUIController Class Reference}
+\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController}\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+
+
+Inheritance diagram for com.\+studia.\+Komunikacja.\+GUI.\+GUIController\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for com.\+studia.\+Komunikacja.\+GUI.\+GUIController\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_af225617bdc409720260168d27a1cd28a}{set\+In\+Out}} (Buffered\+Reader IN, Print\+Writer OUT)
+\item 
+synchronized String \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a5c7b4fea2e3f5e3849f95ae14ccf34cd}{send\+Command}} (String komenda)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a3052e3829e8c0b575da49eface82fd10}{is\+Integer}} (String s)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a5b38251059a54f6145c34af1f353bd53}{quit}} ()  throws IOException 
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Buffered\+Reader \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a63a6d297dda64a9fc5e96e0f3f7661ad}{in}}
+\item 
+Print\+Writer \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_ae0b84d96ee23d5f380896a06943026b2}{out}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa bazowa dla kontrolerów GUI, która zapewnia mechanizm komunikacji z serwerem. Umożliwia wysyłanie komend do serwera oraz odbieranie odpowiedzi. Ponadto zawiera funkcje pomocnicze do zamykania połączenia z serwerem. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a3052e3829e8c0b575da49eface82fd10}\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a3052e3829e8c0b575da49eface82fd10}} 
+\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}!isInteger@{isInteger}}
+\index{isInteger@{isInteger}!com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+\doxysubsubsection{\texorpdfstring{isInteger()}{isInteger()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Komunikacja.\+GUI.\+GUIController.\+is\+Integer (\begin{DoxyParamCaption}\item[{String}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy podany ciąg znaków reprezentuje liczbę całkowitą.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & ciąg znaków do sprawdzenia \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true jeśli ciąg jest liczbą całkowitą, false w przeciwnym razie 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a5b38251059a54f6145c34af1f353bd53}\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a5b38251059a54f6145c34af1f353bd53}} 
+\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}!quit@{quit}}
+\index{quit@{quit}!com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+\doxysubsubsection{\texorpdfstring{quit()}{quit()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+GUI.\+GUIController.\+quit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zamyka połączenie z serwerem przez zamknięcie strumieni wejściowego i wyjściowego.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & w przypadku problemów z zamknięciem strumieni \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1MenuGUIController_aa0937e863626f14a20ef520f70c1d7a1}{com.\+studia.\+Komunikacja.\+GUI.\+Menu\+GUIController}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a5c7b4fea2e3f5e3849f95ae14ccf34cd}\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a5c7b4fea2e3f5e3849f95ae14ccf34cd}} 
+\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}!sendCommand@{sendCommand}}
+\index{sendCommand@{sendCommand}!com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+\doxysubsubsection{\texorpdfstring{sendCommand()}{sendCommand()}}
+{\footnotesize\ttfamily synchronized String com.\+studia.\+Komunikacja.\+GUI.\+GUIController.\+send\+Command (\begin{DoxyParamCaption}\item[{String}]{komenda }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wysyła komendę do serwera i oczekuje odpowiedzi. Używa mechanizmu synchronizacji, aby uniknąć problemów w przypadku równoczesnego dostępu.
+
+
+\begin{DoxyParams}{Parameters}
+{\em komenda} & komenda do wysłania do serwera \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+odpowiedź z serwera 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_af225617bdc409720260168d27a1cd28a}\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_af225617bdc409720260168d27a1cd28a}} 
+\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}!setInOut@{setInOut}}
+\index{setInOut@{setInOut}!com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+\doxysubsubsection{\texorpdfstring{setInOut()}{setInOut()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+GUI.\+GUIController.\+set\+In\+Out (\begin{DoxyParamCaption}\item[{Buffered\+Reader}]{IN,  }\item[{Print\+Writer}]{OUT }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Ustawia strumienie komunikacyjne (wejściowy i wyjściowy).
+
+
+\begin{DoxyParams}{Parameters}
+{\em IN} & strumień wejściowy \\
+\hline
+{\em OUT} & strumień wyjściowy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a63a6d297dda64a9fc5e96e0f3f7661ad}\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_a63a6d297dda64a9fc5e96e0f3f7661ad}} 
+\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}!in@{in}}
+\index{in@{in}!com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+\doxysubsubsection{\texorpdfstring{in}{in}}
+{\footnotesize\ttfamily Buffered\+Reader com.\+studia.\+Komunikacja.\+GUI.\+GUIController.\+in}
+
+Strumień wejściowy do komunikacji z serwerem \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_ae0b84d96ee23d5f380896a06943026b2}\label{classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController_ae0b84d96ee23d5f380896a06943026b2}} 
+\index{com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}!out@{out}}
+\index{out@{out}!com.studia.Komunikacja.GUI.GUIController@{com.studia.Komunikacja.GUI.GUIController}}
+\doxysubsubsection{\texorpdfstring{out}{out}}
+{\footnotesize\ttfamily Print\+Writer com.\+studia.\+Komunikacja.\+GUI.\+GUIController.\+out}
+
+Strumień wyjściowy do komunikacji z serwerem 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Komunikacja/\+GUI/GUIController.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,75 @@
+\hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry}{}\doxysection{com.\+studia.\+Komunikacja.\+Serwer\+Gry Class Reference}
+\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry}\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_aa602f49fff23ccf4ae38cd9a712f1070}{Serwer\+Gry}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a8215902f0a6b900b870e7b7f6d9d4f6f}{start}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a7af432de53cfe25571617949b051b852}{koniec}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a0cc05a600663df08e58fa5b4c1a8b94b}{Serwer\+Wlaczony}} = false
+\item 
+static final int \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a783dfd81d6e6a98d615ed1dcb6ba1c63}{nr\+Portu}} = 8000
+\item 
+static final String \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a0c738d9fb5ce11bb60a4df7d4546f67e}{host}} = \char`\"{}localhost\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa reprezentująca serwer gry. Odpowiada za obsługę połączeń przychodzących od klientów, zarządzanie wątkami dla graczy i zakończenie pracy serwera.
+
+Serwer uruchamia nasłuch na określonym porcie i czeka na połączenia od klientów. Każde połączenie obsługiwane jest przez osobny wątek, który komunikuje się z klientem, obsługując jego komendy. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_aa602f49fff23ccf4ae38cd9a712f1070}\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_aa602f49fff23ccf4ae38cd9a712f1070}} 
+\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}!SerwerGry@{SerwerGry}}
+\index{SerwerGry@{SerwerGry}!com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsubsection{\texorpdfstring{SerwerGry()}{SerwerGry()}}
+{\footnotesize\ttfamily com.\+studia.\+Komunikacja.\+Serwer\+Gry.\+Serwer\+Gry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Konstruktor serwera gry. Inicjalizuje listę przechowującą wątki graczy. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a7af432de53cfe25571617949b051b852}\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a7af432de53cfe25571617949b051b852}} 
+\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}!koniec@{koniec}}
+\index{koniec@{koniec}!com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsubsection{\texorpdfstring{koniec()}{koniec()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Serwer\+Gry.\+koniec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zamyka serwer gry, kończy wszystkie połączenia i wątki graczy. \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a8215902f0a6b900b870e7b7f6d9d4f6f}\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a8215902f0a6b900b870e7b7f6d9d4f6f}} 
+\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}!start@{start}}
+\index{start@{start}!com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Serwer\+Gry.\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Uruchamia serwer gry. Tworzy gniazdo serwera i nasłuchuje na połączenia przychodzące. Każde połączenie od klienta jest obsługiwane przez osobny wątek. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a0c738d9fb5ce11bb60a4df7d4546f67e}\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a0c738d9fb5ce11bb60a4df7d4546f67e}} 
+\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}!host@{host}}
+\index{host@{host}!com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsubsection{\texorpdfstring{host}{host}}
+{\footnotesize\ttfamily final String com.\+studia.\+Komunikacja.\+Serwer\+Gry.\+host = \char`\"{}localhost\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+Adres hosta, na którym działa serwer \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a783dfd81d6e6a98d615ed1dcb6ba1c63}\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a783dfd81d6e6a98d615ed1dcb6ba1c63}} 
+\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}!nrPortu@{nrPortu}}
+\index{nrPortu@{nrPortu}!com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsubsection{\texorpdfstring{nrPortu}{nrPortu}}
+{\footnotesize\ttfamily final int com.\+studia.\+Komunikacja.\+Serwer\+Gry.\+nr\+Portu = 8000\hspace{0.3cm}{\ttfamily [static]}}
+
+Numer portu, na którym nasłuchuje serwer \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a0cc05a600663df08e58fa5b4c1a8b94b}\label{classcom_1_1studia_1_1Komunikacja_1_1SerwerGry_a0cc05a600663df08e58fa5b4c1a8b94b}} 
+\index{com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}!SerwerWlaczony@{SerwerWlaczony}}
+\index{SerwerWlaczony@{SerwerWlaczony}!com.studia.Komunikacja.SerwerGry@{com.studia.Komunikacja.SerwerGry}}
+\doxysubsubsection{\texorpdfstring{SerwerWlaczony}{SerwerWlaczony}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Komunikacja.\+Serwer\+Gry.\+Serwer\+Wlaczony = false\hspace{0.3cm}{\ttfamily [static]}}
+
+Flaga wskazująca, czy serwer jest włączony 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Komunikacja/Serwer\+Gry.\+java\end{DoxyCompactItemize}

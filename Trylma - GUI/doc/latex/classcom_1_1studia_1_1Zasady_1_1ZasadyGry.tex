@@ -1,0 +1,242 @@
+\hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{}\doxysection{com.\+studia.\+Zasady.\+Zasady\+Gry Class Reference}
+\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+
+
+Inheritance diagram for com.\+studia.\+Zasady.\+Zasady\+Gry\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcom_1_1studia_1_1Zasady_1_1ZasadyGry__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a01916e8f24276113b50333e59d374eeb}{Zasady\+Gry}} (int \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae11f135e76399a080ab83714bea72b4e}{liczba\+Graczy}})
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae074bce0be4102ce7c7e56cf0b316e17}{gra\+Skonczona}} (\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}} plansza)
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a10bc14e144278adc162797799c6494dd}{ile\+Graczy}} ()
+\item 
+JSONArray \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a068c8e80ccd5b8af057e7f843cf0e1b8}{info\+JSON}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_aad039b278a0a8180c0c3a7fff4314a61}{opis\+Zasad}} ()
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ab25fe82ea4550516f9c3c85be645c88e}{ruch\+Jest\+Poprawny}} (\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}} plansza, int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} sekwencja\+Ruchow, int gracz)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_af77daa4f32e654c1f7c3cde3c9e3b5a3}{wykonaj\+Ruch}} (\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}} plansza, int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} sekwencja\+Ruchow, int gracz)
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a5abd68b8da6c4af00694286a1f0a3372}{zwyciezca}} (int gracz)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a3b0ee1613c271acf591b8fb92dbbf44c}{skok\+Jest\+Legalny}} (\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}} plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae11f135e76399a080ab83714bea72b4e}{liczba\+Graczy}}
+\item 
+int\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a5d9c86194d9ddc1a98d867cc9beed3d5}{warunki\+Zwyciestwa}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstrakcyjna klasa reprezentująca zasady gry. Klasa ta zarządza liczbą graczy, warunkami zwycięstwa oraz sprawdza poprawność ruchów w grze. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a01916e8f24276113b50333e59d374eeb}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a01916e8f24276113b50333e59d374eeb}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!ZasadyGry@{ZasadyGry}}
+\index{ZasadyGry@{ZasadyGry}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{ZasadyGry()}{ZasadyGry()}}
+{\footnotesize\ttfamily com.\+studia.\+Zasady.\+Zasady\+Gry.\+Zasady\+Gry (\begin{DoxyParamCaption}\item[{int}]{liczba\+Graczy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Konstruktor klasy \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{Zasady\+Gry}}. Ustawia liczbę graczy i inicjalizuje tablicę warunków zwycięstwa.
+
+
+\begin{DoxyParams}{Parameters}
+{\em liczba\+Graczy} & Liczba graczy w grze. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae074bce0be4102ce7c7e56cf0b316e17}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae074bce0be4102ce7c7e56cf0b316e17}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!graSkonczona@{graSkonczona}}
+\index{graSkonczona@{graSkonczona}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{graSkonczona()}{graSkonczona()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Zasady.\+Zasady\+Gry.\+gra\+Skonczona (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}}}]{plansza }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy gra została zakończona. \mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}} kończy się, gdy wszyscy gracze oprócz jednego osiągną warunki zwycięstwa.
+
+
+\begin{DoxyParams}{Parameters}
+{\em plansza} & Plansza, na której rozgrywa się gra. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli gra jest zakończona, w przeciwnym razie false. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1CaptureZasadyGry_a1cd3a561103539ab312526ad246abfa6}{com.\+studia.\+Zasady.\+Capture\+Zasady\+Gry}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a10bc14e144278adc162797799c6494dd}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a10bc14e144278adc162797799c6494dd}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!ileGraczy@{ileGraczy}}
+\index{ileGraczy@{ileGraczy}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{ileGraczy()}{ileGraczy()}}
+{\footnotesize\ttfamily int com.\+studia.\+Zasady.\+Zasady\+Gry.\+ile\+Graczy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca liczbę graczy w grze.
+
+\begin{DoxyReturn}{Returns}
+Liczba graczy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a068c8e80ccd5b8af057e7f843cf0e1b8}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a068c8e80ccd5b8af057e7f843cf0e1b8}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!infoJSON@{infoJSON}}
+\index{infoJSON@{infoJSON}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{infoJSON()}{infoJSON()}}
+{\footnotesize\ttfamily JSONArray com.\+studia.\+Zasady.\+Zasady\+Gry.\+info\+JSON (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca informacje o zasadach gry w formacie JSON.
+
+\begin{DoxyReturn}{Returns}
+JSONArray zawierający informacje o zasadach dla określonej liczby graczy. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1CaptureZasadyGry_a0dd140e3afc27b04dcdd8b2a9419cd0d}{com.\+studia.\+Zasady.\+Capture\+Zasady\+Gry}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_aad039b278a0a8180c0c3a7fff4314a61}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_aad039b278a0a8180c0c3a7fff4314a61}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!opisZasad@{opisZasad}}
+\index{opisZasad@{opisZasad}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{opisZasad()}{opisZasad()}}
+{\footnotesize\ttfamily String com.\+studia.\+Zasady.\+Zasady\+Gry.\+opis\+Zasad (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca pusty opis zasad gry.
+
+\begin{DoxyReturn}{Returns}
+Opis zasad gry (w tym przypadku pusty ciąg znaków). 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1StandardoweZasadyGry_afb26bc1413dc1fe82ef2161e65460058}{com.\+studia.\+Zasady.\+Standardowe\+Zasady\+Gry}}, \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1FastPacedZasadyGry_a9d811755eaca1f59f6047086de85ae41}{com.\+studia.\+Zasady.\+Fast\+Paced\+Zasady\+Gry}}, and \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1CaptureZasadyGry_a1bc8f8a55ca7ec8a1b1cd82b6db04fac}{com.\+studia.\+Zasady.\+Capture\+Zasady\+Gry}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ab25fe82ea4550516f9c3c85be645c88e}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ab25fe82ea4550516f9c3c85be645c88e}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!ruchJestPoprawny@{ruchJestPoprawny}}
+\index{ruchJestPoprawny@{ruchJestPoprawny}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{ruchJestPoprawny()}{ruchJestPoprawny()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Zasady.\+Zasady\+Gry.\+ruch\+Jest\+Poprawny (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}}}]{plansza,  }\item[{int}]{sekwencja\+Ruchow\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy ruch jest poprawny.
+
+
+\begin{DoxyParams}{Parameters}
+{\em plansza} & Plansza, na której rozgrywa się gra. \\
+\hline
+{\em sekwencja\+Ruchow} & Tablica zawierająca sekwencję ruchów. \\
+\hline
+{\em gracz} & Indeks gracza wykonującego ruch. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli ruch jest poprawny, w przeciwnym razie false. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1StandardoweZasadyGry_a859bfa31c853a9034c50f8777e4bf5cd}{com.\+studia.\+Zasady.\+Standardowe\+Zasady\+Gry}}, \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1FastPacedZasadyGry_a856dddabdead1dd1689a7af85af5e7e1}{com.\+studia.\+Zasady.\+Fast\+Paced\+Zasady\+Gry}}, and \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1CaptureZasadyGry_a9bf4acf9304942849d055519dabeb36b}{com.\+studia.\+Zasady.\+Capture\+Zasady\+Gry}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a3b0ee1613c271acf591b8fb92dbbf44c}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a3b0ee1613c271acf591b8fb92dbbf44c}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!skokJestLegalny@{skokJestLegalny}}
+\index{skokJestLegalny@{skokJestLegalny}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{skokJestLegalny()}{skokJestLegalny()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Zasady.\+Zasady\+Gry.\+skok\+Jest\+Legalny (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}}}]{plansza,  }\item[{int}]{wierszP,  }\item[{int}]{kolumnaP,  }\item[{int}]{wierszK,  }\item[{int}]{kolumnaK }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Sprawdza, czy skok jest legalny.
+
+
+\begin{DoxyParams}{Parameters}
+{\em plansza} & Plansza, na której rozgrywa się gra. \\
+\hline
+{\em wierszP} & Wiersz początkowy skoku. \\
+\hline
+{\em kolumnaP} & Kolumna początkowa skoku. \\
+\hline
+{\em wierszK} & Wiersz końcowy skoku. \\
+\hline
+{\em kolumnaK} & Kolumna końcowa skoku. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli skok jest legalny, w przeciwnym razie false. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1StandardoweZasadyGry_a059148444ea57ada17b30dbabe104439}{com.\+studia.\+Zasady.\+Standardowe\+Zasady\+Gry}}, and \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1FastPacedZasadyGry_ac61429fa4a8e760738f3c566a1581803}{com.\+studia.\+Zasady.\+Fast\+Paced\+Zasady\+Gry}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_af77daa4f32e654c1f7c3cde3c9e3b5a3}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_af77daa4f32e654c1f7c3cde3c9e3b5a3}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!wykonajRuch@{wykonajRuch}}
+\index{wykonajRuch@{wykonajRuch}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{wykonajRuch()}{wykonajRuch()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Zasady.\+Zasady\+Gry.\+wykonaj\+Ruch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}}}]{plansza,  }\item[{int}]{sekwencja\+Ruchow\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wykonuje ruch na planszy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em plansza} & Plansza, na której rozgrywa się gra. \\
+\hline
+{\em sekwencja\+Ruchow} & Tablica zawierająca sekwencję ruchów. \\
+\hline
+{\em gracz} & Indeks gracza wykonującego ruch. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, jeśli ruch został wykonany poprawnie, w przeciwnym razie false. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1StandardoweZasadyGry_a10fa227d86d2ffa2a00c820566a60e36}{com.\+studia.\+Zasady.\+Standardowe\+Zasady\+Gry}}, \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1FastPacedZasadyGry_a80014351488fb8e63ef66090ec0c5150}{com.\+studia.\+Zasady.\+Fast\+Paced\+Zasady\+Gry}}, and \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1CaptureZasadyGry_aaafb14b9fef341954c1f2eb35ade5230}{com.\+studia.\+Zasady.\+Capture\+Zasady\+Gry}}.
+
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a5abd68b8da6c4af00694286a1f0a3372}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a5abd68b8da6c4af00694286a1f0a3372}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!zwyciezca@{zwyciezca}}
+\index{zwyciezca@{zwyciezca}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{zwyciezca()}{zwyciezca()}}
+{\footnotesize\ttfamily int com.\+studia.\+Zasady.\+Zasady\+Gry.\+zwyciezca (\begin{DoxyParamCaption}\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca zwycięzcę gry na podstawie warunków zwycięstwa.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & Indeks gracza, którego warunki zwycięstwa są sprawdzane. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Indeks gracza, jeśli jest zwycięzcą, w przeciwnym razie 0. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1CaptureZasadyGry_a642457e73dacedb4d3dda293bdd126e7}{com.\+studia.\+Zasady.\+Capture\+Zasady\+Gry}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae11f135e76399a080ab83714bea72b4e}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_ae11f135e76399a080ab83714bea72b4e}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!liczbaGraczy@{liczbaGraczy}}
+\index{liczbaGraczy@{liczbaGraczy}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{liczbaGraczy}{liczbaGraczy}}
+{\footnotesize\ttfamily int com.\+studia.\+Zasady.\+Zasady\+Gry.\+liczba\+Graczy\hspace{0.3cm}{\ttfamily [protected]}}
+
+Liczba graczy \mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a5d9c86194d9ddc1a98d867cc9beed3d5}\label{classcom_1_1studia_1_1Zasady_1_1ZasadyGry_a5d9c86194d9ddc1a98d867cc9beed3d5}} 
+\index{com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}!warunkiZwyciestwa@{warunkiZwyciestwa}}
+\index{warunkiZwyciestwa@{warunkiZwyciestwa}!com.studia.Zasady.ZasadyGry@{com.studia.Zasady.ZasadyGry}}
+\doxysubsubsection{\texorpdfstring{warunkiZwyciestwa}{warunkiZwyciestwa}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} com.\+studia.\+Zasady.\+Zasady\+Gry.\+warunki\+Zwyciestwa\hspace{0.3cm}{\ttfamily [protected]}}
+
+Tablica przechowująca informacje o stanie zwycięstwa 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Zasady/Zasady\+Gry.\+java\end{DoxyCompactItemize}

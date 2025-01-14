@@ -1,0 +1,99 @@
+\hypertarget{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication}{}\doxysection{com.\+studia.\+Komunikacja.\+Klient\+Application Class Reference}
+\label{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication}\index{com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}}
+
+
+Inheritance diagram for com.\+studia.\+Komunikacja.\+Klient\+Application\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for com.\+studia.\+Komunikacja.\+Klient\+Application\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_a6bf014247c8725df8735f2b7ae0d21c5}{start}} (Stage stage)  throws IOException 
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_aeb2c7c1f33a919c9c14fa9b1e3d8967c}{start}} (String\mbox{[}$\,$\mbox{]} args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_ad0acd36fbf73d4f51caec657632b5363}{Menu\+Do\+Gry}} ()  throws IOException 
+\item 
+static void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_ac0244e8b00ba83ed2283d15fa5be107c}{Gra\+Do\+Menu}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa aplikacji klienta, która odpowiada za zarządzanie interfejsem użytkownika (GUI) oraz komunikację z serwerem. Aplikacja umożliwia przełączanie się między dwoma głównymi ekranami\+: menu oraz ekranem gry.
+
+Rozpoczyna połączenie z serwerem oraz umożliwia interakcję z grą poprzez wysyłanie i odbieranie danych z serwera. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_ac0244e8b00ba83ed2283d15fa5be107c}\label{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_ac0244e8b00ba83ed2283d15fa5be107c}} 
+\index{com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}!GraDoMenu@{GraDoMenu}}
+\index{GraDoMenu@{GraDoMenu}!com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}}
+\doxysubsubsection{\texorpdfstring{GraDoMenu()}{GraDoMenu()}}
+{\footnotesize\ttfamily static void com.\+studia.\+Komunikacja.\+Klient\+Application.\+Gra\+Do\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Przełącza aplikację z powrotem do sceny menu. \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_ad0acd36fbf73d4f51caec657632b5363}\label{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_ad0acd36fbf73d4f51caec657632b5363}} 
+\index{com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}!MenuDoGry@{MenuDoGry}}
+\index{MenuDoGry@{MenuDoGry}!com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}}
+\doxysubsubsection{\texorpdfstring{MenuDoGry()}{MenuDoGry()}}
+{\footnotesize\ttfamily static void com.\+studia.\+Komunikacja.\+Klient\+Application.\+Menu\+Do\+Gry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Przełącza aplikację do sceny gry, inicjalizując wszystkie niezbędne elementy.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & jeśli wystąpi błąd podczas ładowania plików FXML \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_a6bf014247c8725df8735f2b7ae0d21c5}\label{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_a6bf014247c8725df8735f2b7ae0d21c5}} 
+\index{com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}!start@{start}}
+\index{start@{start}!com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Klient\+Application.\+start (\begin{DoxyParamCaption}\item[{Stage}]{stage }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metoda uruchamiająca aplikację i inicjalizująca interfejs użytkownika. Ładuje i wyświetla ekran menu oraz nawiązuje połączenie z serwerem.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stage} & główna scena aplikacji \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & jeśli wystąpi błąd podczas ładowania plików FXML \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_aeb2c7c1f33a919c9c14fa9b1e3d8967c}\label{classcom_1_1studia_1_1Komunikacja_1_1KlientApplication_aeb2c7c1f33a919c9c14fa9b1e3d8967c}} 
+\index{com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}!start@{start}}
+\index{start@{start}!com.studia.Komunikacja.KlientApplication@{com.studia.Komunikacja.KlientApplication}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Klient\+Application.\+start (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metoda uruchamiająca aplikację.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & argumenty przekazywane do aplikacji \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Komunikacja/Klient\+Application.\+java\end{DoxyCompactItemize}

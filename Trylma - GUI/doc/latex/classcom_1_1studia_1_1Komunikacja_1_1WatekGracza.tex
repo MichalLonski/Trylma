@@ -1,0 +1,83 @@
+\hypertarget{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza}{}\doxysection{com.\+studia.\+Komunikacja.\+Watek\+Gracza Class Reference}
+\label{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza}\index{com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}}
+
+
+Inheritance diagram for com.\+studia.\+Komunikacja.\+Watek\+Gracza\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for com.\+studia.\+Komunikacja.\+Watek\+Gracza\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_a171ff21b535d502462fc3c7f7298f402}{Watek\+Gracza}} (Socket socket)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_ac8d97e08388422c7fe71dcdbe3c4f30c}{run}} ()
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_ae3d3ebb0b6d66c721c73b5143f0d9401}{get\+Gracz}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_a27b76ed4cb419323e0d18801140fe917}{quit}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wątek reprezentujący komunikację z jednym klientem gry. Obsługuje przychodzące wiadomości od klienta i wykonuje odpowiednie akcje, takie jak dołączanie do gry, tworzenie gry, sprawdzanie stanu gry, wykonywanie ruchów itp. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_a171ff21b535d502462fc3c7f7298f402}\label{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_a171ff21b535d502462fc3c7f7298f402}} 
+\index{com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}!WatekGracza@{WatekGracza}}
+\index{WatekGracza@{WatekGracza}!com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}}
+\doxysubsubsection{\texorpdfstring{WatekGracza()}{WatekGracza()}}
+{\footnotesize\ttfamily com.\+studia.\+Komunikacja.\+Watek\+Gracza.\+Watek\+Gracza (\begin{DoxyParamCaption}\item[{Socket}]{socket }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Konstruktor klasy. Inicjalizuje gniazdo klienta i przypisuje gracza.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & Gniazdo klienta do komunikacji z serwerem. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_ae3d3ebb0b6d66c721c73b5143f0d9401}\label{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_ae3d3ebb0b6d66c721c73b5143f0d9401}} 
+\index{com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}!getGracz@{getGracz}}
+\index{getGracz@{getGracz}!com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}}
+\doxysubsubsection{\texorpdfstring{getGracz()}{getGracz()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} com.\+studia.\+Komunikacja.\+Watek\+Gracza.\+get\+Gracz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca obiekt gracza, który jest powiązany z tym wątkiem.
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} powiązany z tym wątkiem. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_a27b76ed4cb419323e0d18801140fe917}\label{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_a27b76ed4cb419323e0d18801140fe917}} 
+\index{com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}!quit@{quit}}
+\index{quit@{quit}!com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}}
+\doxysubsubsection{\texorpdfstring{quit()}{quit()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Watek\+Gracza.\+quit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Kończy komunikację z klientem i zamyka połączenie. \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_ac8d97e08388422c7fe71dcdbe3c4f30c}\label{classcom_1_1studia_1_1Komunikacja_1_1WatekGracza_ac8d97e08388422c7fe71dcdbe3c4f30c}} 
+\index{com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}!run@{run}}
+\index{run@{run}!com.studia.Komunikacja.WatekGracza@{com.studia.Komunikacja.WatekGracza}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Watek\+Gracza.\+run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Uruchamia wątek i obsługuje komunikację z klientem. Odczytuje wiadomości od klienta, wykonuje odpowiednie akcje oraz przesyła wyniki. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Komunikacja/Watek\+Gracza.\+java\end{DoxyCompactItemize}

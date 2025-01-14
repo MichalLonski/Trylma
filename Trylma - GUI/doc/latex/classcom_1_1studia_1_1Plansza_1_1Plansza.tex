@@ -1,0 +1,118 @@
+\hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza}{}\doxysection{com.\+studia.\+Plansza.\+Plansza Class Reference}
+\label{classcom_1_1studia_1_1Plansza_1_1Plansza}\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a9f06905d4805115f889a56110df22810}{Plansza}} ()
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a59554c4e88ba5e61e803fb03cda40e24}{Plansza}} (\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}} do\+Kopiowania)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a98610de54166a9ca663ef9cbca35aa32}{utworz\+Plansze}} (JSONArray mapa)
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole}{Pole}} \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a8b9807b4546013f017cc04ae71b57394}{sprawdz\+Pole}} (int wiersz, int kolumna)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a86d2f7ced20cee6eb51f050a38418dac}{wykonaj\+Ruch}} (int\mbox{[}$\,$\mbox{]} pozycja\+Poczatkowa, int\mbox{[}$\,$\mbox{]} pozycja\+Koncowa, int gracz)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final int \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a78f08be21a8e89501b3fc126f0790ac0}{LICZBA\+\_\+\+WIERSZY}} = 25
+\item 
+static final int \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza_a792ccb64bc0af51cc944b93076444f85}{LICZBA\+\_\+\+KOLUMN}} = 17
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa reprezentująca planszę do gry. \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}} składa się z pól, które mogą być zajmowane przez graczy. Zawiera metody do tworzenia planszy, wykonywania ruchów oraz zarządzania stanem gry. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a9f06905d4805115f889a56110df22810}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a9f06905d4805115f889a56110df22810}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!Plansza@{Plansza}}
+\index{Plansza@{Plansza}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{Plansza()}{Plansza()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily com.\+studia.\+Plansza.\+Plansza.\+Plansza (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Konstruktor domyślny. Tworzy pustą planszę. \mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a59554c4e88ba5e61e803fb03cda40e24}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a59554c4e88ba5e61e803fb03cda40e24}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!Plansza@{Plansza}}
+\index{Plansza@{Plansza}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{Plansza()}{Plansza()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily com.\+studia.\+Plansza.\+Plansza.\+Plansza (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}}}]{do\+Kopiowania }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Konstruktor kopiujący planszę. Tworzy nową planszę na podstawie istniejącej planszy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em do\+Kopiowania} & \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Plansza}{Plansza}}, którą chcemy skopiować. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a8b9807b4546013f017cc04ae71b57394}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a8b9807b4546013f017cc04ae71b57394}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!sprawdzPole@{sprawdzPole}}
+\index{sprawdzPole@{sprawdzPole}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{sprawdzPole()}{sprawdzPole()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole}{Pole}} com.\+studia.\+Plansza.\+Plansza.\+sprawdz\+Pole (\begin{DoxyParamCaption}\item[{int}]{wiersz,  }\item[{int}]{kolumna }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza pole w danej pozycji na planszy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wiersz} & Numer wiersza. \\
+\hline
+{\em kolumna} & Numer kolumny. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole}{Pole}} w danej pozycji na planszy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a98610de54166a9ca663ef9cbca35aa32}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a98610de54166a9ca663ef9cbca35aa32}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!utworzPlansze@{utworzPlansze}}
+\index{utworzPlansze@{utworzPlansze}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{utworzPlansze()}{utworzPlansze()}}
+{\footnotesize\ttfamily void com.\+studia.\+Plansza.\+Plansza.\+utworz\+Plansze (\begin{DoxyParamCaption}\item[{JSONArray}]{mapa }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Tworzy planszę na podstawie danych z formatu JSON.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mapa} & JSON zawierający dane o planszy. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a86d2f7ced20cee6eb51f050a38418dac}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a86d2f7ced20cee6eb51f050a38418dac}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!wykonajRuch@{wykonajRuch}}
+\index{wykonajRuch@{wykonajRuch}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{wykonajRuch()}{wykonajRuch()}}
+{\footnotesize\ttfamily void com.\+studia.\+Plansza.\+Plansza.\+wykonaj\+Ruch (\begin{DoxyParamCaption}\item[{int\mbox{[}$\,$\mbox{]}}]{pozycja\+Poczatkowa,  }\item[{int\mbox{[}$\,$\mbox{]}}]{pozycja\+Koncowa,  }\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wykonuje ruch na planszy, przenosząc pionek z jednej pozycji na drugą.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pozycja\+Poczatkowa} & Tablica z współrzędnymi początkowej pozycji. \\
+\hline
+{\em pozycja\+Koncowa} & Tablica z współrzędnymi końcowej pozycji. \\
+\hline
+{\em gracz} & Indeks gracza, który wykonuje ruch. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a792ccb64bc0af51cc944b93076444f85}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a792ccb64bc0af51cc944b93076444f85}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!LICZBA\_KOLUMN@{LICZBA\_KOLUMN}}
+\index{LICZBA\_KOLUMN@{LICZBA\_KOLUMN}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{LICZBA\_KOLUMN}{LICZBA\_KOLUMN}}
+{\footnotesize\ttfamily final int com.\+studia.\+Plansza.\+Plansza.\+LICZBA\+\_\+\+KOLUMN = 17\hspace{0.3cm}{\ttfamily [static]}}
+
+Liczba kolumn w planszy. \mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Plansza_a78f08be21a8e89501b3fc126f0790ac0}\label{classcom_1_1studia_1_1Plansza_1_1Plansza_a78f08be21a8e89501b3fc126f0790ac0}} 
+\index{com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}!LICZBA\_WIERSZY@{LICZBA\_WIERSZY}}
+\index{LICZBA\_WIERSZY@{LICZBA\_WIERSZY}!com.studia.Plansza.Plansza@{com.studia.Plansza.Plansza}}
+\doxysubsubsection{\texorpdfstring{LICZBA\_WIERSZY}{LICZBA\_WIERSZY}}
+{\footnotesize\ttfamily final int com.\+studia.\+Plansza.\+Plansza.\+LICZBA\+\_\+\+WIERSZY = 25\hspace{0.3cm}{\ttfamily [static]}}
+
+Liczba wierszy w planszy. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Plansza/Plansza.\+java\end{DoxyCompactItemize}

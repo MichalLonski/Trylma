@@ -1,0 +1,245 @@
+\hypertarget{classcom_1_1studia_1_1Gra}{}\doxysection{com.\+studia.\+Gra Class Reference}
+\label{classcom_1_1studia_1_1Gra}\index{com.studia.Gra@{com.studia.Gra}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Gra_a41f3ff759b415f4730952fdc72c9c52c}{Gra}} (\mbox{\hyperlink{enumcom_1_1studia_1_1Zasady_1_1TypGry}{Typ\+Gry}} typ, int liczba\+Graczy)
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a86d768efabd24c1e7f65cc03de5e2453}{Zacznij\+Gre}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a7cd0d92551ca8ac75b34160754179151}{pass\+Tury}} (int miejsce\+Gracza)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a4bb982ed5b1b32d52fb3fa7a8dab0593}{wykonaj\+Ruch}} (int miejsce\+Gracza, int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} sekwencja\+Ruchow)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Gra_aa362abd793db457d67debd1f6e79c6d0}{trwa\+Tura\+Gracza}} (int miejsce\+Gracza)
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a8b90eab246f5fc34c42a5174b970d787}{dodaj\+Gracza}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Gra_ab8ab51bfb1ef85551b286b4049e4e6ae}{usun\+Gracza}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz)
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Gra_ae20fbd8570bbc69d9aa3336f792b550a}{daj\+ID}} ()
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a9f51ab21a6e59d0d203c3653e329747c}{czy\+Gra\+Sie\+Zaczela}} ()
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} $>$ \mbox{\hyperlink{classcom_1_1studia_1_1Gra_ae987cb3ffd8b0109524164019a4c0cd1}{daj\+Liste\+Graczy}} ()
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{Zasady\+Gry}} \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a599f42bd020e40314a8adbc187ffdc4d}{daj\+Zasady\+Gry}} ()
+\item 
+int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a68dd0fd20ffaf6354197d771c1991294}{daj\+Ruch\+ZPoprzedniej\+Tury}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Gra_a1658f12974b5fe8e9d8ec78a87865495}{daj\+Obecnego\+Gracza}} ()
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Gra_afb62a1f44280c73c674f242cabfa2860}{ruch\+Jest\+Poprawny}} (int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} sekwencja\+Ruchow, int gracz)
+\item 
+String \mbox{\hyperlink{classcom_1_1studia_1_1Gra_ae71cf06501786738f92c6d0a0d2d7d41}{opis}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa reprezentująca grę, która zarządza zasadami, planszą, kolejką graczy i ruchem. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a41f3ff759b415f4730952fdc72c9c52c}\label{classcom_1_1studia_1_1Gra_a41f3ff759b415f4730952fdc72c9c52c}} 
+\index{com.studia.Gra@{com.studia.Gra}!Gra@{Gra}}
+\index{Gra@{Gra}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{Gra()}{Gra()}}
+{\footnotesize\ttfamily com.\+studia.\+Gra.\+Gra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumcom_1_1studia_1_1Zasady_1_1TypGry}{Typ\+Gry}}}]{typ,  }\item[{int}]{liczba\+Graczy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Konstruktor gry.
+
+
+\begin{DoxyParams}{Parameters}
+{\em typ} & typ gry. \\
+\hline
+{\em liczba\+Graczy} & liczba graczy uczestniczących w grze. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & gdy liczba graczy jest niewłaściwa. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a9f51ab21a6e59d0d203c3653e329747c}\label{classcom_1_1studia_1_1Gra_a9f51ab21a6e59d0d203c3653e329747c}} 
+\index{com.studia.Gra@{com.studia.Gra}!czyGraSieZaczela@{czyGraSieZaczela}}
+\index{czyGraSieZaczela@{czyGraSieZaczela}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{czyGraSieZaczela()}{czyGraSieZaczela()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Gra.\+czy\+Gra\+Sie\+Zaczela (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy gra została rozpoczęta.
+
+\begin{DoxyReturn}{Returns}
+true, jeśli gra trwa; false w przeciwnym wypadku. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_ae20fbd8570bbc69d9aa3336f792b550a}\label{classcom_1_1studia_1_1Gra_ae20fbd8570bbc69d9aa3336f792b550a}} 
+\index{com.studia.Gra@{com.studia.Gra}!dajID@{dajID}}
+\index{dajID@{dajID}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{dajID()}{dajID()}}
+{\footnotesize\ttfamily int com.\+studia.\+Gra.\+daj\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca ID gry.
+
+\begin{DoxyReturn}{Returns}
+ID gry. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_ae987cb3ffd8b0109524164019a4c0cd1}\label{classcom_1_1studia_1_1Gra_ae987cb3ffd8b0109524164019a4c0cd1}} 
+\index{com.studia.Gra@{com.studia.Gra}!dajListeGraczy@{dajListeGraczy}}
+\index{dajListeGraczy@{dajListeGraczy}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{dajListeGraczy()}{dajListeGraczy()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}$>$ com.\+studia.\+Gra.\+daj\+Liste\+Graczy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca listę graczy.
+
+\begin{DoxyReturn}{Returns}
+lista graczy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a1658f12974b5fe8e9d8ec78a87865495}\label{classcom_1_1studia_1_1Gra_a1658f12974b5fe8e9d8ec78a87865495}} 
+\index{com.studia.Gra@{com.studia.Gra}!dajObecnegoGracza@{dajObecnegoGracza}}
+\index{dajObecnegoGracza@{dajObecnegoGracza}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{dajObecnegoGracza()}{dajObecnegoGracza()}}
+{\footnotesize\ttfamily int com.\+studia.\+Gra.\+daj\+Obecnego\+Gracza (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca indeks obecnego gracza.
+
+\begin{DoxyReturn}{Returns}
+indeks obecnego gracza. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a68dd0fd20ffaf6354197d771c1991294}\label{classcom_1_1studia_1_1Gra_a68dd0fd20ffaf6354197d771c1991294}} 
+\index{com.studia.Gra@{com.studia.Gra}!dajRuchZPoprzedniejTury@{dajRuchZPoprzedniejTury}}
+\index{dajRuchZPoprzedniejTury@{dajRuchZPoprzedniejTury}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{dajRuchZPoprzedniejTury()}{dajRuchZPoprzedniejTury()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} com.\+studia.\+Gra.\+daj\+Ruch\+ZPoprzedniej\+Tury (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca ruch z poprzedniej tury.
+
+\begin{DoxyReturn}{Returns}
+ruch z poprzedniej tury. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a599f42bd020e40314a8adbc187ffdc4d}\label{classcom_1_1studia_1_1Gra_a599f42bd020e40314a8adbc187ffdc4d}} 
+\index{com.studia.Gra@{com.studia.Gra}!dajZasadyGry@{dajZasadyGry}}
+\index{dajZasadyGry@{dajZasadyGry}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{dajZasadyGry()}{dajZasadyGry()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{Zasady\+Gry}} com.\+studia.\+Gra.\+daj\+Zasady\+Gry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca zasady gry.
+
+\begin{DoxyReturn}{Returns}
+zasady gry. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a8b90eab246f5fc34c42a5174b970d787}\label{classcom_1_1studia_1_1Gra_a8b90eab246f5fc34c42a5174b970d787}} 
+\index{com.studia.Gra@{com.studia.Gra}!dodajGracza@{dodajGracza}}
+\index{dodajGracza@{dodajGracza}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{dodajGracza()}{dodajGracza()}}
+{\footnotesize\ttfamily synchronized void com.\+studia.\+Gra.\+dodaj\+Gracza (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Dodaje nowego gracza do gry.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & gracz do dodania. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_ae71cf06501786738f92c6d0a0d2d7d41}\label{classcom_1_1studia_1_1Gra_ae71cf06501786738f92c6d0a0d2d7d41}} 
+\index{com.studia.Gra@{com.studia.Gra}!opis@{opis}}
+\index{opis@{opis}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{opis()}{opis()}}
+{\footnotesize\ttfamily String com.\+studia.\+Gra.\+opis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca opis gry.
+
+\begin{DoxyReturn}{Returns}
+opis gry. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a7cd0d92551ca8ac75b34160754179151}\label{classcom_1_1studia_1_1Gra_a7cd0d92551ca8ac75b34160754179151}} 
+\index{com.studia.Gra@{com.studia.Gra}!passTury@{passTury}}
+\index{passTury@{passTury}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{passTury()}{passTury()}}
+{\footnotesize\ttfamily void com.\+studia.\+Gra.\+pass\+Tury (\begin{DoxyParamCaption}\item[{int}]{miejsce\+Gracza }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Przechodzi do kolejnego gracza.
+
+
+\begin{DoxyParams}{Parameters}
+{\em miejsce\+Gracza} & miejsce gracza w kolejce. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_afb62a1f44280c73c674f242cabfa2860}\label{classcom_1_1studia_1_1Gra_afb62a1f44280c73c674f242cabfa2860}} 
+\index{com.studia.Gra@{com.studia.Gra}!ruchJestPoprawny@{ruchJestPoprawny}}
+\index{ruchJestPoprawny@{ruchJestPoprawny}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{ruchJestPoprawny()}{ruchJestPoprawny()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Gra.\+ruch\+Jest\+Poprawny (\begin{DoxyParamCaption}\item[{int}]{sekwencja\+Ruchow\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy ruch jest poprawny.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sekwencja\+Ruchow} & sekwencja ruchów do sprawdzenia. \\
+\hline
+{\em gracz} & gracz wykonujący ruch. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, jeśli ruch jest poprawny; false w przeciwnym wypadku. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_aa362abd793db457d67debd1f6e79c6d0}\label{classcom_1_1studia_1_1Gra_aa362abd793db457d67debd1f6e79c6d0}} 
+\index{com.studia.Gra@{com.studia.Gra}!trwaTuraGracza@{trwaTuraGracza}}
+\index{trwaTuraGracza@{trwaTuraGracza}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{trwaTuraGracza()}{trwaTuraGracza()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Gra.\+trwa\+Tura\+Gracza (\begin{DoxyParamCaption}\item[{int}]{miejsce\+Gracza }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy trwa tura danego gracza.
+
+
+\begin{DoxyParams}{Parameters}
+{\em miejsce\+Gracza} & miejsce gracza w kolejce. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, jeśli trwa tura gracza; false w przeciwnym wypadku. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_ab8ab51bfb1ef85551b286b4049e4e6ae}\label{classcom_1_1studia_1_1Gra_ab8ab51bfb1ef85551b286b4049e4e6ae}} 
+\index{com.studia.Gra@{com.studia.Gra}!usunGracza@{usunGracza}}
+\index{usunGracza@{usunGracza}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{usunGracza()}{usunGracza()}}
+{\footnotesize\ttfamily void com.\+studia.\+Gra.\+usun\+Gracza (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Usuwa gracza z gry.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & gracz do usunięcia. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a4bb982ed5b1b32d52fb3fa7a8dab0593}\label{classcom_1_1studia_1_1Gra_a4bb982ed5b1b32d52fb3fa7a8dab0593}} 
+\index{com.studia.Gra@{com.studia.Gra}!wykonajRuch@{wykonajRuch}}
+\index{wykonajRuch@{wykonajRuch}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{wykonajRuch()}{wykonajRuch()}}
+{\footnotesize\ttfamily void com.\+studia.\+Gra.\+wykonaj\+Ruch (\begin{DoxyParamCaption}\item[{int}]{miejsce\+Gracza,  }\item[{int}]{sekwencja\+Ruchow\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wykonuje ruch gracza.
+
+
+\begin{DoxyParams}{Parameters}
+{\em miejsce\+Gracza} & miejsce gracza w kolejce. \\
+\hline
+{\em sekwencja\+Ruchow} & sekwencja ruchów wykonanych przez gracza. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Gra_a86d768efabd24c1e7f65cc03de5e2453}\label{classcom_1_1studia_1_1Gra_a86d768efabd24c1e7f65cc03de5e2453}} 
+\index{com.studia.Gra@{com.studia.Gra}!ZacznijGre@{ZacznijGre}}
+\index{ZacznijGre@{ZacznijGre}!com.studia.Gra@{com.studia.Gra}}
+\doxysubsubsection{\texorpdfstring{ZacznijGre()}{ZacznijGre()}}
+{\footnotesize\ttfamily int com.\+studia.\+Gra.\+Zacznij\+Gre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rozpoczyna grę, jeśli wszyscy gracze są dodani.
+
+\begin{DoxyReturn}{Returns}
+Indeks obecnego gracza, który zaczyna grę, lub -\/1, jeśli gra nie jest pełna. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/Gra.\+java\end{DoxyCompactItemize}
