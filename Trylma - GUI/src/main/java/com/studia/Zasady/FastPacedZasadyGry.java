@@ -53,7 +53,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
 
         Plansza kopiaPlanszy = new Plansza(plansza);
         boolean rezultat = true;
-        int kogoDomStart = obecne.getDomek();
+        int kogoDomStart = obecne.getStrefa();
         boolean robiRuch = false;
         boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
@@ -84,7 +84,7 @@ public class FastPacedZasadyGry extends ZasadyGry {
         if (rezultat) {
             Pole ostatnie = plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
-            int kogoDomKoniec = ostatnie.getDomek();
+            int kogoDomKoniec = ostatnie.getStrefa();
             rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz)
                     || kogoDomKoniec == gracz);
         }
@@ -167,9 +167,9 @@ public class FastPacedZasadyGry extends ZasadyGry {
      */
     @Override
     public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
-        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz
+        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getStrefa() != gracz
                 && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
-                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz) {
+                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getStrefa() == gracz) {
             warunkiZwyciestwa[gracz]++;
         }
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);

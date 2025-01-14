@@ -53,25 +53,25 @@ public class StandardoweZasadyGry extends ZasadyGry {
 
         Plansza kopiaPlanszy = new Plansza(plansza);
         boolean rezultat = true;
-        int kogoDomStart = obecne.getDomek();
+        int kogoDomStart = obecne.getStrefa();
         boolean robiRuch = false;
         boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
             int kolumnaP = sekwencjaRuchow[i][0];
             int wierszP = sekwencjaRuchow[i][1];
-            int wierszK = sekwencjaRuchow[i + 1][0];
-            int kolumnaK = sekwencjaRuchow[i + 1][1];
+            int kolumnaK = sekwencjaRuchow[i + 1][0];
+            int wierszK = sekwencjaRuchow[i + 1][1];
 
             if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
-            } else if ((wierszP == kolumnaK && Math.abs(wierszK - kolumnaP) == 2)
-                    || ((Math.abs(wierszK - kolumnaP) == 1 && Math.abs(kolumnaK - wierszP) == 1))) {
+            } else if ((wierszP == wierszK && Math.abs(kolumnaK - kolumnaP) == 2)
+                    || ((Math.abs(kolumnaK - kolumnaP) == 1 && Math.abs(wierszK - wierszP) == 1))) {
                 rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
                 robiRuch = true;
-            } else if ((Math.abs(wierszK - kolumnaP) == 4 && Math.abs(kolumnaK - wierszP) == 0)
-                    || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
-                rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, wierszK, kolumnaK);
+            } else if ((Math.abs(kolumnaK - kolumnaP) == 4 && Math.abs(wierszK - wierszP) == 0)
+                    || (Math.abs(kolumnaK - kolumnaP) == 2 && Math.abs(wierszK - wierszP) == 2)) {
+                rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, kolumnaK, wierszK);
                 robiSkok = true;
             }
 
@@ -87,7 +87,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
         if (rezultat) {
             Pole ostatnie = kopiaPlanszy.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1][1]);
-            int kogoDomKoniec = ostatnie.getDomek();
+            int kogoDomKoniec = ostatnie.getStrefa();
             rezultat = (kogoDomKoniec == kogoDomStart || (kogoDomKoniec == 0 && kogoDomStart != gracz)
                     || kogoDomKoniec == gracz);
         }
@@ -110,7 +110,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
         if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
             return false;
         }
-        return plansza.sprawdzPole((wierszP + wierszK) / 2, (kolumnaP + kolumnaK) / 2).zajete();
+        return plansza.sprawdzPole((kolumnaP + kolumnaK) / 2, (wierszP + wierszK) / 2).zajete();
     }
 
     /**
@@ -137,9 +137,9 @@ public class StandardoweZasadyGry extends ZasadyGry {
      */
     @Override
     public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
-        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getDomek() != gracz
+        if (plansza.sprawdzPole(sekwencjaRuchow[0][0], sekwencjaRuchow[0][1]).getStrefa() != gracz
                 && plansza.sprawdzPole(sekwencjaRuchow[sekwencjaRuchow.length - 1][0],
-                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getDomek() == gracz) {
+                        sekwencjaRuchow[sekwencjaRuchow.length - 1][1]).getStrefa() == gracz) {
             warunkiZwyciestwa[gracz]++;
         }
         super.wykonajRuch(plansza, sekwencjaRuchow, gracz);

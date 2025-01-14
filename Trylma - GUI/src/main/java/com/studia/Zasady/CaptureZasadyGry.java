@@ -59,15 +59,17 @@ public class CaptureZasadyGry extends ZasadyGry {
      * @return True, jeśli istnieją możliwe ruchy, false w przeciwnym razie.
      */
     private boolean istniejaRuchy(Plansza plansza) {
-        for (int i = 0; i < Plansza.LICZBA_WIERSZY; i++) {
-            for (int j = 0; j < Plansza.LICZBA_KOLUMN; j++) {
+        for (int wiersz = 0; wiersz < Plansza.LICZBA_WIERSZY; wiersz++) {
+            for (int kolumna = 0; kolumna < Plansza.LICZBA_KOLUMN; kolumna++) {
                 for (int[] ruch : legalneKierunki()) {
-                    int nowaKolumna = j + ruch[0];
-                    int nowyWiersz = i + ruch[1];
+                    int nowaKolumna = kolumna + ruch[0];
+                    int nowyWiersz = wiersz + ruch[1];
                     if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
                             && nowyWiersz < Plansza.LICZBA_WIERSZY) {
+                        System.out.println("wiersz: " + wiersz + " kolumna: " + kolumna);
+                        System.out.println("nowy wiersz: " + nowyWiersz + " nowa kolumna: " + nowaKolumna);
                         if (plansza.sprawdzPole(nowyWiersz, nowaKolumna).zajete()) {
-                            if (ruchJestPoprawny(plansza, new int[][] { { i, j }, { nowaKolumna, nowyWiersz } }, 1)) {
+                            if (plansza.sprawdzPole((kolumna + nowaKolumna) / 2, (wiersz + nowyWiersz) / 2).zajete()) {
                                 return true;
                             }
                         }
@@ -126,14 +128,14 @@ public class CaptureZasadyGry extends ZasadyGry {
 
             int kolumnaP = sekwencjaRuchow[i][0];
             int wierszP = sekwencjaRuchow[i][1];
-            int wierszK = sekwencjaRuchow[i + 1][0];
-            int kolumnaK = sekwencjaRuchow[i + 1][1];
+            int kolumnaK = sekwencjaRuchow[i + 1][0];
+            int wierszK = sekwencjaRuchow[i + 1][1];
 
-            if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
+            if (kopiaPlanszy.sprawdzPole(kolumnaK, wierszK).zajete()) {
                 rezultat = false;
-            } else if ((Math.abs(wierszK - kolumnaP) == 4 && Math.abs(kolumnaK - wierszP) == 0)
-                    || (Math.abs(wierszK - kolumnaP) == 2 && Math.abs(kolumnaK - wierszP) == 2)) {
-                rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, wierszK, kolumnaK);
+            } else if ((Math.abs(kolumnaK - kolumnaP) == 4 && Math.abs(wierszK - wierszP) == 0)
+                    || (Math.abs(kolumnaK - kolumnaP) == 2 && Math.abs(wierszK - wierszP) == 2)) {
+                rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, kolumnaK, wierszK);
             } else {
                 rezultat = false;
             }
@@ -179,10 +181,10 @@ public class CaptureZasadyGry extends ZasadyGry {
             int wierszK = sekwencjaRuchow[i + 1][0];
             int kolumnaK = sekwencjaRuchow[i + 1][1];
 
-            plansza.sprawdzPole((wierszK + wierszP) / 2, (kolumnaK + kolumnaP) / 2).setGracz(0);
+            plansza.sprawdzPole((kolumnaK + kolumnaP) / 2, (wierszK + wierszP) / 2).setGracz(0);
             warunkiZwyciestwa[gracz]++;
         }
-        super.wykonajRuch(plansza, sekwencjaRuchow, gracz);
+        plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
         return istniejaRuchy(plansza);
     }
 

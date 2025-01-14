@@ -74,7 +74,7 @@ public class Pole {
      * 
      * @return Numer strefy przypisanej do pola. Wartość 0 oznacza brak strefy.
      */
-    public int getDomek() {
+    public int getStrefa() {
         return strefaGracza;
     }
 }
