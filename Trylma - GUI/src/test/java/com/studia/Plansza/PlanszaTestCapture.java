@@ -42,9 +42,9 @@ public class PlanszaTestCapture {
     void testWykonajRuch() {
 
 
-        plansza.wykonajRuch(new int[] { 18, 4 }, new int[] { 16, 4 }, 1);
+        plansza.wykonajRuch(new int[] { 9, 6 }, new int[] { 12, 8 }, 1);
 
-        assertEquals(0, plansza.sprawdzPole(10, 6).getGracz(), "Pole (10, 6) powinno być puste");
+        assertEquals(0, plansza.sprawdzPole(9, 6).getGracz(), "Pole (10, 6) powinno być puste");
 
         assertEquals(1, plansza.sprawdzPole(12, 8).getGracz(), "Na polu (12, 8) powinien stać gracz 1");
     }
