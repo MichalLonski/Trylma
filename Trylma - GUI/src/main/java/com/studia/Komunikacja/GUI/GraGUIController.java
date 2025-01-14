@@ -25,28 +25,28 @@ import org.json.JSONArray;
 
 import static java.lang.Thread.sleep;
 
-/*
-Klasa kontrolera dla Okienka oczekiwania na gre i gry
+/**
+ * Klasa kontrolera odpowiedzialna za zarządzanie interfejsem użytkownika w grze.
+ * Obejmuje logikę dla planszy gry, interakcji z użytkownikiem oraz komunikację z serwerem gry.
  */
 public class GraGUIController extends GUIController {
 
-    private ZasadyGry zasady; // do generowania planszy
-    private Stage taScena;
-    private volatile boolean wTymMenu = true;
-    private volatile boolean graRozpoczeta = false;
-    private int miejsceGracza;
-    private int turaGracza;
+    private ZasadyGry zasady; // Zasady gry, używane do generowania planszy
+    private Stage taScena; // Scena gry
+    private volatile boolean wTymMenu = true; // Flaga wskazująca, czy nadal jesteśmy w menu oczekiwania
+    private volatile boolean graRozpoczeta = false; // Flaga wskazująca, czy gra już się rozpoczęła
+    private int miejsceGracza; // Miejsce gracza w kolejce
+    private int turaGracza; // Numer aktualnej tury
     private int[][] ostatniRuch = new int[][] {
             new int[] { 0, 0 },
             new int[] { 0, 0 },
     };
-    private final static int LICZBA_WIERSZY = 25;
-    private final static int LICZBA_KOLUMN = 17;
-    public final static int ROZMIAR_POLA = 30;
-    public int SZEROKOSC_MENU; // 240
-    public int WYSOKOSC_MENU; // 280
-    private ArrayList<int[]> sekwencjaRuchow = new ArrayList<>();
-    private final ArrayList<PoleWGUI> pola = new ArrayList<>();
+    private final static int LICZBA_WIERSZY = 25; // Liczba wierszy na planszy
+    private final static int LICZBA_KOLUMN = 17; // Liczba kolumn na planszy
+    private final static int ROZMIAR_POLA = 30; // Rozmiar pojedynczego pola na planszy
+    private int SZEROKOSC_MENU; // Szerokość menu gry
+    private ArrayList<int[]> sekwencjaRuchow = new ArrayList<>(); // Sekwencja ruchów gracza
+    private final ArrayList<PoleWGUI> pola = new ArrayList<>(); // Lista pól na planszy
     private final HashMap<Integer, Color> kolorGracza = new HashMap<>() {
         {
             put(9, Color.LIGHTGRAY);
@@ -102,9 +102,12 @@ public class GraGUIController extends GUIController {
     @FXML
     Rectangle turaKolorRectangle;
 
+    /**
+     * Generuje planszę gry na podstawie zasad gry.
+     * Tworzy odpowiednie pola i pionki na planszy, ustawiając je w odpowiednich miejscach.
+     */
     public void GenerateBoard() {
-        SZEROKOSC_MENU = (int) menuPane.getPrefWidth(); // 240
-        WYSOKOSC_MENU = (int) menuPane.getPrefHeight(); // 280
+        SZEROKOSC_MENU = (int) menuPane.getPrefWidth(); // Szerokość menu
         planszaGridPane = new GridPane();
         planszaGridPane.setGridLinesVisible(true);
         planszaPane.getChildren().add(planszaGridPane);
@@ -127,14 +130,18 @@ public class GraGUIController extends GUIController {
         anchorPane.setPrefHeight(Height);
 
         taScena.sizeToScene();
-
-        // TODO: Tu będzie framet kodu który będzie kolorować pola, czy tam kolorować
-        // pionki na nim, to się zobaczy
-
     }
 
+    /**
+     * Tworzy pole na planszy o określonym typie.
+     * Dla każdego typu pola, generuje odpowiedni wygląd pionka.
+     * 
+     * @param X współrzędna X pola
+     * @param Y współrzędna Y pola
+     * @param typ typ pola
+     * @return stworzone pole jako obiekt Pane
+     */
     public Pane stworzPole(int X, int Y, int typ) {
-
         Pane pane = new Pane();
         Rectangle rect = new Rectangle();
 
@@ -156,6 +163,16 @@ public class GraGUIController extends GUIController {
         return pane;
     }
 
+    /**
+     * Tworzy pionek na danym polu w zależności od jego typu.
+     * Dodaje odpowiedni kolor i obwódkę zaznaczenia.
+     * 
+     * @param typ typ pionka
+     * @param rect prostokąt reprezentujący pole
+     * @param pane pane zawierające pole
+     * @param X współrzędna X
+     * @param Y współrzędna Y
+     */
     private void stworzPionek(int typ, Rectangle rect, Pane pane, int X, int Y) {
         if (typ == 9) {
             rect.setFill(Color.LIGHTGRAY);
@@ -167,7 +184,7 @@ public class GraGUIController extends GUIController {
             pane.getChildren().add(circle);
             pane.getChildren().add(obwodkaCircle);
 
-            ///// Reprezentacja pionka
+            // Reprezentacja pionka
             circle.setRadius((double) ROZMIAR_POLA * 0.45);
             circle.setCenterX((double) ROZMIAR_POLA / 2);
             circle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -176,7 +193,7 @@ public class GraGUIController extends GUIController {
             circle.setFill(Color.WHITE);
             circle.setMouseTransparent(true);
 
-            ///// Obwódka zaznaczenia
+            // Obwódka zaznaczenia
             obwodkaCircle.setRadius((double) ROZMIAR_POLA * 0.48);
             obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
             obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -192,7 +209,7 @@ public class GraGUIController extends GUIController {
             pola.add(new PoleWGUI(pole, rect, circle, obwodkaCircle, typ));
             rect.setOnMouseClicked((MouseEvent event) -> poleKlikniete(pole, obwodkaCircle, typ));
         } else {
-            // TODO: czy nie lepiej zrobić liczbaGraczy - typ?
+            // Dla innych typów pionków
             rect.setFill(kolorGracza.get(typ));
             rect.toFront();
             Circle circle = new Circle();
@@ -200,7 +217,7 @@ public class GraGUIController extends GUIController {
             pane.getChildren().add(circle);
             pane.getChildren().add(obwodkaCircle);
 
-            ///// Reprezentacja pionka
+            // Reprezentacja pionka
             circle.setRadius((double) ROZMIAR_POLA * 0.45);
             circle.setCenterX((double) ROZMIAR_POLA / 2);
             circle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -209,7 +226,7 @@ public class GraGUIController extends GUIController {
             circle.setFill(kolorGracza.get(typ));
             circle.setMouseTransparent(true);
 
-            ///// Obwódka zaznaczenia
+            // Obwódka zaznaczenia
             obwodkaCircle.setRadius((double) ROZMIAR_POLA * 0.48);
             obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
             obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
@@ -227,6 +244,14 @@ public class GraGUIController extends GUIController {
         }
     }
 
+    /**
+     * Obsługuje kliknięcie na pole na planszy.
+     * Dodaje dane pole do sekwencji ruchów, jeśli gracz wykonuje ruch w swojej turze.
+     * 
+     * @param pole współrzędne klikniętego pola
+     * @param obwodkaCircle obwódka zaznaczenia pola
+     * @param typ typ pionka na tym polu
+     */
     private void poleKlikniete(int[] pole, Circle obwodkaCircle, int typ) {
         if (turaGracza == miejsceGracza && graRozpoczeta) {
             sekwencjaRuchow.add(pole);
@@ -234,6 +259,7 @@ public class GraGUIController extends GUIController {
         }
     }
 
+    // Wątek odpowiedzialny za komunikację z serwerem
     Thread komunikacja = new Thread(() -> {
         try {
             while (wTymMenu) {
@@ -257,7 +283,6 @@ public class GraGUIController extends GUIController {
                     }
 
                 } else {
-
                     String odp = sendCommand("hasStarted");
 
                     Platform.runLater(() -> iloscGraczyLabel
@@ -274,7 +299,6 @@ public class GraGUIController extends GUIController {
                             graRozpoczeta = true;
 
                         });
-
                     }
                 }
 
@@ -285,6 +309,12 @@ public class GraGUIController extends GUIController {
         }
     });
 
+    /**
+     * Inicjalizuje grę na podstawie sceny i zasad gry.
+     * Ustawia odpowiednie zasady gry oraz uruchamia wątek komunikacji.
+     * 
+     * @param stage scena gry
+     */
     public void setInfo(Stage stage) {
         taScena = stage;
         String odp = sendCommand("gameRules");
@@ -307,6 +337,10 @@ public class GraGUIController extends GUIController {
         komunikacja.start();
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku "Wykonaj ruch".
+     * Wysyła dane ruchu do serwera.
+     */
     public void wykonajRuchButtonKlik() {
         String doWyslania = "";
         for (int[] pole : sekwencjaRuchow) {
@@ -314,9 +348,12 @@ public class GraGUIController extends GUIController {
         }
         sendCommand("doMove" + doWyslania);
         resetButtonKlik();
-
     }
 
+    /**
+     * Resetuje stan gry po wykonaniu ruchu.
+     * Czyści sekwencję ruchów i ukrywa obwódki zaznaczenia.
+     */
     public void resetButtonKlik() {
         sekwencjaRuchow = new ArrayList<>();
         for (PoleWGUI pole : pola) {
@@ -325,8 +362,11 @@ public class GraGUIController extends GUIController {
         }
     }
 
+    /**
+     * Sprawdza, czy gracz może wykonać ruch.
+     * Jeśli sekwencja ruchów jest poprawna, umożliwia wykonanie ruchu.
+     */
     private void czyMoznaWykonacRuch() {
-
         if (sekwencjaRuchow.size() > 1) {
             String doWyslania = "";
             for (int[] pole : sekwencjaRuchow) {
@@ -344,8 +384,11 @@ public class GraGUIController extends GUIController {
         }
     }
 
+    /**
+     * Aktualizuje planszę gry na podstawie ostatniego ruchu.
+     * Przemieszcza pionek na odpowiednie pole.
+     */
     private void aktualizujPlansze() {
-
         String odp = sendCommand("lastMove");
         String[] koords1 = odp.split(" ");
         String[] koords2 = new String[] {
@@ -372,7 +415,6 @@ public class GraGUIController extends GUIController {
             ostatniRuch[1][1] = nowyOstatniRuch[1][1];
 
             for (PoleWGUI pole : pola) {
-
                 if (pole.getKoordynaty()[0] == nowyOstatniRuch[0][0]
                         && pole.getKoordynaty()[1] == nowyOstatniRuch[0][1]) {
                     poleStart = pole;
@@ -389,5 +431,4 @@ public class GraGUIController extends GUIController {
             poleStart.getCirc().setFill(kolorGracza.get(poleStart.getTyp()));
         }
     }
-
 }

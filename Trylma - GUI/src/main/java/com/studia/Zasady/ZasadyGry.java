@@ -12,7 +12,10 @@ import com.studia.Plansza.Plansza;
  * poprawność ruchów w grze.
  */
 public abstract class ZasadyGry {
+
+    /** Liczba graczy */
     protected int liczbaGraczy;
+    /** Tablica przechowująca informacje o stanie zwycięstwa*/
     protected int[] warunkiZwyciestwa;
 
     /**

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import com.studia.Zasady.FabrykaZasad;
 import com.studia.Zasady.TypGry;
 
-public class PlanszaTestCapture {
+class PlanszaTestCapture {
     private Plansza plansza;
 
     @BeforeEach
