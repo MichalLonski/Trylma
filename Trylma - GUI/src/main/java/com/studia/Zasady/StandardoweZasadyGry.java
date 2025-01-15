@@ -58,20 +58,19 @@ public class StandardoweZasadyGry extends ZasadyGry {
         boolean robiSkok = false;
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
-            int kolumnaP = sekwencjaRuchow[i][0];
-            int wierszP = sekwencjaRuchow[i][1];
-            int kolumnaK = sekwencjaRuchow[i + 1][0];
-            int wierszK = sekwencjaRuchow[i + 1][1];
-
+            int wierszP = sekwencjaRuchow[i][0];
+            int kolumnaP = sekwencjaRuchow[i][1];
+            int wierszK = sekwencjaRuchow[i + 1][0];
+            int kolumnaK = sekwencjaRuchow[i + 1][1];
             if (kopiaPlanszy.sprawdzPole(wierszK, kolumnaK).zajete()) {
                 rezultat = false;
-            } else if ((wierszP == wierszK && Math.abs(kolumnaK - kolumnaP) == 2)
-                    || ((Math.abs(kolumnaK - kolumnaP) == 1 && Math.abs(wierszK - wierszP) == 1))) {
+            } else if ((kolumnaP == kolumnaK && Math.abs(wierszK - wierszP) == 2)
+                    || ((Math.abs(wierszK - wierszP) == 1 && Math.abs(kolumnaK - kolumnaP) == 1))) {
                 rezultat = ((i + 1) == sekwencjaRuchow.length - 1);
                 robiRuch = true;
-            } else if ((Math.abs(kolumnaK - kolumnaP) == 4 && Math.abs(wierszK - wierszP) == 0)
-                    || (Math.abs(kolumnaK - kolumnaP) == 2 && Math.abs(wierszK - wierszP) == 2)) {
-                rezultat = skokJestLegalny(kopiaPlanszy, kolumnaP, wierszP, kolumnaK, wierszK);
+            } else if ((Math.abs(wierszK - wierszP) == 4 && Math.abs(kolumnaK - kolumnaP) == 0)
+                    || (Math.abs(wierszK - wierszP) == 2 && Math.abs(kolumnaK - kolumnaP) == 2)) {
+                rezultat = skokJestLegalny(kopiaPlanszy, wierszP, kolumnaP, wierszK, kolumnaK);
                 robiSkok = true;
             }
 
@@ -80,8 +79,9 @@ public class StandardoweZasadyGry extends ZasadyGry {
             if (!rezultat) {
                 break;
             }
+            int temp = warunkiZwyciestwa[gracz];
             wykonajRuch(kopiaPlanszy, new int[][] { sekwencjaRuchow[i], sekwencjaRuchow[i + 1] }, gracz);
-
+            warunkiZwyciestwa[gracz] = temp;
         }
 
         if (rezultat) {
@@ -110,7 +110,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
         if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
             return false;
         }
-        return plansza.sprawdzPole((kolumnaP + kolumnaK) / 2, (wierszP + wierszK) / 2).zajete();
+        return plansza.sprawdzPole((wierszP + wierszK) / 2, (kolumnaP + kolumnaK) / 2).zajete();
     }
 
     /**

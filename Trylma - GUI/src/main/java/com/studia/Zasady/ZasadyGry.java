@@ -121,6 +121,7 @@ public abstract class ZasadyGry {
      * @return True, jeśli ruch został wykonany poprawnie, w przeciwnym razie false.
      */
     public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
+        plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
         return false;
     }
 

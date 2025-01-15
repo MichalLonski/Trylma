@@ -203,7 +203,7 @@ public class CaptureZasadyGry extends ZasadyGry {
             temp2[i] = temp.get(i);
         }
         pionkiDoZbicia = temp2;
-        plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
+        super.wykonajRuch(plansza, sekwencjaRuchow,gracz);
         return !istniejaRuchy(plansza);
     }
 
