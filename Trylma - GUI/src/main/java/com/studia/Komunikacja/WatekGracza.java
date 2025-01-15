@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import com.studia.Gracz;
+import com.studia.Zasady.CaptureZasadyGry;
 import com.studia.Zasady.TypGry;
 
 /**
@@ -128,7 +129,28 @@ public class WatekGracza extends Thread {
                         gracz.dajGre().wykonajRuch(gracz.ktoreMiejsce(), sekwencjaRuchow1);
                         out.println("success");
                         break;
+                    case "pass":
+                        gracz.dajGre().passTury(gracz.ktoreMiejsce());
+                        out.println("success");
+                        break;
+                    case  "didIWin":
+                        if(gracz.dajGre().dajZasadyGry().getClass() == CaptureZasadyGry.class){
+                            out.println(gracz.dajGre().dajZasadyGry().zwyciezca(gracz.ktoreMiejsce()));
+                        }else {
+                            out.println(gracz.dajGre().dajZasadyGry().zwyciezca(gracz.ktoreMiejsce()) == gracz.ktoreMiejsce());
+                        }
 
+                        break;
+                    case "piecesToTakeOff":
+
+                        int[][] listaDoZbicia = gracz.dajGre().dajZasadyGry().getPionkiDoZbicia();
+                        System.out.println(listaDoZbicia[0][0] + " " + listaDoZbicia[0][1]);
+                        String doWyslania = "";
+                        for (int[] pole : listaDoZbicia){
+                            doWyslania = doWyslania + " " + pole[0] + "!" + pole[1];
+                        }
+                        out.println(doWyslania);
+                        break;
                 }
 
             }

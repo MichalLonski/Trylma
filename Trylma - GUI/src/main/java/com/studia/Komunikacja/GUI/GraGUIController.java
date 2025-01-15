@@ -1,17 +1,17 @@
 package com.studia.Komunikacja.GUI;
 
+import com.studia.Zasady.CaptureZasadyGry;
 import com.studia.Zasady.FabrykaZasad;
 import com.studia.Zasady.TypGry;
 import com.studia.Zasady.ZasadyGry;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,9 +31,11 @@ import static java.lang.Thread.sleep;
  */
 public class GraGUIController extends GUIController {
 
+
     private ZasadyGry zasady; // Zasady gry, używane do generowania planszy
     private Stage taScena; // Scena gry
     private volatile boolean wTymMenu = true; // Flaga wskazująca, czy nadal jesteśmy w menu oczekiwania
+    private volatile boolean czyWygral = false; // Flaga wskazująca czy gracz wygrał już
     private volatile boolean graRozpoczeta = false; // Flaga wskazująca, czy gra już się rozpoczęła
     private int miejsceGracza; // Miejsce gracza w kolejce
     private int turaGracza; // Numer aktualnej tury
@@ -97,10 +99,16 @@ public class GraGUIController extends GUIController {
     Button wykonajRuchButton;
 
     @FXML
+    Button passButton;
+
+    @FXML
     Rectangle twojKolorRectangle;
 
     @FXML
     Rectangle turaKolorRectangle;
+
+    @FXML
+    HBox oznaczenieKolorowHBOX;
 
     /**
      * Generuje planszę gry na podstawie zasad gry.
@@ -210,7 +218,7 @@ public class GraGUIController extends GUIController {
             rect.setOnMouseClicked((MouseEvent event) -> poleKlikniete(pole, obwodkaCircle, typ));
         } else {
             // Dla innych typów pionków
-            rect.setFill(kolorGracza.get(typ));
+            rect.setFill(Color.WHITE);
             rect.toFront();
             Circle circle = new Circle();
             Circle obwodkaCircle = new Circle();
@@ -267,19 +275,37 @@ public class GraGUIController extends GUIController {
                 if (graRozpoczeta) {
                     turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
                     turaKolorRectangle.setFill(kolorGracza.get(turaGracza));
-                    Platform.runLater(this::aktualizujPlansze);
 
-                    if (turaGracza == miejsceGracza) {
+                    Platform.runLater(() -> {
+                        aktualizujPlansze();
+                        aktualizujTabliceWygranych();
+                    });
+
+                    if (turaGracza == miejsceGracza && !czyWygral) {
                         Platform.runLater(() -> {
+                            oczekiwanieLabel.setText("Teraz twoja tura");
+                            passButton.setDisable(false);
                             resetButton.setDisable(false);
                             czyMoznaWykonacRuch();
                         });
+                        if(sendCommand("didIWin").equals("true")){
+                            Platform.runLater(() -> {
+                                wygrana();
+                            });
+                        }
 
-                    } else {
+                    } else if (!czyWygral){
                         Platform.runLater(() -> {
+                            oczekiwanieLabel.setText("Teraz nie twoja tura");
+                            passButton.setDisable(true);
                             resetButton.setDisable(true);
                             wykonajRuchButton.setDisable(true);
                         });
+                        if(sendCommand("didIWin").equals("true")){
+                            Platform.runLater(() -> {
+                                wygrana();
+                            });
+                        }
                     }
 
                 } else {
@@ -291,12 +317,19 @@ public class GraGUIController extends GUIController {
                     if (odp.equals("true")) {
 
                         Platform.runLater(() -> {
-                            oczekiwanieLabel.setVisible(false);
+
                             miejsceGracza = Integer.parseInt(sendCommand("playerSeat"));
                             turaGracza = Integer.parseInt(sendCommand("currentPlayer"));
                             turaKolorRectangle.setFill(kolorGracza.get(turaGracza));
                             twojKolorRectangle.setFill(kolorGracza.get(miejsceGracza));
                             graRozpoczeta = true;
+
+                            if(!(zasady.getClass() == CaptureZasadyGry.class)){
+                                oczekiwanieLabel.setVisible(false);
+                                turaKolorRectangle.setVisible(true);
+                                twojKolorRectangle.setVisible(true);
+                                oznaczenieKolorowHBOX.setVisible(true);
+                            }
 
                         });
                     }
@@ -332,6 +365,7 @@ public class GraGUIController extends GUIController {
             default:
                 throw new IllegalArgumentException("Błąd w ustawianiu zasad");
         }
+        oznaczenieKolorowHBOX.setVisible(false);
         zasadyTextArea.setText(zasady.opisZasad().replaceAll("&", "\n"));
         komunikacja.setDaemon(true);
         komunikacja.start();
@@ -360,6 +394,14 @@ public class GraGUIController extends GUIController {
             Circle circ = pole.getObwodkaCirc();
             circ.setVisible(false);
         }
+    }
+
+    /**
+     * Pasuje ture gracza oraz czyści sekwencję ruchów i ukrywa obwódki zaznaczenia.
+     */
+    public void passButtonKlik() {
+        resetButtonKlik();
+        sendCommand("pass");
     }
 
     /**
@@ -427,8 +469,66 @@ public class GraGUIController extends GUIController {
             poleKoniec.getCirc().setStroke(Color.BLACK);
             poleKoniec.getCirc().setFill(poleStart.getCirc().getFill());
 
-            poleStart.getCirc().setStroke(kolorGracza.get(poleStart.getTyp()));
-            poleStart.getCirc().setFill(kolorGracza.get(poleStart.getTyp()));
+            poleStart.getCirc().setStroke(kolorGracza.get(0));
+            poleStart.getCirc().setFill(kolorGracza.get(0));
+
+            usunPionki();
         }
     }
+
+    /**
+     * W trybie capture usuwa pionki na podstawie ostatniego ruchu.
+     */
+    private void usunPionki(){
+        if(zasady.getClass() == CaptureZasadyGry.class){
+            String odp = sendCommand("piecesToTakeOff");
+            String[] polaDoUsunieca = odp.split(" ");
+            int[][] polaDoUsuniecia1 = new int[polaDoUsunieca.length-1][2];
+
+            for (int j = 0; j < polaDoUsunieca.length-1; j++) {
+                polaDoUsuniecia1[j] = new int[] {
+                        Integer.parseInt(polaDoUsunieca[j+1].split("!")[1]),
+                        Integer.parseInt(polaDoUsunieca[j+1].split("!")[0]) };
+
+            }
+
+
+
+            for(PoleWGUI poleWGUi : pola){
+                for(int[] pole : polaDoUsuniecia1 ){
+                    if(pole[0] == poleWGUi.getKoordynaty()[1] && pole[1] == poleWGUi.getKoordynaty()[0]){
+                        poleWGUi.getCirc().setFill(kolorGracza.get(0));
+                        poleWGUi.getCirc().setStroke(kolorGracza.get(0));
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gdy Gracz wygra, ustawia odpowiednią flage na true i pojawia MessageBox
+     */
+    private void wygrana(){
+
+        czyWygral = true;
+
+        String wiadomosc = "Wygrałeś gre, teraz możesz obserwować innych";
+        oczekiwanieLabel.setText("Wygrałeś !");
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("WYgrana");
+        alert.setHeaderText("Wygrałeś");
+        alert.setContentText(wiadomosc);
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("");
+            }
+        });
+
+    }
+
+    private void aktualizujTabliceWygranych(){
+
+    }
+
 }

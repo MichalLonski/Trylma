@@ -2,6 +2,9 @@ package com.studia.Zasady;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.studia.Plansza.Plansza;
@@ -12,6 +15,8 @@ import com.studia.Plansza.Pole;
  * Zasady te opierają się na zbijaniu pionów.
  */
 public class CaptureZasadyGry extends ZasadyGry {
+
+    private int[][] pionkiDoZbicia;
 
     /**
      * Konstruktor klasy CaptureZasadyGry.
@@ -172,6 +177,7 @@ public class CaptureZasadyGry extends ZasadyGry {
     @Override
     public boolean wykonajRuch(Plansza plansza, int[][] sekwencjaRuchow, int gracz) {
 
+        ArrayList<int[]> temp = new ArrayList<>();
         for (int i = 0; i < sekwencjaRuchow.length - 1; i++) {
 
             int kolumnaP = sekwencjaRuchow[i][0];
@@ -179,9 +185,16 @@ public class CaptureZasadyGry extends ZasadyGry {
             int wierszK = sekwencjaRuchow[i + 1][0];
             int kolumnaK = sekwencjaRuchow[i + 1][1];
 
+            temp.add(new int[] {(kolumnaK + kolumnaP) / 2,(wierszK + wierszP) / 2});
             plansza.sprawdzPole((kolumnaK + kolumnaP) / 2, (wierszK + wierszP) / 2).setGracz(0);
             warunkiZwyciestwa[gracz]++;
         }
+        System.out.println(temp.toString());
+        int[][] temp2 = new int[temp.size()][2];
+        for (int i = 0;i < temp.size();i++){
+            temp2[i] = temp.get(i);
+        }
+        pionkiDoZbicia = temp2;
         plansza.wykonajRuch(sekwencjaRuchow[0], sekwencjaRuchow[sekwencjaRuchow.length - 1], gracz);
         return !istniejaRuchy(plansza);
     }
@@ -202,5 +215,10 @@ public class CaptureZasadyGry extends ZasadyGry {
             }
         }
         return idx;
+    }
+
+    @Override
+    public int[][] getPionkiDoZbicia() {
+        return pionkiDoZbicia;
     }
 }

@@ -133,4 +133,13 @@ public abstract class ZasadyGry {
     public int zwyciezca(int gracz) {
         return (warunkiZwyciestwa[gracz] == 10 ? gracz : 0);
     }
+
+    /**
+     * Zwraca zwycięzcę tablice pionków do zbicia.
+     *
+     * @return Tablica pionków do zbicia.
+     */
+    public int[][] getPionkiDoZbicia(){
+        return null;
+    }
 }

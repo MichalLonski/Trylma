@@ -9,19 +9,19 @@
       <HBox layoutX="5.0" layoutY="5.0" spacing="5.0">
          <children>
             <Pane fx:id="planszaPane" />
-            <Pane fx:id="menuPane" prefHeight="280.0" prefWidth="240.0">
+            <Pane fx:id="menuPane" prefHeight="280.0" prefWidth="260.0">
                <children>
-                  <VBox prefHeight="280.0" prefWidth="240.0" spacing="10.0">
+                  <VBox prefHeight="280.0" prefWidth="260.0" spacing="10.0">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="iloscGraczyLabel" alignment="CENTER" layoutX="138.0" layoutY="54.0" prefHeight="17.0" prefWidth="100.0" text="Gracze: 2/6" />
-                              <TextArea fx:id="kolejkaTextArea" editable="false" layoutX="138.0" layoutY="71.0" prefHeight="129.0" prefWidth="100.0" />
+                              <Label fx:id="iloscGraczyLabel" alignment="CENTER" layoutX="146.0" layoutY="49.0" prefHeight="17.0" prefWidth="100.0" text="Gracze: 2/6" />
+                              <TextArea fx:id="kolejkaTextArea" editable="false" layoutX="146.0" layoutY="71.0" prefHeight="129.0" prefWidth="100.0" />
                               <TextArea fx:id="zasadyTextArea" editable="false" prefHeight="200.0" prefWidth="138.0" wrapText="true" />
-                              <Label fx:id="oczekiwanieLabel" alignment="CENTER" layoutX="138.0" layoutY="7.0" prefHeight="42.0" prefWidth="100.0" text="Oczekiwanie na Graczy!!" textAlignment="CENTER" wrapText="true" />
+                              <Label fx:id="oczekiwanieLabel" alignment="CENTER" layoutX="146.0" layoutY="7.0" prefHeight="42.0" prefWidth="100.0" text="Oczekiwanie na Graczy!!" textAlignment="CENTER" wrapText="true" />
                            </children>
                         </Pane>
-                        <HBox prefHeight="20.0" prefWidth="240.0">
+                        <HBox fx:id="oznaczenieKolorowHBOX" prefHeight="20.0" prefWidth="240.0">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                  <children>
@@ -36,10 +36,11 @@
                                  </children>
                               </HBox>
                            </children></HBox>
-                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="240.0" spacing="10.0">
+                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="240.0" spacing="5.0">
                            <children>
                               <Button fx:id="wykonajRuchButton" disable="true" mnemonicParsing="false" onAction="#wykonajRuchButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Potwierdź Ruch" />
                               <Button fx:id="resetButton" disable="true" mnemonicParsing="false" onAction="#resetButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Resetuj Ruch" />
+                              <Button fx:id="passButton" disable="true" mnemonicParsing="false" onAction="#passButtonKlik" text="Pass" />
                            </children>
                         </HBox>
                      </children>
