@@ -3,7 +3,6 @@ package com.studia.Zasady;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -154,6 +153,14 @@ public class CaptureZasadyGry extends ZasadyGry {
         return rezultat;
     }
 
+    @Override
+    protected boolean skokJestLegalny(Plansza plansza, int wierszP, int kolumnaP, int wierszK, int kolumnaK) {
+        if (wierszP % 2 != wierszK % 2 || kolumnaP % 2 != kolumnaK % 2) {
+            return false;
+        }
+        return plansza.sprawdzPole((wierszP + wierszK) / 2, (kolumnaP + kolumnaK) / 2).zajete();
+    }
+
     /**
      * Zwraca nazwę trybu gry.
      * 
@@ -182,16 +189,17 @@ public class CaptureZasadyGry extends ZasadyGry {
 
             int kolumnaP = sekwencjaRuchow[i][0];
             int wierszP = sekwencjaRuchow[i][1];
-            int wierszK = sekwencjaRuchow[i + 1][0];
-            int kolumnaK = sekwencjaRuchow[i + 1][1];
+            int kolumnaK = sekwencjaRuchow[i + 1][0];
+            int wierszK = sekwencjaRuchow[i + 1][1];
 
-            temp.add(new int[] {(kolumnaK + kolumnaP) / 2,(wierszK + wierszP) / 2});
             plansza.sprawdzPole((kolumnaK + kolumnaP) / 2, (wierszK + wierszP) / 2).setGracz(0);
+
+            temp.add(new int[] { (kolumnaK + kolumnaP) / 2, (wierszK + wierszP) / 2 });
             warunkiZwyciestwa[gracz]++;
         }
-        System.out.println(temp.toString());
+        
         int[][] temp2 = new int[temp.size()][2];
-        for (int i = 0;i < temp.size();i++){
+        for (int i = 0; i < temp.size(); i++) {
             temp2[i] = temp.get(i);
         }
         pionkiDoZbicia = temp2;
@@ -222,3 +230,5 @@ public class CaptureZasadyGry extends ZasadyGry {
         return pionkiDoZbicia;
     }
 }
+
+/* */
