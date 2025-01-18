@@ -1,37 +1,88 @@
 # Trylma
+
 Projekt na Technologie Programowania, semestr zimowy, 2024/25
 
 ## Autorzy
 - Michał Loński
 - Jan Brzoska
+  
+---
 
-## Funkcjonalność (na dzień 11.12.2024)
+## Spis treści
+1. [Wersja bez GUI](#wersja-bez-gui)
+2. [Wersja z GUI](#wersja-z-gui)
+---
+## Wersja bez GUI
+
+### Funkcjonalności
 - Serwer obsługujący wiele klientów, umożliwiający komunikację.
 - Tworzenie, wyświetlanie i dołączanie do gier przez klientów.
 - Przesyłanie informacji o ruchach wśród graczy danej gry.
 
-## Wymagania
+### Wymagania
 - Java Development Kit (JDK) 21
 - Apache Maven
 
-## Instalacja
+### Instalacja
 1. Sklonuj repozytorium:
    ```bash
    git clone https://github.com/MichalLonski/Trylma.git
+   ```
 2. Skompiluj projekt:
-    ```bash
-    cd Trylma/Trylma; mvn compile
+   ```bash
+   cd Trylma/Trylma
+   mvn compile
+   ```
 
-## Uruchamianie
-Upewnij się, że znajdujesz się w folderze zawierającym plik **pom.xml**.
+### Uruchamianie
+1. Upewnij się, że znajdujesz się w folderze zawierającym plik **pom.xml**.
+2. Aby uruchomić serwer:
+   ```bash
+   mvn exec:java -Dexec.mainClass="com.studia.WlaczSerwer"
+   ```
+3. Aby uruchomić nowego klienta:
+   ```bash
+   mvn exec:java -Dexec.mainClass="com.studia.Komunikacja.Klient"
+   ```
 
-- Aby uruchomić serwer:
-    ```bash
-    mvn exec:java -Dexec.mainClass="com.studia.WlaczSerwer"
+---
 
-- Aby uruchomić nowego klienta:
-    ```bash
-    mvn exec:java -Dexec.mainClass="com.studia.Komunikacja.Klient"
+## Wersja z GUI
+
+### Funkcjonalności
+- Interfejs graficzny umożliwiający graczom wizualne zarządzanie grą.
+- Wizualizacja planszy i ruchów graczy w czasie rzeczywistym.
+- Obsługa rozgrywek dla wielu graczy z możliwością dołączania przez GUI.
+- 3 tryby rozgrywki
+
+### Wymagania
+- Java Development Kit (JDK) 21
+- Apache Maven
+- JavaFX 21
+
+### Instalacja
+1. Sklonuj repozytorium:
+   ```bash
+   git clone https://github.com/MichalLonski/Trylma.git
+   ```
+2. Skompiluj projekt:
+   ```bash
+   cd "Trylma/Trylma - GUI"
+   mvn compile
+   ```
+
+### Uruchamianie
+1. Upewnij się, że znajdujesz się w folderze zawierającym plik **pom.xml**.
+2. Aby uruchomić serwer:
+   ```bash
+   mvn exec:java -Dexec.mainClass="com.studia.WlaczSerwer"
+   ```
+3. Aby uruchomić nowego klienta:
+   ```bash
+   mvn javafx:run
+   ```
+
+---
 
 Alternatywnie można zaimportować projekt do **Eclipse**
 - Uruchom Eclipse i przejdź do menu `File`.
