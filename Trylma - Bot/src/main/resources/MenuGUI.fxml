@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studia.Komunikacja.GUI.MenuGUIController">
+   <children>
+      <Pane fx:id="stworzGrePane" prefHeight="200.0" prefWidth="400.0" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="54.0" layoutY="-1.0" prefHeight="30.0" prefWidth="293.0" text="Tworzenie Gry">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <VBox layoutX="286.0" layoutY="28.0" prefHeight="152.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="Ilosć Graczy" />
+                  <ComboBox fx:id="iloscGraczyComboBox" prefWidth="150.0">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="2" />
+                           <String fx:value="3" />
+                           <String fx:value="4" />
+                           <String fx:value="6" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="Wariant Gry" />
+                  <ComboBox fx:id="wariantGryComboBox" onAction="#wyswietlOpisZasad" prefWidth="150.0">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Standardowy" />
+                           <String fx:value="Super Chinese Checkers" />
+                           <String fx:value="Capture" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <Button mnemonicParsing="false" onAction="#stworzGreFinalButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Stwórz Grę" />
+                  <Button mnemonicParsing="false" onAction="#cofnijButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Cofnij" />
+               </children>
+            </VBox>
+            <TextArea fx:id="opisWariantuTextArea" layoutX="14.0" layoutY="31.0" prefHeight="155.0" prefWidth="260.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="menuGlownePane" prefHeight="200.0" prefWidth="400.0">
+         <children>
+            <VBox layoutX="264.0" layoutY="46.0" prefHeight="109.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#stworzGreButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Stwórz Grę" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="ID Gry:" />
+                  <TextField fx:id="IDGryDoDoloczeniaTextField" />
+                  <Button mnemonicParsing="false" onAction="#doloczdoGryButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Dołącz do Gry" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#wyjdzButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Wyjście" />
+               </children>
+            </VBox>
+            <TextArea fx:id="listaGierTextArea" editable="false" layoutX="27.0" layoutY="75.0" prefHeight="113.0" prefWidth="200.0" wrapText="true" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="46.0" prefHeight="17.0" prefWidth="60.0" text="Lista Gier" />
+            <Button layoutX="152.0" layoutY="42.0" mnemonicParsing="false" onAction="#odswiezButtonKlik" prefHeight="25.0" prefWidth="75.0" text="Odśwież" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="12.0" prefHeight="18.0" prefWidth="200.0" text="Menu Główne" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
