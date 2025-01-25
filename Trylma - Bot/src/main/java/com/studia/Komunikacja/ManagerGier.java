@@ -53,10 +53,10 @@ public class ManagerGier {
      * @param liczbaGraczy    liczba graczy, którzy wezmą udział w grze
      * @param inicjujacyGracz gracz, który tworzy grę
      */
-    public synchronized void inicjujNowaGre(TypGry typGry, int liczbaGraczy, Gracz inicjujacyGracz) {
-        Gra nowaGra = new Gra(typGry, liczbaGraczy);
+    public synchronized void inicjujNowaGre(TypGry typGry, int liczbaGraczy, Gracz inicjujacyGracz,int iloscBotow) {
+        Gra nowaGra = new Gra(typGry, liczbaGraczy,iloscBotow);
         ListaGier.add(nowaGra);
-        nowaGra.dodajGracza(inicjujacyGracz);
+        dolaczDoGry(inicjujacyGracz,String.valueOf(nowaGra.dajID()));
     }
 
     /**

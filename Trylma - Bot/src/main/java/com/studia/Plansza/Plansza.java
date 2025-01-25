@@ -118,4 +118,8 @@ public class Plansza {
         sprawdzPole(wierszK, kolumnaK).setGracz(gracz);
         sprawdzPole(wierszP, kolumnaP).setGracz(0);
     }
+
+    public Pole[][] dajPlanszaDoGry(){
+        return planszaDoGry;
+    }
 }

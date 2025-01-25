@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studia.Komunikacja.GUI.MenuGUIController">
    <children>
-      <Pane fx:id="stworzGrePane" prefHeight="200.0" prefWidth="400.0" visible="false">
+      <Pane fx:id="stworzGrePane" prefHeight="240.0" prefWidth="400.0" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="54.0" layoutY="-1.0" prefHeight="30.0" prefWidth="293.0" text="Tworzenie Gry">
                <font>
@@ -39,6 +39,7 @@
                      </items>
                   </ComboBox>
                   <Button mnemonicParsing="false" onAction="#stworzGreFinalButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Stwórz Grę" />
+                  <Button mnemonicParsing="false" onAction="#dodajBotaButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Dodaj Bota" />
                   <Button mnemonicParsing="false" onAction="#cofnijButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Cofnij" />
                </children>
             </VBox>

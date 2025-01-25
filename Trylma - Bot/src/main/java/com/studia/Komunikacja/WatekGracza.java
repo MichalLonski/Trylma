@@ -72,7 +72,8 @@ public class WatekGracza extends Thread {
                         };
 
                         int liczbaGraczy = Integer.parseInt(slowa[2]);
-                        ManagerGier.dajInstancje().inicjujNowaGre(typgry, liczbaGraczy, gracz);
+                        int iloscBotow = Integer.parseInt(slowa[3]);
+                        ManagerGier.dajInstancje().inicjujNowaGre(typgry, liczbaGraczy, gracz,iloscBotow);
                         out.println("success");
 
                         break;

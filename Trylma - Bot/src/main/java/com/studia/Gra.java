@@ -21,6 +21,7 @@ public class Gra {
     private KolejkaGraczy kolejka;
     private Plansza planszaGry;
     private boolean graWTrakcie = false;
+    private ArrayList<Bot> listaBotow = new ArrayList<>();
     private int[][] ruchWPoprzedniejTurze = new int[][] {
             new int[] { 0, 0 },
             new int[] { 0, 0 },
@@ -33,12 +34,13 @@ public class Gra {
      * @param liczbaGraczy liczba graczy uczestniczących w grze.
      * @throws IllegalArgumentException gdy liczba graczy jest niewłaściwa.
      */
-    public Gra(TypGry typ, int liczbaGraczy) {
+    public Gra(TypGry typ, int liczbaGraczy,int iloscBotow) {
         if (liczbaGraczy == 2 || liczbaGraczy == 3 || liczbaGraczy == 4 || liczbaGraczy == 6) {
             this.zasadyGry = FabrykaZasad.stworzZasadyGry(typ, liczbaGraczy);
             this.listaGraczy = new ArrayList<>();
             ID_GRY = ID;
             ID++;
+            for(int i = 0;i < iloscBotow;i++){dodajBota();}
         } else {
             throw new IllegalArgumentException("Zła liczba graczy");
         }
@@ -60,6 +62,7 @@ public class Gra {
         planszaGry = new Plansza();
         planszaGry.utworzPlansze(zasadyGry.infoJSON());
         graWTrakcie = true;
+        for (Bot bot : listaBotow){bot.startBot();}
         return kolejka.obecnyGracz();
     }
 
@@ -204,6 +207,7 @@ public class Gra {
         }
         this.listaGraczy.add(gracz);
         gracz.przypiszGre(this);
+        System.out.println(listaGraczy.size());
     }
 
     /**
@@ -271,6 +275,10 @@ public class Gra {
         return kolejka.obecnyGracz();
     }
 
+    public Plansza dajPlanszaGry(){
+        return planszaGry;
+    }
+
     /**
      * Sprawdza, czy ruch jest poprawny.
      *
@@ -289,5 +297,12 @@ public class Gra {
      */
     public String opis() {
         return "ID gry: " + ID_GRY + " | Zapełnienie: " + listaGraczy.size() + "/" + zasadyGry.ileGraczy();
+    }
+
+    private void dodajBota(){
+        System.out.println("Dodano Bota!");
+        Bot bot = new Bot();
+        listaBotow.add(bot);
+        dodajGracza(bot.getGracz());
     }
 }

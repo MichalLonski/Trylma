@@ -22,6 +22,9 @@ import java.io.PrintWriter;
  */
 public class MenuGUIController extends GUIController {
 
+    /** Ilośc botów do dodania w tworzonej właśnie grze */
+    private int iloscBotowDoDodania = 0;
+
     /** Strumień wejściowy do komunikacji z serwerem */
     private BufferedReader in;
 
@@ -113,8 +116,9 @@ public class MenuGUIController extends GUIController {
         try {
             if (wariantGryComboBox.getValue() != null && iloscGraczyComboBox.getValue() != null) {
                 sendCommand("create" + " " + wariantGryComboBox.getValue().replace(" ", "") + " "
-                        + iloscGraczyComboBox.getValue());
+                        + iloscGraczyComboBox.getValue() + " " + iloscBotowDoDodania);
                 KlientApplication.MenuDoGry();
+                System.out.println(iloscBotowDoDodania);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,6 +132,11 @@ public class MenuGUIController extends GUIController {
     public void cofnijButtonKlik() {
         menuGlownePane.setVisible(true);
         stworzGrePane.setVisible(false);
+    }
+
+    public void dodajBotaButtonKlik(){
+        iloscBotowDoDodania++;
+        System.out.println(iloscBotowDoDodania);
     }
 
     /**
