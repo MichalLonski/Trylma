@@ -206,7 +206,7 @@ public class GraGUIController extends GUIController {
             obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
             obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
 
-            obwodkaCircle.setStroke(Color.CYAN);
+            obwodkaCircle.setStroke(Color.RED);
             obwodkaCircle.setFill(Color.TRANSPARENT);
             obwodkaCircle.setMouseTransparent(true);
             obwodkaCircle.setVisible(false);
@@ -239,7 +239,7 @@ public class GraGUIController extends GUIController {
             obwodkaCircle.setCenterX((double) ROZMIAR_POLA / 2);
             obwodkaCircle.setCenterY((double) ROZMIAR_POLA / 2);
 
-            obwodkaCircle.setStroke(Color.CYAN);
+            obwodkaCircle.setStroke(Color.RED);
             obwodkaCircle.setFill(Color.TRANSPARENT);
             obwodkaCircle.setMouseTransparent(true);
             obwodkaCircle.setVisible(false);
@@ -430,7 +430,7 @@ public class GraGUIController extends GUIController {
      * Aktualizuje planszę gry na podstawie ostatniego ruchu.
      * Przemieszcza pionek na odpowiednie pole.
      */
-    private void aktualizujPlansze() {
+    private synchronized void aktualizujPlansze() {
         String odp = sendCommand("lastMove");
         String[] koords1 = odp.split(" ");
         String[] koords2 = new String[] {

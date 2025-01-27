@@ -131,7 +131,7 @@ public abstract class ZasadyGry {
      */
     protected final int[][] legalneKierunki() {
         return new int[][] {
-                { -2, 0 }, { 2, 0 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
+                { 0, -2 }, { 0, 2 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
         };
     }
 }

@@ -46,7 +46,7 @@ public class Pole {
      *         przeciwnym razie false.
      */
     public boolean zajete() {
-        return nrGracza > 0 && nrGracza <= 6;
+        return nrGracza != 0;
     }
 
     /**

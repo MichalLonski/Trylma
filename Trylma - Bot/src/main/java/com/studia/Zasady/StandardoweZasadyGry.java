@@ -240,6 +240,7 @@ public class StandardoweZasadyGry extends ZasadyGry {
         return wszystkieRuchy;
     }
 
+
     /**
      * Rekurencyjna metoda do generowania skoków wielokrotnych (np. podwójnych,
      * potrójnych).
@@ -251,35 +252,75 @@ public class StandardoweZasadyGry extends ZasadyGry {
      * @param wszystkieRuchy  Lista, do której dodajemy możliwe ruchy.
      * @param odwiedzone      Zbiór odwiedzonych pól w tej sekwencji.
      */
+//    private void generujSkokiWielokrotne(Plansza plansza, int gracz, int[][] sekwencjaRuchow,
+//            List<int[][]> wszystkieRuchy, List<int[]> odwiedzone) {
+//        int[] ostatniePole = sekwencjaRuchow[sekwencjaRuchow.length - 1];
+//        int wiersz = ostatniePole[0];
+//        int kolumna = ostatniePole[1];
+//
+//        odwiedzone.add(new int[] { wiersz, kolumna });
+//
+//        for (int[] ruch : legalneKierunki()) {
+//            int nowaKolumna = kolumna + 2 * ruch[0];
+//            int nowyWiersz = wiersz + 2 * ruch[1];
+//
+//            if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
+//                    && nowyWiersz < Plansza.LICZBA_WIERSZY &&
+//                    !czyPoleByloOdwiedzone(nowyWiersz, nowaKolumna, odwiedzone) &&
+//                    ruchJestPoprawny(plansza, sekwencjaRuchow, gracz)) {
+//
+//                int[][] nowyRuch = new int[sekwencjaRuchow.length + 1][];
+//                System.arraycopy(sekwencjaRuchow, 0, nowyRuch, 0, sekwencjaRuchow.length);
+//                nowyRuch[sekwencjaRuchow.length] = new int[] { nowyWiersz, nowaKolumna };
+//
+//                wszystkieRuchy.add(nowyRuch);
+//                odwiedzone.add(new int[] { nowyWiersz, nowaKolumna });
+//
+//                generujSkokiWielokrotne(plansza, gracz, nowyRuch, wszystkieRuchy, odwiedzone);
+//            }
+//        }
+//
+//        odwiedzone.remove(odwiedzone.size() - 1);
+//    }
+
     private void generujSkokiWielokrotne(Plansza plansza, int gracz, int[][] sekwencjaRuchow,
-            List<int[][]> wszystkieRuchy, List<int[]> odwiedzone) {
+                                         List<int[][]> wszystkieRuchy, List<int[]> odwiedzone) {
         int[] ostatniePole = sekwencjaRuchow[sekwencjaRuchow.length - 1];
         int wiersz = ostatniePole[0];
         int kolumna = ostatniePole[1];
 
-        odwiedzone.add(new int[] { wiersz, kolumna });
-
+        // Iteracja po wszystkich możliwych kierunkach
         for (int[] ruch : legalneKierunki()) {
-            int nowaKolumna = kolumna + 2 * ruch[0];
+            int srodekWiersz = wiersz + ruch[1];
+            int srodekKolumna = kolumna + ruch[0];
             int nowyWiersz = wiersz + 2 * ruch[1];
+            int nowaKolumna = kolumna + 2 * ruch[0];
 
-            if (0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN && 0 <= nowyWiersz
-                    && nowyWiersz < Plansza.LICZBA_WIERSZY &&
+            // Sprawdzanie, czy skok jest w granicach planszy
+            if (0 <= nowyWiersz && nowyWiersz < Plansza.LICZBA_WIERSZY &&
+                    0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN &&
                     !czyPoleByloOdwiedzone(nowyWiersz, nowaKolumna, odwiedzone) &&
-                    ruchJestPoprawny(plansza, sekwencjaRuchow, gracz)) {
+                    plansza.sprawdzPole(srodekWiersz, srodekKolumna).getGracz() != 0 && // Pole pośrodku musi być zajęte
+                    plansza.sprawdzPole(nowyWiersz, nowaKolumna).getGracz() == 0 && // Pole docelowe musi być puste
+                    plansza.sprawdzPole(nowyWiersz,nowaKolumna).getStrefa() == 0 && // Strefa pola docelowego musi być albo niczyja
+                    plansza.sprawdzPole(nowyWiersz,nowaKolumna).getStrefa() == gracz) { // albo należeć do gracza któty się rusza
 
+                // Tworzenie nowej sekwencji ruchów
                 int[][] nowyRuch = new int[sekwencjaRuchow.length + 1][];
                 System.arraycopy(sekwencjaRuchow, 0, nowyRuch, 0, sekwencjaRuchow.length);
                 nowyRuch[sekwencjaRuchow.length] = new int[] { nowyWiersz, nowaKolumna };
 
-                wszystkieRuchy.add(nowyRuch);
-                odwiedzone.add(new int[] { nowyWiersz, nowaKolumna });
+                // Tworzenie nowej listy odwiedzonych pól
+                List<int[]> nowaListaOdwiedzonych = new ArrayList<>(odwiedzone);
+                nowaListaOdwiedzonych.add(new int[] { nowyWiersz, nowaKolumna });
 
-                generujSkokiWielokrotne(plansza, gracz, nowyRuch, wszystkieRuchy, odwiedzone);
+                // Rekurencyjne wywołanie dla dalszych skoków
+                generujSkokiWielokrotne(plansza, gracz, nowyRuch, wszystkieRuchy, nowaListaOdwiedzonych);
+
+                // Dodawanie ruchu tylko wtedy, gdy skok zakończony
+                wszystkieRuchy.add(nowyRuch);
             }
         }
-
-        odwiedzone.remove(odwiedzone.size() - 1);
     }
 
     private boolean czyPoleByloOdwiedzone(int wiersz, int kolumna, List<int[]> odwiedzone) {

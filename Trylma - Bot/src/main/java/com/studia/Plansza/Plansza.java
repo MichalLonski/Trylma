@@ -74,6 +74,7 @@ public class Plansza {
             planszaDoGry[nrWiersza] = wiersz;
         }
         ustawStrefy();
+        //drukujPlanszeTest();
     }
 
     /**
@@ -122,4 +123,40 @@ public class Plansza {
     public Pole[][] dajPlanszaDoGry(){
         return planszaDoGry;
     }
+
+    public void drukujPlanszeTest(){
+        for(Pole[] a : planszaDoGry){
+            for(Pole pole : a){
+                System.out.print(pole.getGracz()+",");
+            }
+            System.out.println();
+        }
+    }
+
+    public int[] dajKoordyOdPola(Pole pole){
+        int x = 0;
+        int y = 0;
+        for (int nrWiersza = 0; nrWiersza < LICZBA_WIERSZY; nrWiersza++) {
+            for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
+                if(sprawdzPole(nrWiersza,nrKolumny) == pole){
+                    x = nrWiersza;
+                    y = nrKolumny;
+                }
+            }
+        }
+        return new int[]{x,y};
+    }
+
+//    public String  serializePlansza(){
+//        StringBuilder sb = new StringBuilder();
+//        for (int nrWiersza = 0; nrWiersza < LICZBA_WIERSZY; nrWiersza++) {
+//            for (int nrKolumny = 0; nrKolumny < LICZBA_KOLUMN; nrKolumny++) {
+//                if(sprawdzPole(nrWiersza,nrKolumny) == pole){
+//                    x = nrWiersza;
+//                    y = nrKolumny;
+//                }
+//            }
+//        }
+//    }
+
 }

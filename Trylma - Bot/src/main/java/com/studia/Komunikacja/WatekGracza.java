@@ -38,7 +38,7 @@ public class WatekGracza extends Thread {
      * wyniki.
      */
     @Override
-    public void run() {
+    public synchronized void run() {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);

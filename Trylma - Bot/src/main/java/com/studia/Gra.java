@@ -142,7 +142,7 @@ public class Gra {
      * @param miejsceGracza   miejsce gracza w kolejce.
      * @param sekwencjaRuchow sekwencja ruchów wykonanych przez gracza.
      */
-    public void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
+    public synchronized void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (ruchJestPoprawny(sekwencjaRuchow, miejsceGracza)) {
             if (zasadyGry.wykonajRuch(planszaGry, sekwencjaRuchow, miejsceGracza)) {
                 int wygrany = zasadyGry.zwyciezca(miejsceGracza);
@@ -153,19 +153,21 @@ public class Gra {
                     kolejka.usunGracza(wygrany);
                 }
             }
-            for (int[][] ruch : zasadyGry.possibleMoves(miejsceGracza, planszaGry)) {
-                System.out.print("Ruch: ");
-                for (int[] pole : ruch) {
-                    System.out.print("(" + pole[0] + ", " + pole[1] + ") ");
-                }
-                System.out.println();
-            }
+//            for (int[][] ruch : zasadyGry.possibleMoves(miejsceGracza, planszaGry)) {
+//                System.out.print("Ruch: ");
+//                for (int[] pole : ruch) {
+//                    System.out.print("(" + pole[0] + ", " + pole[1] + ") ");
+//                }
+//                System.out.println();
+//            }
             kolejka.wykonanoRuch();
 
             ruchWPoprzedniejTurze = new int[][] {
                     sekwencjaRuchow[0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1]
             };
+        }else {
+            System.out.println("Zły ruch");
         }
     }
 
@@ -173,7 +175,8 @@ public class Gra {
      * Kończy grę.
      */
     private void koniecGry() {
-        throw new UnsupportedOperationException("Unimplemented method 'koniecGry'");
+        System.out.println("Gra skończona !");
+        //throw new UnsupportedOperationException("Unimplemented method 'koniecGry'");
     }
 
     /**
@@ -182,7 +185,8 @@ public class Gra {
      * @param miejsceGracza miejsce gracza w kolejce.
      */
     private void graczWygrywa(int miejsceGracza) {
-        throw new UnsupportedOperationException("Unimplemented method 'graczWygrywa'");
+        System.out.println("Gracz " + miejsceGracza + " wygrywa !");
+        //throw new UnsupportedOperationException("Unimplemented method 'graczWygrywa'");
     }
 
     /**
@@ -300,9 +304,23 @@ public class Gra {
     }
 
     private void dodajBota(){
-        System.out.println("Dodano Bota!");
+        //System.out.println("Dodano Bota!");
         Bot bot = new Bot();
         listaBotow.add(bot);
         dodajGracza(bot.getGracz());
+    }
+
+    public double[] getSredniaPozycjaPionka(int gracz){
+        int SumKolumn = 0;
+        int SumWiersz = 0;
+        for (int wiersz = 0; wiersz < Plansza.LICZBA_WIERSZY; wiersz++) {
+            for (int kolumna = 0; kolumna < Plansza.LICZBA_KOLUMN; kolumna++) {
+                if (planszaGry.sprawdzPole(wiersz, kolumna).getGracz() == gracz) {
+                    SumWiersz += wiersz;
+                    SumKolumn += kolumna;
+                }
+            }
+        }
+        return new double[]{(double) SumWiersz /10, (double) SumKolumn /10};
     }
 }
