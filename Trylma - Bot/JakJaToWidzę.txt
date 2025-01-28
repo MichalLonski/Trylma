@@ -1,0 +1,56 @@
+
+1. Serwer gry
+- Serwer gry działa w tle, nie posiada interfejsu użytkownika. 
+- Odpowiada za zarządzanie grami, komunikację między klientami oraz ich synchronizację.
+
+2. Klient
+- Klient umożliwia graczowi uruchomienie gry oraz dołączenie do istniejącej rozgrywki.
+- Główne okno klienta:
+  - Przycisk „Nowa gra” – umożliwia stworzenie nowej gry.
+  - Przycisk „Dołącz do gry” – wyświetla listę dostępnych gier (oczekujące na graczy) z następującymi informacjami:
+    - Zasady gry
+    - Zapełnienie gry
+    - Przycisk do dołączenia do gry
+
+3. Tworzenie nowej gry
+- Po kliknięciu przycisku „Nowa gra” otwierane jest okno z następującymi opcjami:
+  - Liczba graczy – pole wyboru liczby graczy (2, 3, 4, 6).
+  - Zasady gry – pole wyboru zasad (np. Z1, Z2, ...), z możliwością dodania opisu do każdej z opcji.
+  - Przycisk „Utwórz” jest aktywowany dopiero po wybraniu liczby graczy oraz zasad gry. Do momentu wypełnienia wszystkich pól, przycisk jest nieaktywny.
+  - Przycisk „Anuluj” – powraca do głównego ekranu.
+
+4. Scena gry
+- Po utworzeniu lub dołączeniu do gry, scena zmienia się na planszę gry, na której:
+  - Wyświetlana jest plansza w kształcie kwadratu (gwiazda wpisana w kwadrat).
+  - Po prawej stronie widoczne są następujące informacje:
+    - Zasady gry
+    - Zapełnienie gry (przed rozpoczęciem)
+    - Lista graczy
+    - Informacja o aktualnym graczu (np. tura gracza nr 1)
+  - Na dole ekranu znajdują się przyciski, aktywne tylko w czasie tury gracza:
+    - „Potwierdź ruch” – aktywny tylko wtedy, gdy gracz wykonuje poprawny ruch na planszy.
+    - „Resetuj ruch” – umożliwia anulowanie wybranego ruchu.
+
+5. Mechanika gry
+- Gra rozpoczyna się po zapełnieniu pokoju graczy.
+- Gracze są losowo ustawiani w kolejności tur.
+- Gracz, który ma aktualnie swoją turę, klika na planszę w celu wybrania pola:
+  - Kliknięcie na dane pole dodaje je do obecnego ruchu.
+  - Kliknięcie ponownie na to samo pole usuwa je z obecnego ruchu (np. A1 A2 A2 A3 → A1 A3).
+  - Jeśli ruch jest niepoprawny, przycisk „Potwierdź ruch” staje się nieaktywny.
+  - Ruchy gracza są weryfikowane na bieżąco. Po edytowaniu ruchu, przycisk „Potwierdź ruch” zostaje aktywowany tylko wtedy, gdy ruch jest poprawny.
+
+6. Zamknięcie gry przez gracza
+- Jeśli gracz, który nie zakończył jeszcze gry, zamknie okno aplikacji, wyświetlane jest okno dialogowe z informacją, że gra została porzucona.
+- Pozostali gracze zostają wyrzuceni do lobby, gra zostaje usunięta z lsity gier.
+
+7. Zakończenie gry
+- Gra kończy się, gdy:
+  - Zostanie tylko jeden gracz, który nie wygrał.
+  - Możliwość rozważenia remisu (zobaczymy czy zechce nam się to robić).
+
+8. Po zakończeniu gry
+- Gracz, który wygrał, ma możliwość:
+  - Oglądania końcowych statystyk gry.
+  - Powrotu do lobby za pomocą przycisku „Do lobby”.
+- Gdy wszyscy gracze opuszczą grę, jest ona usuwana z listy gier.

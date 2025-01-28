@@ -18,12 +18,14 @@
     </properties>
 
     <dependencies>
+        <!-- Zależności do Jackson dla JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
 
+        <!-- Zależności do JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -35,6 +37,7 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <!-- Zależności do testów JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -49,16 +52,46 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Zależność do obsługi JSON -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20230227</version>
         </dependency>
+
+        <!-- Zależności do Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Zależność do H2 (baza danych w pamięci) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.1.214</version>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
-
-
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>2.7.6</version> <!-- Sprawdź najnowszą wersję -->
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
     <build>
         <plugins>
+            <!-- Plugin kompilacji -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -68,6 +101,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Plugin dla JavaFX -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -76,8 +110,6 @@
                     <mainClass>com.studia.Klient</mainClass>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
 </project>

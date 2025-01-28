@@ -1,0 +1,171 @@
+\hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier}{}\doxysection{com.\+studia.\+Komunikacja.\+Manager\+Gier Class Reference}
+\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier}\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_af06467c920e6871133d28145c146b433}{inicjuj\+Nowa\+Gre}} (\mbox{\hyperlink{enumcom_1_1studia_1_1Zasady_1_1TypGry}{Typ\+Gry}} typ\+Gry, int liczba\+Graczy, \mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} inicjujacy\+Gracz)
+\item 
+synchronized int \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a777046f78ecfabf79e2afded5ee9345b}{dolacz\+Do\+Gry}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz, String id)
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_adcb5fc8f8d4bcb7fd5bc16e3878e6105}{jesli\+Gra\+Pelna\+Rozpocznij}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}} gra)
+\item 
+synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a8bf53212f71593f481b662afe7888a58}{wykonaj\+Ruch}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz, int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} sekwencja\+Ruchow)
+\item 
+\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}} \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a84efb96b64074a3a74f4cb2c8f8db43d}{znajdz\+Gre\+Po\+ID}} (int id)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a47e4248fd870b67b299fa55592a7605e}{zarejestruj\+Gracza}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz, Print\+Writer print\+Writer)
+\item 
+Print\+Writer \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_afdfcdb0b3811a02b619a5aad2dfdb73d}{konsola\+Gracza}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz)
+\item 
+String \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a39b4c60aa0ecd10e6b7a1aa1d03f5d83}{wypisz\+Gry}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier}{Manager\+Gier}} \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a6522ef4ee1a239f91dd3522265d6d329}{daj\+Instancje}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa odpowiedzialna za zarządzanie grami na serwerze. Umożliwia tworzenie nowych gier, dołączanie graczy do istniejących gier, wykonywanie ruchów w grach oraz komunikowanie się z graczami.
+
+Jest to implementacja wzorca Singleton, dzięki czemu istnieje tylko jedna instancja tej klasy w systemie. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a6522ef4ee1a239f91dd3522265d6d329}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a6522ef4ee1a239f91dd3522265d6d329}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!dajInstancje@{dajInstancje}}
+\index{dajInstancje@{dajInstancje}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{dajInstancje()}{dajInstancje()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier}{Manager\+Gier}} com.\+studia.\+Komunikacja.\+Manager\+Gier.\+daj\+Instancje (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Zwraca instancję klasy \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier}{Manager\+Gier}} (singleton).
+
+\begin{DoxyReturn}{Returns}
+instancja klasy \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier}{Manager\+Gier}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a777046f78ecfabf79e2afded5ee9345b}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a777046f78ecfabf79e2afded5ee9345b}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!dolaczDoGry@{dolaczDoGry}}
+\index{dolaczDoGry@{dolaczDoGry}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{dolaczDoGry()}{dolaczDoGry()}}
+{\footnotesize\ttfamily synchronized int com.\+studia.\+Komunikacja.\+Manager\+Gier.\+dolacz\+Do\+Gry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{gracz,  }\item[{String}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Dodaje gracza do istniejącej gry.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & gracz, który chce dołączyć do gry \\
+\hline
+{\em id} & ID gry, do której gracz chce dołączyć \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 jeśli dołączenie do gry się udało, -\/1 jeśli gra jest pełna lub nie istnieje 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_af06467c920e6871133d28145c146b433}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_af06467c920e6871133d28145c146b433}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!inicjujNowaGre@{inicjujNowaGre}}
+\index{inicjujNowaGre@{inicjujNowaGre}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{inicjujNowaGre()}{inicjujNowaGre()}}
+{\footnotesize\ttfamily synchronized void com.\+studia.\+Komunikacja.\+Manager\+Gier.\+inicjuj\+Nowa\+Gre (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumcom_1_1studia_1_1Zasady_1_1TypGry}{Typ\+Gry}}}]{typ\+Gry,  }\item[{int}]{liczba\+Graczy,  }\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{inicjujacy\+Gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Inicjuje nową grę i dodaje do niej gracza, który ją stworzył.
+
+
+\begin{DoxyParams}{Parameters}
+{\em typ\+Gry} & typ gry, którą chcemy stworzyć \\
+\hline
+{\em liczba\+Graczy} & liczba graczy, którzy wezmą udział w grze \\
+\hline
+{\em inicjujacy\+Gracz} & gracz, który tworzy grę \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_adcb5fc8f8d4bcb7fd5bc16e3878e6105}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_adcb5fc8f8d4bcb7fd5bc16e3878e6105}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!jesliGraPelnaRozpocznij@{jesliGraPelnaRozpocznij}}
+\index{jesliGraPelnaRozpocznij@{jesliGraPelnaRozpocznij}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{jesliGraPelnaRozpocznij()}{jesliGraPelnaRozpocznij()}}
+{\footnotesize\ttfamily synchronized void com.\+studia.\+Komunikacja.\+Manager\+Gier.\+jesli\+Gra\+Pelna\+Rozpocznij (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}}}]{gra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy gra jest pełna, i jeśli tak, wywołuje rozpoczęcie gry.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gra} & gra, którą należy sprawdzić \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_afdfcdb0b3811a02b619a5aad2dfdb73d}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_afdfcdb0b3811a02b619a5aad2dfdb73d}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!konsolaGracza@{konsolaGracza}}
+\index{konsolaGracza@{konsolaGracza}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{konsolaGracza()}{konsolaGracza()}}
+{\footnotesize\ttfamily Print\+Writer com.\+studia.\+Komunikacja.\+Manager\+Gier.\+konsola\+Gracza (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca Print\+Writer skojarowany z danym graczem.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & gracz, dla którego chcemy uzyskać Print\+Writer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Print\+Writer skojarzony z graczem 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a8bf53212f71593f481b662afe7888a58}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a8bf53212f71593f481b662afe7888a58}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!wykonajRuch@{wykonajRuch}}
+\index{wykonajRuch@{wykonajRuch}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{wykonajRuch()}{wykonajRuch()}}
+{\footnotesize\ttfamily synchronized void com.\+studia.\+Komunikacja.\+Manager\+Gier.\+wykonaj\+Ruch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{gracz,  }\item[{int}]{sekwencja\+Ruchow\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wykonuje ruch w grze i wysyła komunikat do wszystkich graczy o wykonaniu ruchu.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & gracz, który wykonał ruch \\
+\hline
+{\em sekwencja\+Ruchow} & sekwencja ruchów, które zostały wykonane \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a39b4c60aa0ecd10e6b7a1aa1d03f5d83}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a39b4c60aa0ecd10e6b7a1aa1d03f5d83}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!wypiszGry@{wypiszGry}}
+\index{wypiszGry@{wypiszGry}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{wypiszGry()}{wypiszGry()}}
+{\footnotesize\ttfamily String com.\+studia.\+Komunikacja.\+Manager\+Gier.\+wypisz\+Gry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca opis wszystkich gier dostępnych na serwerze.
+
+\begin{DoxyReturn}{Returns}
+lista opisów gier 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a47e4248fd870b67b299fa55592a7605e}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a47e4248fd870b67b299fa55592a7605e}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!zarejestrujGracza@{zarejestrujGracza}}
+\index{zarejestrujGracza@{zarejestrujGracza}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{zarejestrujGracza()}{zarejestrujGracza()}}
+{\footnotesize\ttfamily void com.\+studia.\+Komunikacja.\+Manager\+Gier.\+zarejestruj\+Gracza (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}}}]{gracz,  }\item[{Print\+Writer}]{print\+Writer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rejestruje gracza w systemie, przypisując mu odpowiedni Print\+Writer do komunikacji.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & gracz, którego rejestrujemy \\
+\hline
+{\em print\+Writer} & Print\+Writer, który będzie używany do komunikacji z graczem \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a84efb96b64074a3a74f4cb2c8f8db43d}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a84efb96b64074a3a74f4cb2c8f8db43d}} 
+\index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!znajdzGrePoID@{znajdzGrePoID}}
+\index{znajdzGrePoID@{znajdzGrePoID}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
+\doxysubsubsection{\texorpdfstring{znajdzGrePoID()}{znajdzGrePoID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}} com.\+studia.\+Komunikacja.\+Manager\+Gier.\+znajdz\+Gre\+Po\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca grę po podanym ID.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID gry, którą chcemy znaleźć \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gra o podanym ID, lub null, jeśli gra o takim ID nie istnieje 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Komunikacja/Manager\+Gier.\+java\end{DoxyCompactItemize}

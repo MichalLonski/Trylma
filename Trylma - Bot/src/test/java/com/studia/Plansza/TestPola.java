@@ -21,7 +21,7 @@ class PoleTest {
         assertFalse(pole.zajete(), "Pole nie powinno być zajęte po ustawieniu gracza na 0");
 
         pole.setGracz(7);
-        assertFalse(pole.zajete(), "Pole nie powinno być zajęte po ustawieniu gracza na 7");
+        assertTrue(pole.zajete(), "Pole powinno być zajęte po ustawieniu gracza na 7");
 
     }
 

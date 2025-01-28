@@ -1,0 +1,61 @@
+@startuml
+class Server {
+    - List<Game> activeGames
+    + createGame(maxPlayers: int): Game
+    + closeGame(gameId: String): void
+    + connect(client: Client): void
+    + listAvailableGames(): List<Game>
+    + joinGame(client: Client, gameId: String): boolean
+}
+
+class Client {
+    - String id
+    - String currentGameId
+    - String seatInGame
+    + connectToServer(server: Server): void
+    + listAvailableGames(): void
+    + joinGame(gameId: String): boolean
+    + move(start: String, end: String): void
+    + receiveUpdate(update: String): void
+}
+
+class Game {
+    - String id
+    - List<Client> players
+    - Board board
+    - Client currentPlayer
+    - GameRules rules
+    - List<Client> playerQueue
+    + addPlayer(client: Client): boolean
+    + startGame(): void
+    + handleMove(client: Client, start: String, end: String): void
+    + notifyPlayers(update: String): void
+}
+
+class Board {
+    - Field[][] fields
+    + getField(row: int, col: int): Field
+    + updateField(start: String, end: String, playerId: String): void
+}
+
+class Field {
+    - int row
+    - int col
+    - boolean occupied
+    - int PlayerId
+}
+
+class GameRules {
+    - int maxPlayers
+    + handleMoveValidation(start: String, end: String, playerId: String): boolean
+}
+
+Server "1" *-- "many" Game
+Game "1" *-- "1" Board
+Game "1" *-- "many" Client
+Board "1" *-- "many" Field
+Client "1" --> "1" Server
+Client "1" --> "1" Game
+Game "1" --> "1" GameRules
+@enduml
+

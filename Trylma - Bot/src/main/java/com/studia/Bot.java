@@ -3,7 +3,6 @@ package com.studia;
 import com.studia.Plansza.Pole;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import static java.lang.Thread.sleep;
 
 public class Bot {
     private Gracz gracz;
-    private int miejsceGracza; // Miejsce gracza w kolejce
-    private int turaGracza; // Numer aktualnej tur
     private poleXkoordyXczyzajete[] Pola = new poleXkoordyXczyzajete[10];
     private poleXkoordyXczyzajete poleDocelowe = new poleXkoordyXczyzajete(null,null);
 

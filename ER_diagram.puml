@@ -1,0 +1,73 @@
+
+@startuml
+
+entity "Mitologie" {
+    * id : int
+    --
+    nazwa : string
+    opis : string
+}
+
+entity "Bóstwo" {
+    * id : int
+    --
+    imie : string
+    id_mitologii : int
+    opis : string
+    atrybut : string
+}
+
+entity "Bohater" {
+    * id : int
+    --
+    imie : string
+    id_mitologii : int
+    opis : string
+    atrybut : string
+}
+
+entity "Artefakt" {
+    * id : int
+    --
+    imie : string
+    id_mitologii : int
+    id_bohatera : int <<nullable>>
+    id_bóstwa : int <<nullable>>
+    opis : string
+}
+
+entity "Mit" {
+    * id : int
+    --
+    nazwa : string
+    id_mitologii : int
+    opis : string
+}
+
+entity "Mit_Bohater" {
+    * id_mitu : int
+    * id_bohatera : int
+}
+
+entity "Mit_Bóstwo" {
+    * id_mitu : int
+    * id_bóstwa : int
+}
+
+entity "Mit_Artefakt" {
+    * id_mitu : int
+    * id_artefaktu : int
+}
+
+' Relacje
+Mitologie ||--o{ Bóstwo : "zawiera"
+Mitologie ||--o{ Bohater : "zawiera"
+Mitologie ||--o{ Artefakt : "zawiera"
+Mitologie ||--o{ Mit : "zawiera"
+Mit ||--o{ Mit_Bohater : "zawiera"
+Mit ||--o{ Mit_Bóstwo : "zawiera"
+Mit ||--o{ Mit_Artefakt : "zawiera"
+Bóstwo ||--o{ Artefakt : "posiada"
+Bohater ||--o{ Artefakt : "posiada"
+
+@enduml

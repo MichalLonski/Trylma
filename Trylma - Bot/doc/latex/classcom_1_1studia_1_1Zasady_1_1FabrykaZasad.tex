@@ -1,0 +1,41 @@
+\hypertarget{classcom_1_1studia_1_1Zasady_1_1FabrykaZasad}{}\doxysection{com.\+studia.\+Zasady.\+Fabryka\+Zasad Class Reference}
+\label{classcom_1_1studia_1_1Zasady_1_1FabrykaZasad}\index{com.studia.Zasady.FabrykaZasad@{com.studia.Zasady.FabrykaZasad}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{Zasady\+Gry}} \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1FabrykaZasad_ab4e5ebad8477de418d2e783e57e59f50}{stworz\+Zasady\+Gry}} (\mbox{\hyperlink{enumcom_1_1studia_1_1Zasady_1_1TypGry}{Typ\+Gry}} typ, int liczba\+Graczy)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fabryka odpowiednich zasad gry w zależności od wybranego typu gry. Używa wzorca projektowego fabryki, aby stworzyć odpowiednią klasę zasad gry. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Zasady_1_1FabrykaZasad_ab4e5ebad8477de418d2e783e57e59f50}\label{classcom_1_1studia_1_1Zasady_1_1FabrykaZasad_ab4e5ebad8477de418d2e783e57e59f50}} 
+\index{com.studia.Zasady.FabrykaZasad@{com.studia.Zasady.FabrykaZasad}!stworzZasadyGry@{stworzZasadyGry}}
+\index{stworzZasadyGry@{stworzZasadyGry}!com.studia.Zasady.FabrykaZasad@{com.studia.Zasady.FabrykaZasad}}
+\doxysubsubsection{\texorpdfstring{stworzZasadyGry()}{stworzZasadyGry()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{Zasady\+Gry}} com.\+studia.\+Zasady.\+Fabryka\+Zasad.\+stworz\+Zasady\+Gry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumcom_1_1studia_1_1Zasady_1_1TypGry}{Typ\+Gry}}}]{typ,  }\item[{int}]{liczba\+Graczy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Tworzy odpowiednie zasady gry na podstawie wybranego typu gry.
+
+
+\begin{DoxyParams}{Parameters}
+{\em typ} & Typ gry, który ma zostać użyty do stworzenia zasad. \\
+\hline
+{\em liczba\+Graczy} & Liczba graczy, która będzie miała wpływ na zasady. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Obiekt rozszerzający abstrakcyjną klasę \mbox{\hyperlink{classcom_1_1studia_1_1Zasady_1_1ZasadyGry}{Zasady\+Gry}}, zawierający zasady odpowiednie dla wybranego typu gry. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & Jeśli typ gry jest nieznany. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Zasady/Fabryka\+Zasad.\+java\end{DoxyCompactItemize}

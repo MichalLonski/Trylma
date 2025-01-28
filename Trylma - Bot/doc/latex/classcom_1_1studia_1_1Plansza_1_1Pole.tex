@@ -1,0 +1,85 @@
+\hypertarget{classcom_1_1studia_1_1Plansza_1_1Pole}{}\doxysection{com.\+studia.\+Plansza.\+Pole Class Reference}
+\label{classcom_1_1studia_1_1Plansza_1_1Pole}\index{com.studia.Plansza.Pole@{com.studia.Plansza.Pole}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole_ac4b4ec14bcf8f93b1584a9584a65e720}{get\+Gracz}} ()
+\item 
+boolean \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole_a4018b6431e989a4e294fc2d9a2ba6bb4}{zajete}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole_a742e17f4c5299adc6f571a86f377cd3f}{set\+Gracz}} (int gracz)
+\item 
+void \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole_a5cdc21335fc089c147e5af09073ac83c}{set\+Strefa}} (int gracz)
+\item 
+int \mbox{\hyperlink{classcom_1_1studia_1_1Plansza_1_1Pole_a5f38a5df9029560cd78ed4fe60d74351}{get\+Strefa}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa reprezentująca jedno pole na planszy. Każde pole może zawierać pionek przypisany do gracza, oraz informacje o domku gracza. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Pole_ac4b4ec14bcf8f93b1584a9584a65e720}\label{classcom_1_1studia_1_1Plansza_1_1Pole_ac4b4ec14bcf8f93b1584a9584a65e720}} 
+\index{com.studia.Plansza.Pole@{com.studia.Plansza.Pole}!getGracz@{getGracz}}
+\index{getGracz@{getGracz}!com.studia.Plansza.Pole@{com.studia.Plansza.Pole}}
+\doxysubsubsection{\texorpdfstring{getGracz()}{getGracz()}}
+{\footnotesize\ttfamily int com.\+studia.\+Plansza.\+Pole.\+get\+Gracz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca numer gracza przypisanego do pola.
+
+\begin{DoxyReturn}{Returns}
+Numer gracza, który posiada pole. 0 oznacza brak gracza. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Pole_a5f38a5df9029560cd78ed4fe60d74351}\label{classcom_1_1studia_1_1Plansza_1_1Pole_a5f38a5df9029560cd78ed4fe60d74351}} 
+\index{com.studia.Plansza.Pole@{com.studia.Plansza.Pole}!getStrefa@{getStrefa}}
+\index{getStrefa@{getStrefa}!com.studia.Plansza.Pole@{com.studia.Plansza.Pole}}
+\doxysubsubsection{\texorpdfstring{getStrefa()}{getStrefa()}}
+{\footnotesize\ttfamily int com.\+studia.\+Plansza.\+Pole.\+get\+Strefa (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Zwraca numer strefy przypisanego do pola.
+
+\begin{DoxyReturn}{Returns}
+Numer strefy przypisanej do pola. Wartość 0 oznacza brak strefy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Pole_a742e17f4c5299adc6f571a86f377cd3f}\label{classcom_1_1studia_1_1Plansza_1_1Pole_a742e17f4c5299adc6f571a86f377cd3f}} 
+\index{com.studia.Plansza.Pole@{com.studia.Plansza.Pole}!setGracz@{setGracz}}
+\index{setGracz@{setGracz}!com.studia.Plansza.Pole@{com.studia.Plansza.Pole}}
+\doxysubsubsection{\texorpdfstring{setGracz()}{setGracz()}}
+{\footnotesize\ttfamily void com.\+studia.\+Plansza.\+Pole.\+set\+Gracz (\begin{DoxyParamCaption}\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Ustawia gracza przypisanego do pola.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & Numer gracza, który ma być przypisany do pola. Wartość 0 oznacza brak gracza, wartość $>$6 oznacza, że pole nie jest polem faktycznym. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Pole_a5cdc21335fc089c147e5af09073ac83c}\label{classcom_1_1studia_1_1Plansza_1_1Pole_a5cdc21335fc089c147e5af09073ac83c}} 
+\index{com.studia.Plansza.Pole@{com.studia.Plansza.Pole}!setStrefa@{setStrefa}}
+\index{setStrefa@{setStrefa}!com.studia.Plansza.Pole@{com.studia.Plansza.Pole}}
+\doxysubsubsection{\texorpdfstring{setStrefa()}{setStrefa()}}
+{\footnotesize\ttfamily void com.\+studia.\+Plansza.\+Pole.\+set\+Strefa (\begin{DoxyParamCaption}\item[{int}]{gracz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Ustawia strefę dla gracza na tym polu.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gracz} & Numer gracza przypisanego do domku na tym polu. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1studia_1_1Plansza_1_1Pole_a4018b6431e989a4e294fc2d9a2ba6bb4}\label{classcom_1_1studia_1_1Plansza_1_1Pole_a4018b6431e989a4e294fc2d9a2ba6bb4}} 
+\index{com.studia.Plansza.Pole@{com.studia.Plansza.Pole}!zajete@{zajete}}
+\index{zajete@{zajete}!com.studia.Plansza.Pole@{com.studia.Plansza.Pole}}
+\doxysubsubsection{\texorpdfstring{zajete()}{zajete()}}
+{\footnotesize\ttfamily boolean com.\+studia.\+Plansza.\+Pole.\+zajete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sprawdza, czy pole jest zajęte przez gracza.
+
+\begin{DoxyReturn}{Returns}
+True, jeśli pole jest zajęte przez gracza, w przeciwnym razie false. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/studia/\+Plansza/Pole.\+java\end{DoxyCompactItemize}

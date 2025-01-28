@@ -1,0 +1,18 @@
+<map id="com.studia.Komunikacja.KlientApplication" name="com.studia.Komunikacja.KlientApplication">
+<area shape="rect" id="node1" title=" " alt="" coords="983,283,1205,325"/>
+<area shape="rect" id="node2" title=" " alt="" coords="651,181,746,208"/>
+<area shape="rect" id="node3" title=" " alt="" coords="669,232,728,259"/>
+<area shape="rect" id="node4" href="$classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1MenuGUIController.html" title=" " alt="" coords="592,349,805,390"/>
+<area shape="rect" id="node5" href="$classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GUIController.html" title=" " alt="" coords="201,457,415,498"/>
+<area shape="rect" id="node8" href="$classcom_1_1studia_1_1Komunikacja_1_1GUI_1_1GraGUIController.html" title=" " alt="" coords="592,283,805,325"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,439,128,465"/>
+<area shape="rect" id="node7" title=" " alt="" coords="21,489,113,516"/>
+<area shape="rect" id="node9" title=" " alt="" coords="281,51,335,77"/>
+<area shape="rect" id="node10" title=" " alt="" coords="275,111,341,137"/>
+<area shape="rect" id="node11" title=" " alt="" coords="279,185,337,212"/>
+<area shape="rect" id="node12" title=" " alt="" coords="269,240,347,267"/>
+<area shape="rect" id="node13" title=" " alt="" coords="259,291,357,317"/>
+<area shape="rect" id="node14" title=" " alt="" coords="268,341,348,368"/>
+<area shape="rect" id="node15" title=" " alt="" coords="265,396,351,423"/>
+<area shape="rect" id="node16" title=" " alt="" coords="668,415,729,441"/>
+</map>

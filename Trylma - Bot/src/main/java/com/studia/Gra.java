@@ -1,5 +1,6 @@
 package com.studia;
 
+import com.studia.BazaDanych.GraService;
 import com.studia.Plansza.Plansza;
 import com.studia.Zasady.FabrykaZasad;
 import com.studia.Zasady.TypGry;
@@ -9,10 +10,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * Klasa reprezentująca grę, która zarządza zasadami, planszą, kolejką graczy i
  * ruchem.
  */
+@Component
 public class Gra {
     private static int ID = 0;
     private final int ID_GRY;
@@ -26,7 +31,11 @@ public class Gra {
             new int[] { 0, 0 },
             new int[] { 0, 0 },
     };
+    private List<int[][]>  listaRuchow = new ArrayList<>();
 
+
+    @Autowired
+    private GraService graService;
     /**
      * Konstruktor gry.
      *
@@ -142,7 +151,9 @@ public class Gra {
      * @param miejsceGracza   miejsce gracza w kolejce.
      * @param sekwencjaRuchow sekwencja ruchów wykonanych przez gracza.
      */
-    public synchronized void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
+
+     
+     public synchronized void wykonajRuch(int miejsceGracza, int[][] sekwencjaRuchow) {
         if (ruchJestPoprawny(sekwencjaRuchow, miejsceGracza)) {
             if (zasadyGry.wykonajRuch(planszaGry, sekwencjaRuchow, miejsceGracza)) {
                 int wygrany = zasadyGry.zwyciezca(miejsceGracza);
@@ -153,23 +164,25 @@ public class Gra {
                     kolejka.usunGracza(wygrany);
                 }
             }
-//            for (int[][] ruch : zasadyGry.possibleMoves(miejsceGracza, planszaGry)) {
-//                System.out.print("Ruch: ");
-//                for (int[] pole : ruch) {
-//                    System.out.print("(" + pole[0] + ", " + pole[1] + ") ");
-//                }
-//                System.out.println();
-//            }
+    
+            listaRuchow.add(sekwencjaRuchow);
+            // Zapisanie ruchu do bazy danych
+            graService.zapiszRuch(sekwencjaRuchow, miejsceGracza, this);
+    
+            // Zapisanie stanu gry
+            graService.zapiszGre(this);
+    
             kolejka.wykonanoRuch();
 
             ruchWPoprzedniejTurze = new int[][] {
                     sekwencjaRuchow[0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1]
             };
-        }else {
+        } else {
             System.out.println("Zły ruch");
         }
     }
+    
 
     /**
      * Kończy grę.
@@ -322,5 +335,9 @@ public class Gra {
             }
         }
         return new double[]{(double) SumWiersz /10, (double) SumKolumn /10};
+    }
+    
+    public int[][][] dajRuchyZHistorii() {
+        return listaRuchow.toArray(new int[listaRuchow.size()][][]);
     }
 }
