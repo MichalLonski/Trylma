@@ -44,7 +44,7 @@ public class Bot {
         double jakBardzoZTylu;
         double score;
 
-        double w1 = 2;
+        double w1 = 5;
         double w2 = 1;
         double deltaW1 = 0.25;
 
@@ -125,6 +125,7 @@ public class Bot {
             while (gracz.dajGre().czyGraSieZaczela()){
                 sleep(100);
                 if(gracz.dajGre().trwaTuraGracza(gracz.ktoreMiejsce())){
+                    sleep(200);
                     wykonajRuch();
                 }
             }

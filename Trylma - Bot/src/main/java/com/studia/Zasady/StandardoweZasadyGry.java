@@ -301,9 +301,9 @@ public class StandardoweZasadyGry extends ZasadyGry {
                     0 <= nowaKolumna && nowaKolumna < Plansza.LICZBA_KOLUMN &&
                     !czyPoleByloOdwiedzone(nowyWiersz, nowaKolumna, odwiedzone) &&
                     plansza.sprawdzPole(srodekWiersz, srodekKolumna).getGracz() != 0 && // Pole pośrodku musi być zajęte
-                    plansza.sprawdzPole(nowyWiersz, nowaKolumna).getGracz() == 0 && // Pole docelowe musi być puste
-                    plansza.sprawdzPole(nowyWiersz,nowaKolumna).getStrefa() == 0 && // Strefa pola docelowego musi być albo niczyja
-                    plansza.sprawdzPole(nowyWiersz,nowaKolumna).getStrefa() == gracz) { // albo należeć do gracza któty się rusza
+                    plansza.sprawdzPole(nowyWiersz, nowaKolumna).getGracz() == 0  && // Pole docelowe musi być puste
+                    (plansza.sprawdzPole(nowyWiersz,nowaKolumna).getStrefa() == 0 || // Strefa pola docelowego musi być albo niczyja
+                    plansza.sprawdzPole(nowyWiersz,nowaKolumna).getStrefa() == gracz)) { // albo należeć do gracza któty się rusza
 
                 // Tworzenie nowej sekwencji ruchów
                 int[][] nowyRuch = new int[sekwencjaRuchow.length + 1][];
