@@ -5,9 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
+
+import com.studia.BazaDanychMk2.GraDB;
+import com.studia.BazaDanychMk2.Ruch;
 import com.studia.Gracz;
 import com.studia.Zasady.CaptureZasadyGry;
 import com.studia.Zasady.TypGry;
+import javafx.scene.control.Label;
 
 /**
  * Wątek reprezentujący komunikację z jednym klientem gry.
@@ -151,6 +156,34 @@ public class WatekGracza extends Thread {
                             doWyslania = doWyslania + " " + pole[0] + "!" + pole[1];
                         }
                         out.println(doWyslania);
+                        break;
+                    case "savedGames":
+                        String odp = ManagerGier.dajInstancje().graService.pobierzWszystkieGry();
+                        out.println(odp);
+                        break;
+                    case "gameExists":
+                        if(ManagerGier.dajInstancje().graService.pobierzGre(Integer.parseInt(slowa[1])) == null){
+                            out.println("fail");
+                        }else{
+                            out.println("success");
+                        }
+                        break;
+                    case "gameData":
+                        GraDB gra = ManagerGier.dajInstancje().getGraService().pobierzGre(Integer.parseInt(slowa[1]));
+                        out.println(gra.getTyp() +","+gra.getIloscGraczy());
+                        break;
+                    case "moveList":
+                        List<Ruch> listaRuchow = ManagerGier.dajInstancje().getRuchService().pobierzRuchy(Integer.parseInt(slowa[1]));
+                        String listToSend = "";
+                        for (Ruch ruch : listaRuchow){
+                            listToSend += ruch.getRuch()+"!";
+                        }
+                        listToSend += "&";
+                        listToSend = listToSend.replaceAll("!&","");
+                        out.println(listToSend);
+                        break;
+                    default:
+                        System.err.println("Błędna wiadomosć do serwera !");
                         break;
                 }
 

@@ -55,7 +55,7 @@
                   <TextField fx:id="IDGryDoDoloczeniaTextField" />
                   <Button mnemonicParsing="false" onAction="#doloczdoGryButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Dołącz do Gry" textAlignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#wyjdzButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Wyjście" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Odtwórz Gre" />
+                  <Button mnemonicParsing="false" onAction="#odtworzButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Odtwórz Gre" />
                </children>
             </VBox>
             <TextArea fx:id="listaGierTextArea" editable="false" layoutX="27.0" layoutY="75.0" prefHeight="113.0" prefWidth="200.0" wrapText="true" />
@@ -70,11 +70,12 @@
       </Pane>
       <Pane fx:id="odtworzGrePane" prefHeight="240.0" prefWidth="400.0" visible="false">
          <children>
-            <TextField fx:id="IDGryDoOdtworzenia" layoutX="237.0" layoutY="83.0" />
+            <TextField fx:id="IDGryDoOdtworzeniaTextField" layoutX="237.0" layoutY="83.0" />
             <Label alignment="CENTER" layoutX="237.0" layoutY="31.0" prefHeight="17.0" prefWidth="149.0" text="Odtwórz Gre" />
             <Label layoutX="237.0" layoutY="66.0" prefHeight="17.0" prefWidth="149.0" text="ID Gry:" />
-            <Button layoutX="237.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Odtwórz" />
+            <Button layoutX="237.0" layoutY="113.0" mnemonicParsing="false" onAction="#odtworzFinalButtonKlik" prefHeight="25.0" prefWidth="149.0" text="Odtwórz" />
             <TextArea fx:id="DoOdtworzeniaTextArea" layoutX="14.0" layoutY="13.0" prefHeight="215.0" prefWidth="215.0" />
+            <Button layoutX="237.0" layoutY="144.0" mnemonicParsing="false" onAction="#odtworzCofnijButtonKlik" prefHeight="25.0" prefWidth="149.0" text="Cofnij" />
          </children></Pane>
    </children>
 </AnchorPane>

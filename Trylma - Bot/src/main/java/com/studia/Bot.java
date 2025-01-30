@@ -95,7 +95,7 @@ public class Bot {
                 score = 1000;
             }
 
-            printResults();
+            //printResults();
         }
 
         public void printResults(){

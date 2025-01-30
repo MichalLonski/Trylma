@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Objects;
 
 /**
  * Klasa kontrolera dla menu głównego i ekranu tworzenia gry.
@@ -40,7 +41,7 @@ public class MenuGUIController extends GUIController {
     private TextField IDGryDoDoloczeniaTextField;
 
     @FXML
-    private TextField IDGryDoOdtworzenia;
+    private TextField IDGryDoOdtworzeniaTextField;
 
     @FXML
     private TextArea DoOdtworzeniaTextArea;
@@ -127,7 +128,7 @@ public class MenuGUIController extends GUIController {
                 sendCommand("create" + " " + wariantGryComboBox.getValue().replace(" ", "") + " "
                         + iloscGraczyComboBox.getValue() + " " + iloscBotowDoDodania);
                 KlientApplication.MenuDoGry();
-                System.out.println(iloscBotowDoDodania);
+                //System.out.println(iloscBotowDoDodania);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,10 +186,26 @@ public class MenuGUIController extends GUIController {
     }
 
     public void odtworzButtonKlik(){
+        zczytajGry();
+        menuGlownePane.setVisible(false);
+        odtworzGrePane.setVisible(true);
+    }
 
+    public void odtworzCofnijButtonKlik(){
+        menuGlownePane.setVisible(true);
+        odtworzGrePane.setVisible(false);
     }
 
     private void zczytajGry(){
+        String odp = sendCommand("savedGames").replaceAll("&","\n");
+        DoOdtworzeniaTextArea.setText(odp);
+    }
 
+    public void odtworzFinalButtonKlik(){
+        try{
+            if(Objects.equals(sendCommand("gameExists " + IDGryDoOdtworzeniaTextField.getText()), "success")) {
+                KlientApplication.MenuDoOdtwarzania(Integer.parseInt(IDGryDoOdtworzeniaTextField.getText()));
+            }
+        }catch (Exception e){ e.printStackTrace();}
     }
 }

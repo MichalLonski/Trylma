@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
 
 public class GraService {
     private JdbcTemplate jdbcTemplate;
@@ -30,13 +31,29 @@ public class GraService {
     }
 
     public GraDB pobierzGre(int id) {
-        String sql = "SELECT * FROM Gry WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[] {id}, (rs, rowNum) -> {
-            GraDB gra = new GraDB();
-            gra.setId(rs.getInt("id"));
-            gra.setTyp(rs.getString("typ"));
-            gra.setIloscGraczy(rs.getInt("iloscGraczy"));
-            return gra;
-        });
+        try{
+            String sql = "SELECT * FROM Gry WHERE id = ?";
+            return jdbcTemplate.queryForObject(sql, new Object[] {id}, (rs, rowNum) -> {
+                GraDB gra = new GraDB();
+                gra.setId(rs.getInt("id"));
+                gra.setTyp(rs.getString("typ"));
+                gra.setIloscGraczy(rs.getInt("iloscGraczy"));
+                return gra;
+            });
+        }catch (Exception e){
+            return null;
+        }
+
+    }
+
+    public String pobierzWszystkieGry() {
+        String sql = "SELECT id, typ, iloscGraczy FROM gry";
+
+        List<String> gry = jdbcTemplate.query(
+                sql,
+                (rs, rowNum) -> "ID: " + rs.getInt("id") + ", Typ: " + rs.getString("typ") + ", Ilosc Graczy: " + rs.getInt("iloscGraczy")
+        );
+
+        return String.join("&", gry);
     }
 }

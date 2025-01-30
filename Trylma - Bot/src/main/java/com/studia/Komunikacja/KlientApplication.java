@@ -2,6 +2,7 @@ package com.studia.Komunikacja;
 
 import com.studia.Komunikacja.GUI.GraGUIController;
 import com.studia.Komunikacja.GUI.MenuGUIController;
+import com.studia.Komunikacja.GUI.OdtwarzanieGUIController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,6 +39,10 @@ public class KlientApplication extends Application {
 
     /** Scena z ekranem gry */
     static Scene wGrzeScene;
+
+    static Scene odtwarzanieScene;
+
+    static OdtwarzanieGUIController odtwarzanieGUIController;
 
     /** Kontroler dla sceny menu */
     static MenuGUIController menuGUIController;
@@ -120,5 +125,18 @@ public class KlientApplication extends Application {
      */
     public static void GraDoMenu() {
         glownaScena.setScene(menuScene);
+    }
+
+    public static void MenuDoOdtwarzania(int idGry) throws IOException{
+        FXMLLoader fxmlLoaderSec = new FXMLLoader(KlientApplication.class.getResource("/OdtwarzanieGUI.fxml"));
+        odtwarzanieScene = new Scene(fxmlLoaderSec.load());
+        odtwarzanieGUIController = fxmlLoaderSec.getController();
+
+        odtwarzanieGUIController.setInOut(in, out);
+        odtwarzanieGUIController.setInfo(glownaScena,idGry);
+
+        glownaScena.setScene(odtwarzanieScene);
+
+        odtwarzanieGUIController.GenerateBoard();
     }
 }

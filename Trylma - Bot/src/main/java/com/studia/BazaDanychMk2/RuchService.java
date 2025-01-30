@@ -27,4 +27,6 @@ public class RuchService {
             return ruch;
         });
     }
+
+
 }
