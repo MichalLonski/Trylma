@@ -1,9 +1,16 @@
 package com.studia.Komunikacja;
 
+import com.studia.BazaDanychMk2.GraService;
+import com.studia.BazaDanychMk2.JDBCTemplate;
+import com.studia.BazaDanychMk2.RuchService;
 import com.studia.Gra;
 import com.studia.Gracz;
 import com.studia.Zasady.TypGry;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +27,15 @@ import java.util.Map;
  */
 public class ManagerGier {
 
+    ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+    private JDBCTemplate JDBCTemplate;
+
+    GraService graService = (GraService) context.getBean("graService");
+    RuchService ruchService = (RuchService) context.getBean("ruchService");
+
+
+
+
     /** Lista wszystkich gier dostępnych na serwerze */
     final private List<Gra> ListaGier = new ArrayList<>();
 
@@ -27,6 +43,10 @@ public class ManagerGier {
     final private Map<Gracz, PrintWriter> konsolaGraczy = new HashMap<>();
 
     private ManagerGier() {
+        JDBCTemplate = (JDBCTemplate)context.getBean("JDBCTemplate");
+
+        graService.setJdbcTemplate(JDBCTemplate.getJdbcTemplateObject());
+        ruchService.setJdbcTemplate(JDBCTemplate.getJdbcTemplateObject());
     }
 
     /**
@@ -160,5 +180,13 @@ public class ManagerGier {
             wynik += gra.opis() + "&";
         }
         return wynik;
+    }
+
+    public GraService getGraService() {
+        return graService;
+    }
+
+    public RuchService getRuchService() {
+        return ruchService;
     }
 }

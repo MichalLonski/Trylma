@@ -350,7 +350,7 @@ boolean com.studia.Zasady.CaptureZasadyGry.graSkonczona ({\b Plansza}  {\i plans
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Sprawdza, czy gra zosta\'C5\'82a zako\'C5\'84czona na podstawie dost\'C4\'99pnych ruch\'C3\'B3w.\par
+Sprawdza, czy graDB zosta\'C5\'82a zako\'C5\'84czona na podstawie dost\'C4\'99pnych ruch\'C3\'B3w.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Parameters\par}
 \pard\plain \s81\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
@@ -362,7 +362,7 @@ Parameters\par}
 }
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-True, je\'C5\'9Bli gra jest zako\'C5\'84czona (brak dost\'C4\'99pnych ruch\'C3\'B3w), false w przeciwnym razie. \par
+True, je\'C5\'9Bli graDB jest zako\'C5\'84czona (brak dost\'C4\'99pnych ruch\'C3\'B3w), false w przeciwnym razie. \par
 }}}{
 Reimplemented from {\b com.studia.Zasady.ZasadyGry} ({\i p.{\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEA \\*MERGEFORMAT}{\fldrslt pagenum}}}).}\par
 }
@@ -492,7 +492,7 @@ Parameters\par}
 }
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-True, je\'C5\'9Bli gra powinna by\'C4\'87 kontynuowana (istniej\'C4\'85 dalsze ruchy), false w przeciwnym razie. \par
+True, je\'C5\'9Bli graDB powinna by\'C4\'87 kontynuowana (istniej\'C4\'85 dalsze ruchy), false w przeciwnym razie. \par
 }}}{
 Reimplemented from {\b com.studia.Zasady.ZasadyGry} ({\i p.{\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEJ \\*MERGEFORMAT}{\fldrslt pagenum}}}).}\par
 }
@@ -963,10 +963,10 @@ boolean com.studia.Gra.czyGraSieZaczela (){\f2 [inline]}}}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Sprawdza, czy gra zosta\'C5\'82a rozpocz\'C4\'99ta.\par
+Sprawdza, czy graDB zosta\'C5\'82a rozpocz\'C4\'99ta.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-true, je\'C5\'9Bli gra trwa; false w przeciwnym wypadku. \par
+true, je\'C5\'9Bli graDB trwa; false w przeciwnym wypadku. \par
 }}}}
 {\xe \v dajID\:com.studia.Gra}
 {\xe \v com.studia.Gra\:dajID}
@@ -1228,7 +1228,7 @@ int com.studia.Gra.ZacznijGre (){\f2 [inline]}}}
 Rozpoczyna gr\'C4\'99, je\'C5\'9Bli wszyscy gracze s\'C4\'85 dodani.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-Indeks obecnego gracza, kt\'C3\'B3ry zaczyna gr\'C4\'99, lub -1, je\'C5\'9Bli gra nie jest pe\'C5\'82na. \par
+Indeks obecnego gracza, kt\'C3\'B3ry zaczyna gr\'C4\'99, lub -1, je\'C5\'9Bli graDB nie jest pe\'C5\'82na. \par
 }}}}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 The documentation for this class was generated from the following file:{\par
@@ -1262,7 +1262,7 @@ int {\b ktoreMiejsce} ()\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 {\b Gra} {\b dajGre} ()\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-void {\b przypiszGre} ({\b Gra} gra)\par
+void {\b przypiszGre} ({\b Gra} graDB)\par
 }
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
@@ -1342,7 +1342,7 @@ void com.studia.Gracz.opuscGre (){\f2 [inline]}}}
 {\xe \v com.studia.Gracz\:przypiszGre}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
 {\b 
-void com.studia.Gracz.przypiszGre ({\b Gra}  {\i gra}){\f2 [inline]}}}
+void com.studia.Gracz.przypiszGre ({\b Gra}  {\i graDB}){\f2 [inline]}}}
 \par
 {\bkmkstart AAAAAAAAAV}
 {\bkmkend AAAAAAAAAV}
@@ -1356,7 +1356,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i gra} \cell }{gra, do kt\'F3rej gracz jest przypisany. \cell }
+{{\i graDB} \cell }{graDB, do kt\'F3rej gracz jest przypisany. \cell }
 {\row }
 }
 }}
@@ -1974,7 +1974,7 @@ synchronized void {\b inicjujNowaGre} ({\b TypGry} typGry, int liczbaGraczy, {\b
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 synchronized int {\b dolaczDoGry} ({\b Gracz} gracz, String id)\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-synchronized void {\b jesliGraPelnaRozpocznij} ({\b Gra} gra)\par
+synchronized void {\b jesliGraPelnaRozpocznij} ({\b Gra} graDB)\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 synchronized void {\b wykonajRuch} ({\b Gracz} gracz, int[][] sekwencjaRuchow)\par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
@@ -2052,7 +2052,7 @@ Parameters\par}
 }
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-1 je\'C5\'9Bli do\'C5\'82\'C4\'85czenie do gry si\'C4\'99 uda\'C5\'82o, -1 je\'C5\'9Bli gra jest pe\'C5\'82na lub nie istnieje \par
+1 je\'C5\'9Bli do\'C5\'82\'C4\'85czenie do gry si\'C4\'99 uda\'C5\'82o, -1 je\'C5\'9Bli graDB jest pe\'C5\'82na lub nie istnieje \par
 }}}}
 {\xe \v inicjujNowaGre\:com.studia.Komunikacja.ManagerGier}
 {\xe \v com.studia.Komunikacja.ManagerGier\:inicjujNowaGre}
@@ -2092,21 +2092,21 @@ Parameters\par}
 {\xe \v com.studia.Komunikacja.ManagerGier\:jesliGraPelnaRozpocznij}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
 {\b 
-synchronized void com.studia.Komunikacja.ManagerGier.jesliGraPelnaRozpocznij ({\b Gra}  {\i gra}){\f2 [inline]}}}
+synchronized void com.studia.Komunikacja.ManagerGier.jesliGraPelnaRozpocznij ({\b Gra}  {\i graDB}){\f2 [inline]}}}
 \par
 {\bkmkstart AAAAAAAABL}
 {\bkmkend AAAAAAAABL}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Sprawdza, czy gra jest pe\'C5\'82na, i je\'C5\'9Bli tak, wywo\'C5\'82uje rozpocz\'C4\'99cie gry.\par
+Sprawdza, czy graDB jest pe\'C5\'82na, i je\'C5\'9Bli tak, wywo\'C5\'82uje rozpocz\'C4\'99cie gry.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Parameters\par}
 \pard\plain \s81\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i gra} \cell }{gra, kt\'C3\'B3r\'C4\'85 nale\'C5\'BCy sprawdzi\'C4\'87 \cell }
+{{\i graDB} \cell }{graDB, kt\'C3\'B3r\'C4\'85 nale\'C5\'BCy sprawdzi\'C4\'87 \cell }
 {\row }
 }
 }}
@@ -2230,7 +2230,7 @@ Parameters\par}
 }
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-gra o podanym ID, lub null, je\'C5\'9Bli gra o takim ID nie istnieje \par
+graDB o podanym ID, lub null, je\'C5\'9Bli graDB o takim ID nie istnieje \par
 }}}}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 The documentation for this class was generated from the following file:{\par
@@ -3196,7 +3196,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
@@ -3235,7 +3235,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
@@ -3302,7 +3302,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
@@ -3358,7 +3358,7 @@ Detailed Description\par
 Enum reprezentuj\'C4\'85cy dost\'C4\'99pne typy gier. {
 \par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-{\b STANDARDOWA}  - Klasyczna gra \par
+{\b STANDARDOWA}  - Klasyczna graDB \par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 {\b FAST_PACED}  - Super Chinese Checkers \par
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
@@ -3405,7 +3405,7 @@ com.studia.Zasady.TypGry.STANDARDOWA}}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Klasyczna gra. \par
+Klasyczna graDB. \par
 }}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 The documentation for this enum was generated from the following file:{\par
@@ -3761,19 +3761,19 @@ boolean com.studia.Zasady.ZasadyGry.graSkonczona ({\b Plansza}  {\i plansza}){\f
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Sprawdza, czy gra zosta\'C5\'82a zako\'C5\'84czona. {\b Gra} ko\'C5\'84czy si\'C4\'99, gdy wszyscy gracze opr\'C3\'B3cz jednego osi\'C4\'85gn\'C4\'85 warunki zwyci\'C4\'99stwa.\par
+Sprawdza, czy graDB zosta\'C5\'82a zako\'C5\'84czona. {\b Gra} ko\'C5\'84czy si\'C4\'99, gdy wszyscy gracze opr\'C3\'B3cz jednego osi\'C4\'85gn\'C4\'85 warunki zwyci\'C4\'99stwa.\par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Parameters\par}
 \pard\plain \s81\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 }
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
 Returns\par}\pard\plain \s82\li720\widctlpar\ql\adjustright \fs20\cgrid {\s17 \sa60 \sb30
-True, je\'C5\'9Bli gra jest zako\'C5\'84czona, w przeciwnym razie false. \par
+True, je\'C5\'9Bli graDB jest zako\'C5\'84czona, w przeciwnym razie false. \par
 }}}{
 Reimplemented in {\b com.studia.Zasady.CaptureZasadyGry} ({\i p.{\field\fldedit {\*\fldinst PAGEREF AAAAAAAADZ \\*MERGEFORMAT}{\fldrslt pagenum}}}).}\par
 }
@@ -3847,7 +3847,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
@@ -3886,7 +3886,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
@@ -3937,7 +3937,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 gra. \cell }
+{{\i plansza} \cell }{Plansza, na kt\'C3\'B3rej rozgrywa si\'C4\'99 graDB. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187

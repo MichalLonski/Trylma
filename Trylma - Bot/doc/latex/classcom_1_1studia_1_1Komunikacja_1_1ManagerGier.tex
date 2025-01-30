@@ -7,7 +7,7 @@ synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerG
 \item 
 synchronized int \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a777046f78ecfabf79e2afded5ee9345b}{dolacz\+Do\+Gry}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz, String id)
 \item 
-synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_adcb5fc8f8d4bcb7fd5bc16e3878e6105}{jesli\+Gra\+Pelna\+Rozpocznij}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}} gra)
+synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_adcb5fc8f8d4bcb7fd5bc16e3878e6105}{jesli\+Gra\+Pelna\+Rozpocznij}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}} graDB)
 \item 
 synchronized void \mbox{\hyperlink{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_a8bf53212f71593f481b662afe7888a58}{wykonaj\+Ruch}} (\mbox{\hyperlink{classcom_1_1studia_1_1Gracz}{Gracz}} gracz, int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} sekwencja\+Ruchow)
 \item 
@@ -59,7 +59,7 @@ Dodaje gracza do istniejącej gry.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-1 jeśli dołączenie do gry się udało, -\/1 jeśli gra jest pełna lub nie istnieje 
+1 jeśli dołączenie do gry się udało, -\/1 jeśli graDB jest pełna lub nie istnieje
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_af06467c920e6871133d28145c146b433}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_af06467c920e6871133d28145c146b433}} 
 \index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!inicjujNowaGre@{inicjujNowaGre}}
@@ -82,13 +82,13 @@ Inicjuje nową grę i dodaje do niej gracza, który ją stworzył.
 \index{com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}!jesliGraPelnaRozpocznij@{jesliGraPelnaRozpocznij}}
 \index{jesliGraPelnaRozpocznij@{jesliGraPelnaRozpocznij}!com.studia.Komunikacja.ManagerGier@{com.studia.Komunikacja.ManagerGier}}
 \doxysubsubsection{\texorpdfstring{jesliGraPelnaRozpocznij()}{jesliGraPelnaRozpocznij()}}
-{\footnotesize\ttfamily synchronized void com.\+studia.\+Komunikacja.\+Manager\+Gier.\+jesli\+Gra\+Pelna\+Rozpocznij (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}}}]{gra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily synchronized void com.\+studia.\+Komunikacja.\+Manager\+Gier.\+jesli\+Gra\+Pelna\+Rozpocznij (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1studia_1_1Gra}{Gra}}}]{graDB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Sprawdza, czy gra jest pełna, i jeśli tak, wywołuje rozpoczęcie gry.
+Sprawdza, czy graDB jest pełna, i jeśli tak, wywołuje rozpoczęcie gry.
 
 
 \begin{DoxyParams}{Parameters}
-{\em gra} & gra, którą należy sprawdzić \\
+{\em graDB} & graDB, którą należy sprawdzić \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_afdfcdb0b3811a02b619a5aad2dfdb73d}\label{classcom_1_1studia_1_1Komunikacja_1_1ManagerGier_afdfcdb0b3811a02b619a5aad2dfdb73d}} 
@@ -162,7 +162,7 @@ Zwraca grę po podanym ID.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-gra o podanym ID, lub null, jeśli gra o takim ID nie istnieje 
+graDB o podanym ID, lub null, jeśli graDB o takim ID nie istnieje
 \end{DoxyReturn}
 
 

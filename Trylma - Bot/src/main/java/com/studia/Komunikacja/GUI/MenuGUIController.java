@@ -39,6 +39,12 @@ public class MenuGUIController extends GUIController {
     @FXML
     private TextField IDGryDoDoloczeniaTextField;
 
+    @FXML
+    private TextField IDGryDoOdtworzenia;
+
+    @FXML
+    private TextArea DoOdtworzeniaTextArea;
+
     /** Obszar tekstowy do wyświetlania listy dostępnych gier */
     @FXML
     private TextArea listaGierTextArea;
@@ -58,6 +64,9 @@ public class MenuGUIController extends GUIController {
     /** Obszar tekstowy wyświetlający opis wybranego wariantu gry */
     @FXML
     private TextArea opisWariantuTextArea;
+
+    @FXML
+    private Pane odtworzGrePane;
 
     /**
      * Metoda wywoływana po kliknięciu przycisku "Stwórz grę".
@@ -173,5 +182,13 @@ public class MenuGUIController extends GUIController {
 
         Stage stage = (Stage) menuGlownePane.getScene().getWindow();
         stage.close();
+    }
+
+    public void odtworzButtonKlik(){
+
+    }
+
+    private void zczytajGry(){
+
     }
 }

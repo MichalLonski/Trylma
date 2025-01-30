@@ -1,6 +1,10 @@
 package com.studia;
 
-import com.studia.BazaDanych.GraService;
+import com.studia.BazaDanychMk2.GraDB;
+import com.studia.BazaDanychMk2.GraService;
+import com.studia.BazaDanychMk2.RuchService;
+import com.studia.BazaDanychMk2.Ruch;
+import com.studia.Komunikacja.ManagerGier;
 import com.studia.Plansza.Plansza;
 import com.studia.Zasady.FabrykaZasad;
 import com.studia.Zasady.TypGry;
@@ -10,14 +14,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Klasa reprezentująca grę, która zarządza zasadami, planszą, kolejką graczy i
  * ruchem.
  */
-@Component
+
+
 public class Gra {
     private static int ID = 0;
     private final int ID_GRY;
@@ -32,10 +35,11 @@ public class Gra {
             new int[] { 0, 0 },
     };
     private List<int[][]>  listaRuchow = new ArrayList<>();
+    private GraService graService = ManagerGier.dajInstancje().getGraService();
+    private RuchService ruchService = ManagerGier.dajInstancje().getRuchService();
+    private int IDgryWDB;
 
 
-    @Autowired
-    private GraService graService;
     /**
      * Konstruktor gry.
      *
@@ -50,6 +54,13 @@ public class Gra {
             ID_GRY = ID;
             ID++;
             for(int i = 0;i < iloscBotow;i++){dodajBota();}
+            //tutaj będzie dodawana nowa gra
+            GraDB gra = new GraDB();
+            gra.setTyp(typ.name());
+            gra.setIloscGraczy(liczbaGraczy);
+            IDgryWDB = graService.zapiszGre(gra);
+            System.out.println("ID gry w bazie:" + IDgryWDB);
+
         } else {
             throw new IllegalArgumentException("Zła liczba graczy");
         }
@@ -72,6 +83,7 @@ public class Gra {
         planszaGry.utworzPlansze(zasadyGry.infoJSON());
         graWTrakcie = true;
         for (Bot bot : listaBotow){bot.startBot();}
+
         return kolejka.obecnyGracz();
     }
 
@@ -164,20 +176,19 @@ public class Gra {
                     kolejka.usunGracza(wygrany);
                 }
             }
-    
-            listaRuchow.add(sekwencjaRuchow);
-            // Zapisanie ruchu do bazy danych
-            graService.zapiszRuch(sekwencjaRuchow, miejsceGracza, this);
-    
-            // Zapisanie stanu gry
-            graService.zapiszGre(this);
-    
-            kolejka.wykonanoRuch();
 
+            listaRuchow.add(sekwencjaRuchow);
+            kolejka.wykonanoRuch();
             ruchWPoprzedniejTurze = new int[][] {
                     sekwencjaRuchow[0],
                     sekwencjaRuchow[sekwencjaRuchow.length - 1]
             };
+
+            // Zapisz ruch w bazie
+            Ruch ruch = new Ruch();
+            ruch.setIdGry(IDgryWDB);
+            ruch.setRuch(ruchWPoprzedniejTurze[0][0] + "," + ruchWPoprzedniejTurze[0][1] + "," + ruchWPoprzedniejTurze[1][0] + "," + ruchWPoprzedniejTurze[1][1] );
+            ruchService.zapiszRuch(ruch);
         } else {
             System.out.println("Zły ruch");
         }

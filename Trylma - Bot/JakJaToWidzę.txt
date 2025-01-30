@@ -6,14 +6,14 @@
 2. Klient
 - Klient umożliwia graczowi uruchomienie gry oraz dołączenie do istniejącej rozgrywki.
 - Główne okno klienta:
-  - Przycisk „Nowa gra” – umożliwia stworzenie nowej gry.
+  - Przycisk „Nowa graDB” – umożliwia stworzenie nowej gry.
   - Przycisk „Dołącz do gry” – wyświetla listę dostępnych gier (oczekujące na graczy) z następującymi informacjami:
     - Zasady gry
     - Zapełnienie gry
     - Przycisk do dołączenia do gry
 
 3. Tworzenie nowej gry
-- Po kliknięciu przycisku „Nowa gra” otwierane jest okno z następującymi opcjami:
+- Po kliknięciu przycisku „Nowa graDB” otwierane jest okno z następującymi opcjami:
   - Liczba graczy – pole wyboru liczby graczy (2, 3, 4, 6).
   - Zasady gry – pole wyboru zasad (np. Z1, Z2, ...), z możliwością dodania opisu do każdej z opcji.
   - Przycisk „Utwórz” jest aktywowany dopiero po wybraniu liczby graczy oraz zasad gry. Do momentu wypełnienia wszystkich pól, przycisk jest nieaktywny.
@@ -41,8 +41,8 @@
   - Ruchy gracza są weryfikowane na bieżąco. Po edytowaniu ruchu, przycisk „Potwierdź ruch” zostaje aktywowany tylko wtedy, gdy ruch jest poprawny.
 
 6. Zamknięcie gry przez gracza
-- Jeśli gracz, który nie zakończył jeszcze gry, zamknie okno aplikacji, wyświetlane jest okno dialogowe z informacją, że gra została porzucona.
-- Pozostali gracze zostają wyrzuceni do lobby, gra zostaje usunięta z lsity gier.
+- Jeśli gracz, który nie zakończył jeszcze gry, zamknie okno aplikacji, wyświetlane jest okno dialogowe z informacją, że graDB została porzucona.
+- Pozostali gracze zostają wyrzuceni do lobby, graDB zostaje usunięta z lsity gier.
 
 7. Zakończenie gry
 - Gra kończy się, gdy:

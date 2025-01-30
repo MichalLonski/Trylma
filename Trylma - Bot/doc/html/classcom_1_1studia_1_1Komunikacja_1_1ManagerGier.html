@@ -81,7 +81,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af06467c920e6871133d28145c146b433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a777046f78ecfabf79e2afded5ee9345b"><td class="memItemLeft" align="right" valign="top">synchronized int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1studia_1_1Komunikacja_1_1ManagerGier.html#a777046f78ecfabf79e2afded5ee9345b">dolaczDoGry</a> (<a class="el" href="classcom_1_1studia_1_1Gracz.html">Gracz</a> gracz, String id)</td></tr>
 <tr class="separator:a777046f78ecfabf79e2afded5ee9345b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcb5fc8f8d4bcb7fd5bc16e3878e6105"><td class="memItemLeft" align="right" valign="top">synchronized void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1studia_1_1Komunikacja_1_1ManagerGier.html#adcb5fc8f8d4bcb7fd5bc16e3878e6105">jesliGraPelnaRozpocznij</a> (<a class="el" href="classcom_1_1studia_1_1Gra.html">Gra</a> gra)</td></tr>
+<tr class="memitem:adcb5fc8f8d4bcb7fd5bc16e3878e6105"><td class="memItemLeft" align="right" valign="top">synchronized void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1studia_1_1Komunikacja_1_1ManagerGier.html#adcb5fc8f8d4bcb7fd5bc16e3878e6105">jesliGraPelnaRozpocznij</a> (<a class="el" href="classcom_1_1studia_1_1Gra.html">Gra</a> graDB)</td></tr>
 <tr class="separator:adcb5fc8f8d4bcb7fd5bc16e3878e6105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf53212f71593f481b662afe7888a58"><td class="memItemLeft" align="right" valign="top">synchronized void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1studia_1_1Komunikacja_1_1ManagerGier.html#a8bf53212f71593f481b662afe7888a58">wykonajRuch</a> (<a class="el" href="classcom_1_1studia_1_1Gracz.html">Gracz</a> gracz, int[][] sekwencjaRuchow)</td></tr>
 <tr class="separator:a8bf53212f71593f481b662afe7888a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,7 +171,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 jeśli dołączenie do gry się udało, -1 jeśli gra jest pełna lub nie istnieje </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>1 jeśli dołączenie do gry się udało, -1 jeśli graDB jest pełna lub nie istnieje </dd></dl>
 
 </div>
 </div>
@@ -239,7 +239,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">synchronized void com.studia.Komunikacja.ManagerGier.jesliGraPelnaRozpocznij </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcom_1_1studia_1_1Gra.html">Gra</a>&#160;</td>
-          <td class="paramname"><em>gra</em></td><td>)</td>
+          <td class="paramname"><em>graDB</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -249,10 +249,10 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sprawdza, czy gra jest pełna, i jeśli tak, wywołuje rozpoczęcie gry.</p>
+<p>Sprawdza, czy graDB jest pełna, i jeśli tak, wywołuje rozpoczęcie gry.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">gra</td><td>gra, którą należy sprawdzić </td></tr>
+    <tr><td class="paramname">graDB</td><td>graDB, którą należy sprawdzić </td></tr>
   </table>
   </dd>
 </dl>
@@ -438,7 +438,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>gra o podanym ID, lub null, jeśli gra o takim ID nie istnieje </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>graDB o podanym ID, lub null, jeśli graDB o takim ID nie istnieje </dd></dl>
 
 </div>
 </div>

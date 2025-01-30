@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studia.Komunikacja.GUI.MenuGUIController">
+<AnchorPane prefHeight="240.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studia.Komunikacja.GUI.MenuGUIController">
    <children>
       <Pane fx:id="stworzGrePane" prefHeight="240.0" prefWidth="400.0" visible="false">
          <children>
@@ -46,7 +46,7 @@
             <TextArea fx:id="opisWariantuTextArea" layoutX="14.0" layoutY="31.0" prefHeight="155.0" prefWidth="260.0" />
          </children>
       </Pane>
-      <Pane fx:id="menuGlownePane" prefHeight="200.0" prefWidth="400.0">
+      <Pane fx:id="menuGlownePane" prefHeight="240.0" prefWidth="400.0">
          <children>
             <VBox layoutX="264.0" layoutY="46.0" prefHeight="109.0" prefWidth="100.0" spacing="5.0">
                <children>
@@ -55,6 +55,7 @@
                   <TextField fx:id="IDGryDoDoloczeniaTextField" />
                   <Button mnemonicParsing="false" onAction="#doloczdoGryButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Dołącz do Gry" textAlignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#wyjdzButtonKlik" prefHeight="26.0" prefWidth="100.0" text="Wyjście" />
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Odtwórz Gre" />
                </children>
             </VBox>
             <TextArea fx:id="listaGierTextArea" editable="false" layoutX="27.0" layoutY="75.0" prefHeight="113.0" prefWidth="200.0" wrapText="true" />
@@ -67,5 +68,13 @@
             </Label>
          </children>
       </Pane>
+      <Pane fx:id="odtworzGrePane" prefHeight="240.0" prefWidth="400.0" visible="false">
+         <children>
+            <TextField fx:id="IDGryDoOdtworzenia" layoutX="237.0" layoutY="83.0" />
+            <Label alignment="CENTER" layoutX="237.0" layoutY="31.0" prefHeight="17.0" prefWidth="149.0" text="Odtwórz Gre" />
+            <Label layoutX="237.0" layoutY="66.0" prefHeight="17.0" prefWidth="149.0" text="ID Gry:" />
+            <Button layoutX="237.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Odtwórz" />
+            <TextArea fx:id="DoOdtworzeniaTextArea" layoutX="14.0" layoutY="13.0" prefHeight="215.0" prefWidth="215.0" />
+         </children></Pane>
    </children>
 </AnchorPane>

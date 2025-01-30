@@ -1,11 +1,13 @@
 package com.studia;
 
 import com.studia.Komunikacja.SerwerGry;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Klasa odpowiedzialna za uruchomienie serwera gry.
  * Jest to punkt wejścia do aplikacji, który inicjuje instancję serwera gry i uruchamia ją.
  */
+@SpringBootApplication
 public class WlaczSerwer {
 
     /**

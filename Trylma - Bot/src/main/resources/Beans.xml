@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!-- Konfiguracja DataSource -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/trylma" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
+
+    <!-- Konfiguracja JdbcTemplate -->
+    <bean id="JDBCTemplate" class="com.studia.BazaDanychMk2.JDBCTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- Konfiguracja komponentów aplikacji -->
+    <bean id="graService" class="com.studia.BazaDanychMk2.GraService" />
+    <bean id="ruchService" class="com.studia.BazaDanychMk2.RuchService" />
+</beans>
