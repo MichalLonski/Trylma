@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.studia</groupId>
-    <artifactId>TrylmaGUI</artifactId>
-    <version>2.0</version>
+    <artifactId>TrylmaBot</artifactId>
+    <version>3.0</version>
     <name>Trylma - Bot</name>
     <description>Projekt na studia z botem i zapisem do bazy danych</description>
 
