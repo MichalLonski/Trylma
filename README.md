@@ -11,6 +11,7 @@ Projekt na Technologie Programowania, semestr zimowy, 2024/25
 ## Spis treści
 1. [Wersja bez GUI](#wersja-bez-gui)
 2. [Wersja z GUI](#wersja-z-gui)
+3. [Wersja z botem i DB](#wersja-z-botem-i-db)
 ---
 ## Wersja bez GUI
 
@@ -81,7 +82,49 @@ Projekt na Technologie Programowania, semestr zimowy, 2024/25
    ```bash
    mvn javafx:run
    ```
+---
 
+## Wersja z botem i DB
+
+### Funkcjonalności
+- To samo co w wersji z GUI
+- Możliwość dodania i gry z botami w standardowej grze
+- Zapis przebiegu gry do bazy danych
+- Odtworzenie zapisanej gry z bazy danych
+
+### Wymagania
+- Java Development Kit (JDK) 21
+- Apache Maven
+- JavaFX 21
+- MySQL
+
+### Instalacja
+1. Sklonuj repozytorium:
+   ```bash
+   git clone https://github.com/MichalLonski/Trylma.git
+   ```
+2. Skompiluj projekt:
+   ```bash
+   cd "Trylma/Trylma - BOT"
+   mvn compile
+   ```
+3. Stwórz bazę danych "trylma"
+   ```sql
+    CREATE DATABASE trylma;
+    USE trylma;
+   CREATE TABLE Gry (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    typ VARCHAR(50) DEFAULT NULL,
+    iloscGraczy INT(11) DEFAULT NULL,
+    PRIMARY KEY (id)
+    );
+   CREATE TABLE Ruchy (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    idGry INT(11) DEFAULT NULL,
+    ruch VARCHAR(50) DEFAULT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (idGry) REFERENCES Gry(id)
+    );
 ---
 
 Alternatywnie można zaimportować projekt do **Eclipse**
